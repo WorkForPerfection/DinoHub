@@ -1,8 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState } from "react";
-import { Login } from "./Login";
+import { Login } from "./components/Login";
 import { Signup } from "./components/Signup";
+
 function App() {
   const [curPage, setcurPage] = useState('login');
   const switchPage = (page) => {
