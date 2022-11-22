@@ -6,15 +6,20 @@ import Col from 'react-bootstrap/Col';
 
 import DailyCard from '../components/DailyCard'
 
+import '../css/dinofonts.css';
+
 function DailyDinoPage() {
     return(
-        <Row xs={1} md={2} className="g-4">
-            {Array.from({ length: 3 }).map((_, idx) => (
-                <Col>
-                    <DailyCard />
-                </Col>
-            ))}
-        </Row>
+        <Container>
+            <h1 className='dino-font'>The Daily Dino</h1>
+            <Row xs="auto" md="auto" className="g-4">
+                {Array.from({ length: 3 }).map((_, idx) => (
+                    <Col md="auto" >
+                        <DailyCard />
+                    </Col>
+                ))}
+            </Row>
+        </Container>
     )
 }
 

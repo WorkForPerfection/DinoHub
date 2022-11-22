@@ -4,10 +4,13 @@ import Card from 'react-bootstrap/Card'
 
 function DailyCard() {
     return (
-        <Card style={{ width: '22rem' }}>
-            <Card.Header className='text-center'>Dinosaur of the Day</Card.Header>
+        <Card>
+            <Card.Header className='text-center'>
+                <h6>November 10th</h6>
+                <h5>Dinosaur of the Day</h5>
+            </Card.Header>
             <Card.Body>
-                <DionsaurCard style={{ alignItems: 'center' }}/>
+                <DionsaurCard/>
             </Card.Body>
         </Card>
     )

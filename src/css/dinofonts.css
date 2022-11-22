@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'dino-font';
+    src: local('dino-font'), url(./fonts/DinosaurAlt-YzvB4.ttf) format('ttf');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+  }
