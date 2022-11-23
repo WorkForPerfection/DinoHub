@@ -1,16 +1,16 @@
 import React from 'react';
-import DionsaurCard from './DinosaurCard'
 import Card from 'react-bootstrap/Card'
+import DinosaurCard from './DinosaurCard';
 
-function DailyCard() {
+function DailyCard(props) {
     return (
         <Card>
             <Card.Header className='text-center'>
-                <h6>November 10th</h6>
-                <h5>Dinosaur of the Day</h5>
+                <h6 style={{ fontFamily: 'dinopia-r'}}>November 10th</h6>
+                <h3 style={{ fontFamily: 'dinopia-o'}}>Dinosaur of the Day</h3>
             </Card.Header>
             <Card.Body>
-                <DionsaurCard/>
+                <DinosaurCard name={props.name}/>
             </Card.Body>
         </Card>
     )

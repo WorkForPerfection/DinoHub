@@ -8,9 +8,9 @@ function DinosaurCard(props) {
         <div>
             <Card style={{ width: '18rem'}}>
                 <Card.Img variant="top" style={{ height: '18rem' }} src={Dino} alt="image" />
-                <Card.Header as='h4'>T-rex</Card.Header>
+                <Card.Header as='h4' style={{ fontFamily: 'dinopia-r'}}>{props.name}</Card.Header>
                 <Card.Body>
-                    <Card.Text>
+                    <Card.Text style={{ fontFamily: 'dinopia-l'}}>
                         Harry felt happier for the rest of the
                         weekend than he had done all term. He and Ron spent much 
                         of Sunday catching up with all their homework again.

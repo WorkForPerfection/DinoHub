@@ -5,10 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import DailyDinoPage from './pages/DailyDinoPage'
+import NavBar from './components/NavBar'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <NavBar />
     <DailyDinoPage />
     {/* <App /> */}
   </React.StrictMode>

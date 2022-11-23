@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'dino-font';
+    src: local('dino-font'), url('./fonts/DinosaurAlt-YzvB4.ttf') format('truetype');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
+
+@font-face {
+    font-family: 'dinopia-r';
+    src: local('dinopia-r'), url('./fonts/DinopiaRegular-mLrO9.otf') format('truetype');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
+
+@font-face {
+    font-family: 'dinopia-o';
+    src: local('dinopia-o'), url('./fonts/DinopiaOutline-PKRLB.otf') format('truetype');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
+
+@font-face {
+    font-family: 'dinopia-l';
+    src: local('dinopia-l'), url('./fonts/DinopiaLight-d9eVR.otf') format('truetype');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
+
+.bg-sky {
+    background-image: url("./img/bluesky.jpeg");
+    background-size: cover;
+    background-position: top;
+}
+
+.bg-jungle {
+    background-image: url("./img/jungle.jpeg");
+    background-size: cover;
+    background-position: top;
+}
