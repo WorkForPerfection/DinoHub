@@ -1,17 +1,17 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar';
+
+import Logo from './Logo'
 
 function NavBar(props) {
     return (
-        <Container style={{ padding: '1rem' }}>
-            <h1 style={{ fontFamily: 'dino-font', fontSize: '5rem', color: 'tomato'}}>
-                <text style={{ fontSize: '7rem' }}>D</text>
-                ino
-                <text style={{ fontSize: '7rem' }}>H</text>
-                ub
-            </h1>
-        </Container>
+        <Navbar style={{ height: '10%', backgroundColor: '#2C466C' }}>
+            <Logo size={2.5}/>
+        </Navbar>
     )
 }
+
 
 export default NavBar

@@ -3,10 +3,12 @@ import { Container } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card'
 import Dino from './Dino.webp'
 
+import {MINT} from '../css/colors'
+
 function TodayCard(props) {
     return (
         <Card style={{ width: '100%' }}>
-            <Card.Header>
+            <Card.Header style={{ backgroundColor: MINT}}>
                 <h3 style={{ fontFamily: 'dinopia-o'}}>Dinosaur of the Day</h3>
             </Card.Header>
             <Container style={{ height: '10rem', width: '10rem' }}>

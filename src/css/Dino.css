@@ -37,3 +37,8 @@
     background-size: cover;
     background-position: top;
 }
+
+.capital-letter {
+    font-family: 'dino-font';
+    font-size: '4rem'
+}

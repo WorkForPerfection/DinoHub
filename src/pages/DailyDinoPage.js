@@ -26,10 +26,10 @@ function DailyDinoPage() {
     var names = ["yubo1", "laoli2", "bruce3"];
     return(
         <Container>
-            <h1 style={{ fontFamily: "dinopia-r", textAlign: 'center'}}>THE DAILY DINO</h1>
-            <h5 style={{ fontFamily: "dinopia-l", textAlign: 'center', padding: '0.25rem'}}>Wednseday, September 16th, 2022</h5>
-            <TodayCard />
-            <Row xs="auto" md="auto" className="g-4" style={{ alignItems: 'center' }}>
+            <h1 style={{ fontFamily: "dinopia-r", textAlign: 'center', padding: '1rem 0rem 0rem' }}>THE DAILY DINO</h1>
+            <h5 style={{ fontFamily: "dinopia-l", textAlign: 'center', padding: '0.5rem'}}>Wednseday, September 16th, 2022</h5>
+            <TodayCard/>
+            <Row xs="auto" md="auto" className="g-4" style={{ alignItems: 'center', padding: '1rem'}}>
                 {names.map((name) => (
                     <Col md="auto" >
                         <DailyCard name={name}/>
