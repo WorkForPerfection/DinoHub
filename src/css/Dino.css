@@ -74,3 +74,10 @@
     background-color: white;
     /* background-color: #2C466C; */
 }
+
+.hvr-no-shadow {
+    text-shadow: '0.3rem 0.3rem 0.05rem #000000' 
+}
+.hvr-no-shadow:hover {
+    text-shadow: '0rem';
+}

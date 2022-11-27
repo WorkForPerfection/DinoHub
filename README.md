@@ -4,4 +4,8 @@ This is the github repository of Dinohub, a web application for dinosaur lovers.
 npm install react
 npm install react-bootstrap bootsrap
 npm install hover.css
-npm install node
+npm install node    #backend
+npm install axios
+npm install cors    #backend
+npm install express #backend
+npm install node-schedule #backend
