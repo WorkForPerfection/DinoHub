@@ -12,6 +12,7 @@ import { Button } from 'react-bootstrap';
 
 import http from '../services/dino'
 import axios from 'axios';
+import dino from '../services/dino';
 
 const NAVY = '#2C466C'
 // var names = ["yubo1", "laoli2", "bruce3"];
@@ -43,13 +44,18 @@ function DailyDinoPage() {
 
     // console.log('here')
 
+    var [dailyIndex, setIndex] = useState(0)
+    // useEffect(() => {
+    //     setIndex
+    // })
+
     var dailydinos = [{ "id": 1, "date": "2022-11-10T08:00:00.000Z", "dinosaur_id": 1, "dinosaur": { "id": 1, "type": "Papapa", "name": "Tyranysf", "period": "Okenham", "found_in": "USA", "length": "8.0m", "diet": "Herbivour", "dino_picture": null, "dino_size_picture": null, "basic_info": "The motley crew of wizards and witches at Hogwarts taught us about life, love, acceptance, friendship, death, and bravery from our book shelves and on the big screen, leaving us dozens of quotes and moments that still hold up to this day. ", "detailed_description": "There will be no foolish wand-waving or silly incantations in this class. As such, I don't expect many of you to appreciate the subtle science and exact art that is potion-making. However, for those select few who possess the predisposition, I can teach you how to bewitch the mind and ensnare the senses. I can tell you how to bottle fame, brew glory, and even put a stopper in death. Then again, maybe some of you have come to Hogwarts in possession of abilities so formidable that you feel confident enough to not pay attention!", "liked_count": 0 } }, { "id": 2, "date": "2022-11-23T08:00:00.000Z", "dinosaur_id": 2, "dinosaur": { "id": 2, "type": "pior", "name": "Ddaumous", "period": "Autum", "found_in": "Canada", "length": "16.0m", "diet": "Carnivourous", "dino_picture": null, "dino_size_picture": null, "basic_info": "If there is one thing Voldemort cannot understand, it is love. He didn't realize that love as powerful as your mother's for you leaves its own mark. Not a scar, no visible sign… to have been loved so deeply, even though the person who loved us is gone, will give us some protection forever. It is in your very own skin.", "detailed_description": "Being our first introduction to the wizarding world and its beloved cast of characters, it’s no surprise that some of the most memorable Harry Potter sayings come from Sorcerer’s Stone. While it has an inviting, almost storybook-like vibe, the first installment of Harry’s magical journey imparts some deep lessons — the importance of friendship, the value of humility (even if you’re The Boy Who Lived), the dangers of excessive desire, and sometimes, that it’s necessary to break the rules.", "liked_count": 0 } }]
 
 
     console.log("here")
     // console.log(dailydinos[0])
-    var dinotoday = dailydinos[0]
-    var today = new Date()
+    var dinotoday = dailydinos[dailyIndex]
+    var today = new Date(dinotoday.date)
     return (
         <div className='bg-page'>
             <Container>
@@ -82,11 +88,14 @@ function DailyDinoPage() {
                                         color: NAVY,
                                         borderColor: 'transparent'
                                     }}
-                                    md={{ span: 4 }}>
+                                    md={{ span: 4 }}
+                                    onClick={() => setIndex(dailyIndex - 1)}>
                                     <span style={{
                                         fontFamily: 'dinopia-r',
                                         fontSize: '5rem'
-                                    }}>{'<'}</span>
+                                    }}>
+                                        {'<'}
+                                    </span>
                                 </Button>
                             </Col>
                             <Col>
@@ -109,7 +118,8 @@ function DailyDinoPage() {
                                         color: NAVY,
                                         borderColor: 'transparent'
                                     }}
-                                    md={{ span: 4 }}>
+                                    md={{ span: 4 }}
+                                    onClick={() => setIndex(dailyIndex + 1)}>
                                     <span style={{
                                         fontFamily: 'dinopia-r',
                                         fontSize: '5rem'
@@ -128,7 +138,7 @@ function DailyDinoPage() {
                         padding: '1rem 0 0 0'
                     }}>
                     {dailydinos.map((dailydino) => (
-                        <Col md="auto" key={dailydino.id}>
+                        <Col key={dailydino.id}>
                             <DailyCard day={dailydino} style={{ alignItems: 'top' }} />
                         </Col>
                     ))}

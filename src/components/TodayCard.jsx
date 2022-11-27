@@ -27,6 +27,12 @@ function TodayCard(props) {
             <Card.Body>
                 <Container>
                     <Row>
+                        <Col style={{ textAlign: 'center', verticalAlign: 'center' }}>
+                            <Card.Text style={{ fontFamily: 'dinopia-r', fontSize: '5rem' }}>
+                                <span className='capital-letter'>{name.slice(0, 1)}</span>
+                                {name.slice(1)}
+                            </Card.Text>
+                        </Col>
                         <Col md={{ span: 3, offset: 1 }}>
                             <Card.Img
                                 variant="top"
@@ -35,12 +41,6 @@ function TodayCard(props) {
                                     height: '15rem',
                                     width: '15rem'
                                 }} />
-                        </Col>
-                        <Col style={{ textAlign: 'center', verticalAlign: 'center' }}>
-                            <Card.Text style={{ fontFamily: 'dinopia-r', fontSize: '5rem' }}>
-                                <span className='capital-letter'>{name.slice(0, 1)}</span>
-                                {name.slice(1)}
-                            </Card.Text>
                         </Col>
                         <Col>
                             <ListGroup
