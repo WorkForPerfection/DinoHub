@@ -4,15 +4,15 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import DailyCard from '../components/DailyCard'
-import TodayCard from '../components/TodayCard'
+import DailyCard from './components/DailyCard'
+import TodayCard from './components/TodayCard'
 
-import '../css/Dino.css';
+import './css/Dino.css';
 import { Button } from 'react-bootstrap';
 
-import http from '../services/dino'
+import http from './services/dino'
 import axios from 'axios';
-import dino from '../services/dino';
+import dino from './services/dino';
 
 const NAVY = '#2C466C'
 
