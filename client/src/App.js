@@ -2,6 +2,7 @@ import './css/App.css';
 import './css/Dino.css'
 import React, { useEffect, useState } from "react";
 import { Route, Routes, Link, useNavigate } from "react-router-dom";
+import axios from "axios"
 import { BuildYourOwn } from "./BuildYourOwn.js"
 import { DinoEgg } from "./DinoEgg"
 import { DailyRecommendation } from "./DailyRecommendation.js"
@@ -12,16 +13,13 @@ import './general.module.css'
 import styles from "./general.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import Logo from './components/Logo'
 import './css/Dino.css'
 import { MINT, NAVY } from "./css/colors"
-import { fontFamily } from '@mui/system';
 
 function App(props) {
     const [DinoName, setDinoName] = useState("");
@@ -74,14 +72,14 @@ function App(props) {
 
                 </Nav>
                 <Nav>
-                    <Button style={buttonStyle} onClick={() => { navigate("/DinoPage", { state: { curname: DinoName } }) }}> search </Button>
+                    <button style={buttonStyle} onClick={() => { navigate("/DinoPage", { state: { curname: DinoName } }) }}> search </button>
                 </Nav>
                 <Nav>
-                    <Button style={buttonStyle} onClick={() => { navigate("/discover") }}> discover </Button>
+                    <button style={buttonStyle} onClick={() => { navigate("/discover") }}> discover </button>
                 </Nav>
                 <Nav>
-                    <Button style={buttonStyle} onClick={() => { setLogin(true) }}> login </Button>
-                    <Button style={buttonStyle} onClick={() => { setUser({ ...User, name: "wang" }) }}> User </Button>
+                    <button style={buttonStyle} onClick={() => { setLogin(true) }}> login </button>
+                    <button style={buttonStyle} onClick={() => { setUser({ ...user, name: "wang" }) }}> User </button>
                 </Nav>
             </Navbar>
 
