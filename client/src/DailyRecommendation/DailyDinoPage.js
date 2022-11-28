@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import DailyCard from './components/DailyCard'
 import TodayCard from './components/TodayCard'
 
-import './css/Dino.css';
+import '../css/Dino.css';
 import { Button } from 'react-bootstrap';
 
 import http from './services/dino'

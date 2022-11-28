@@ -8,7 +8,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 import Dino from './stego.jpeg';
 
-import { MINT } from '../css/colors'
+import { MINT } from '../../css/colors'
 
 function TodayCard(props) {
     var dino = props.dino.dinosaur

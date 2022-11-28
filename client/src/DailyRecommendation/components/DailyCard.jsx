@@ -2,7 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import DinosaurCard from './DinosaurCard';
 
-import { MINT } from '../css/colors';
+import { MINT } from '../../css/colors';
 
 function DailyCard(props) {
     console.log("props:")

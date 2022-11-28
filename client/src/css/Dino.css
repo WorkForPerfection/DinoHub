@@ -76,8 +76,21 @@
 }
 
 .hvr-no-shadow {
-    text-shadow: '0.3rem 0.3rem 0.05rem #000000' 
+    text-shadow: '0.3rem 0.3rem 0.05rem #000000'
 }
+
 .hvr-no-shadow:hover {
     text-shadow: '0rem';
+}
+
+.bg-dino {
+    background-image: url('./img/dinobg.jpg');
+    background-size: 100% auto;
+    background-attachment: fixed;
+}
+
+.bg-overlay {
+    height: '100%';
+    width: '100%';
+    background-color: 'rgba(0, 0, 0, 0.5)';
 }
