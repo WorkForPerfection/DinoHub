@@ -1,0 +1,83 @@
+@font-face {
+    font-family: 'dino-font';
+    src: local('dino-font'), url('./fonts/DinosaurAlt-YzvB4.ttf') format('truetype');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
+
+@font-face {
+    font-family: 'dinopia-r';
+    src: local('dinopia-r'), url('./fonts/DinopiaRegular-mLrO9.otf') format('truetype');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
+
+@font-face {
+    font-family: 'dinopia-o';
+    src: local('dinopia-o'), url('./fonts/DinopiaOutline-PKRLB.otf') format('truetype');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
+
+@font-face {
+    font-family: 'dinopia-l';
+    src: local('dinopia-l'), url('./fonts/DinopiaLight-d9eVR.otf') format('truetype');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
+
+.bg-sky {
+    background-image: url("./img/bluesky.jpeg");
+    background-size: cover;
+    background-position: top;
+}
+
+.bg-jungle {
+    background-image: url("./img/jungle.jpeg");
+    background-size: cover;
+    background-position: top;
+}
+
+.capital-letter {
+    font-family: 'dino-font';
+    font-size: '4rem'
+}
+
+.hvr-bob {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+.hvr-bob:hover,
+.hvr-bob:focus,
+.hvr-bob:active {
+    -webkit-animation-name: hvr-bob-float, hvr-bob;
+    animation-name: hvr-bob-float, hvr-bob;
+    -webkit-animation-duration: .3s, 1.5s;
+    animation-duration: .3s, 1.5s;
+    -webkit-animation-delay: 0s, .3s;
+    animation-delay: 0s, .3s;
+    -webkit-animation-timing-function: ease-out, ease-in-out;
+    animation-timing-function: ease-out, ease-in-out;
+    -webkit-animation-iteration-count: 1, infinite;
+    animation-iteration-count: 1, infinite;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-direction: normal, alternate;
+    animation-direction: normal, alternate;
+}
+
+.bg-page {
+    background-color: white;
+    /* background-color: #2C466C; */
+}
+
+.hvr-no-shadow {
+    text-shadow: '0.3rem 0.3rem 0.05rem #000000' 
+}
+.hvr-no-shadow:hover {
+    text-shadow: '0rem';
+}
