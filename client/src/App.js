@@ -16,6 +16,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
 
 import Logo from './components/Logo'
 import './css/Dino.css'
@@ -34,8 +36,8 @@ function App(props) {
 
     const linkStyle = {
         color: 'white',
-        margin: '1rem',
-        fontSize: '1.3rem'
+        margin: '0.5rem',
+        fontSize: '1.2rem'
     }
 
     const formStyle = {
@@ -50,6 +52,20 @@ function App(props) {
         fontFamily: 'dinopia-r',
         margin: '0.8rem',
         borderColor: MINT
+    }
+
+    const containerStyle = {
+        textAlign: 'center',
+        verticalAlign: 'center',
+    }
+
+    const cardStyle = {
+        textAlign: 'center',
+        verticalAlign: 'center',
+        fontFamily: 'dinopia-l',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: '40%'
     }
 
     //In your_dino_egg, if the user is not logged in, then we should display "login first"
@@ -107,19 +123,21 @@ function App(props) {
     if(user) {
         console.log(user);
         accountPage = (
-            <dev>
-                <button onClick={() => {
+            <Container style={containerStyle}>
+                <Card style={cardStyle}>
+                <button style={buttonStyle} onClick={() => {
                     handleLogout()
                 }}> log out
                 </button>
-                Username:{user[0].username}
+                Username: {user[0].username}
                 <br/>
-                First name:{user[0].first_name}
+                First name: {user[0].first_name}
                 <br/>
-                Last name:{user[0].last_name}
+                Last name: {user[0].last_name}
                 <br/>
                 profile_picture:{user[0].profile_picture}
-            </dev>
+                </Card>
+            </Container>
         )
     }
     const handleLoginSubmit = async e => {
@@ -161,17 +179,18 @@ function App(props) {
     };
     //if user is already logged in, display the corresponding account info component
     if(user) {logincomponent=(
-        <dev className={styles.content_begin}>
-            <dev>
-                <button onClick={()=>setLogin(false)}> Back </button>
+        <Container style={containerStyle}>
+            <Card style={cardStyle}>
+                <button style={buttonStyle} onClick={()=>setLogin(false)}> Back </button>
                 {accountPage}
-            </dev>
-        </dev>
+            </Card>
+        </Container>
     );}
     //else, display forms to log in/sign up
     else {logincomponent = (
-        <dev>
-            <button onClick={() => setLogin(false)}> Back </button>
+        <Container style={containerStyle}>
+            <button style={buttonStyle} onClick={() => setLogin(false)}> Back </button>
+            <Card style={cardStyle}>
             <form id={"form1"} onSubmit={handleLoginSubmit}>
                 Log in to an existing account: <br/>
                 <label htmlFor="username">Username: </label>
@@ -190,7 +209,7 @@ function App(props) {
                         onChange={({target}) => setPassword(target.value)}
                     />
                 </div>
-                <button type="submit">Login</button>
+                <button style={buttonStyle} type="submit">Login</button>
             </form>
             <form id={"form2"} onSubmit={handleSignUpSubmit}>
                 Sign up a new account: <br/>
@@ -210,9 +229,10 @@ function App(props) {
                         onChange={({target}) => setnewPassword(target.value)}
                     />
                 </div>
-                <button type="submit">Sign up</button>
+                <button style={buttonStyle} type="submit">Sign up</button>
             </form>
-        </dev>
+            </Card>
+        </Container>
     );
     }
     //whenever rendering homepage, check whether there is a logged in user
@@ -243,10 +263,10 @@ function App(props) {
             );
         }
         return (
-            <dev className={styles.content_begin}>
+            <Container style={{margin:'10% 0 0 0'}}>
                 {logincomponent}
                 {warningMessage}
-            </dev>
+            </Container>
         );
     }
     else return HomeRender;

@@ -14,8 +14,6 @@ function TodayCard(props) {
     var dino = props.dino.dinosaur
     var name = dino.name
     var dis = dino.basic_info
-    console.log("fudsad")
-    console.log(dino)
     return (
         <Card style={{
             width: '100%',

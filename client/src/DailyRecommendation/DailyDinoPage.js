@@ -60,7 +60,6 @@ function DailyDinoPage() {
 
         console.log('index to: ' + alt)
         if (alt > -1 && alt < obj.length) {
-
             console.log('index to: ' + alt)
             setIndex(alt)
         }
@@ -68,7 +67,6 @@ function DailyDinoPage() {
 
     function incIndex() {
         var alt = dailyIndex + 1
-
         console.log('index to: ' + alt)
         if (alt > -1 && alt < obj.length) {
             console.log('index to: ' + alt)
@@ -86,8 +84,8 @@ function DailyDinoPage() {
     return (
         <div className='bg-page'>
             <Container>
-                <div style={{ margin: '2rem 0rem 0rem 0rem' }}>
-                    <div style={{ padding: "0rem 10rem 0rem 10rem" }}>
+                <div>
+                    <div style={{ padding: "0rem 20rem 0rem 20rem" }}>
                         <h1 style={{
                             fontFamily: "dinopia-r",
                             color: 'white',
@@ -107,29 +105,30 @@ function DailyDinoPage() {
                         </h1>
                     </div>
                     <Container>
-                        <Row>
-                            <Col md='1'>
+                        <Row className="justify-content-md-center">
+                            <Col className="justify-content-md-center" md='1' span={3}>
                                 <Button
                                     style={{
                                         backgroundColor: 'transparent',
                                         color: NAVY,
                                         borderColor: 'transparent'
                                     }}
-                                    md={{ span: 4 }}
                                     onClick={decIndex()}>
                                     <span style={{
                                         fontFamily: 'dinopia-r',
-                                        fontSize: '5rem'
+                                        fontSize: '5rem',
+                                        margin: '0rem',
+                                        padding: '0rem'
                                     }}>
                                         {'<'}
                                     </span>
                                 </Button>
                             </Col>
-                            <Col>
+                            <Col md='auto'>
                                 <h3 style={{
                                     fontFamily: "dinopia-l",
                                     textAlign: 'center',
-                                    padding: '0.3rem',
+                                    padding: '3rem 0.3rem 0.3rem 0.3rem',
                                     color: '#2C466C',
                                     letterSpacing: '0.11rem'
                                 }}>
@@ -138,18 +137,19 @@ function DailyDinoPage() {
                                     {' '}{today.getDate()}, {today.getFullYear()}
                                 </h3>
                             </Col>
-                            <Col md='1'>
+                            <Col className="justify-content-md-center" md='1'>
                                 <Button
                                     style={{
                                         backgroundColor: 'transparent',
                                         color: NAVY,
                                         borderColor: 'transparent'
                                     }}
-                                    md={{ span: 4 }}
                                     onClick={incIndex()}>
                                     <span style={{
                                         fontFamily: 'dinopia-r',
-                                        fontSize: '5rem'
+                                        fontSize: '5rem',
+                                        margin: '0rem',
+                                        padding: '0rem'
                                     }}>{'>'}
                                     </span>
                                 </Button>

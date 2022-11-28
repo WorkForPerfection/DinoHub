@@ -5,11 +5,8 @@ import DinosaurCard from './DinosaurCard';
 import { MINT } from '../../css/colors';
 
 function DailyCard(props) {
-    console.log("props:")
-    console.log(props)
     var date = new Date(props.day.date)
     var dinosaur = props.day.dinosaur
-    console.log(dinosaur)
     return (
         <Card>
             <Card.Header

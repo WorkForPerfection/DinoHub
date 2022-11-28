@@ -15,7 +15,7 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup';
 
 // const cardStyle1 = { margin: '0.8rem', color: ORG, backgroundColor: MINT }
-const cardStyle2 = { margin: '0.8rem', color: NAVY, fontFamily: 'dinopia-l', fontSize: '1.2rem', backgroundColor: MINT }
+const cardStyle2 = { margin: '0.8rem', color: NAVY, fontFamily: 'dinopia-l', fontSize: '1.3rem', backgroundColor: MINT }
 
 export function Home() {
     return (
@@ -33,14 +33,13 @@ export function Home() {
                     <Logo size={11} color1={NAVY} />
                 </Container>
 
-                {/* In addition, you can try out some of our custom features, including: */}
                 <h1 style={{ fontSize: '2rem', fontFamily: 'dinopia-L', color: NAVY, textAlign: 'center' }}>Dedicated to Fellow Dino Fans</h1>
                 <h1 style={{ fontFamily: 'dinopia-r', color: NAVY, textAlign: 'center' }}>\/{'      '}\/{'      '}\/</h1>
                 <Row>
                     <Col>
                         <Card style={cardStyle2}>
-                            <Card.Header>This is a place where dinosaur lovers can learn and share dinosaur facts, build your own customized dino-fossil, and even hatch your own dinosaur egg!</Card.Header>
-                            <Card.Body style={{ backgroundColor: 'transparent' }}>
+                            <Card.Header style={{padding: '1rem'}}>This is a place where dinosaur lovers can learn and share dinosaur facts, build your own customized dino-fossil, and even hatch your own dinosaur egg!</Card.Header>
+                            <Card.Body style={{ backgroundColor: 'transparent', padding: '1rem'}}>
                                 In addition, you can try out some of our custom features, including:
                                 <ListGroup>
                                     <ListGroup.Item>
@@ -62,16 +61,16 @@ export function Home() {
                     </Col>
                     <Col style={{ fontSize: '3rem', fontFamily: 'dinopia-o' }} md={5}>
                         <Card style={{ margin: '0.8rem', color: ORG, backgroundColor: MINT }}>
-                            <Card.Header>
+                            <Card.Header style={{padding: '1rem'}}>
                                 <span style={{ fontFamily: 'dino-font' }}>Learn</span>
                                 {' '}and{' '}<span style={{ fontFamily: 'dino-font' }}>Share</span>{' '}dinosaur facts
                             </Card.Header>
                         </Card>
                         <Card style={{ margin: '0.6rem', color: ORG, backgroundColor: MINT }}>
-                            <Card.Header><span style={{ fontFamily: 'dino-font' }}>Build</span> your own customized dino-fossil</Card.Header>
+                            <Card.Header style={{padding: '1rem'}}><span style={{ fontFamily: 'dino-font' }}>Build</span> your own customized dino-fossil</Card.Header>
                         </Card>
                         <Card style={{ margin: '0.8rem', color: ORG, backgroundColor: MINT }}>
-                            <Card.Header><span style={{ fontFamily: 'dino-font' }}>Hatch</span> your own dinosaur egg!</Card.Header>
+                            <Card.Header style={{padding: '1rem'}}><span style={{ fontFamily: 'dino-font' }}>Hatch</span> your own dinosaur egg!</Card.Header>
                         </Card>
 
                     </Col>
