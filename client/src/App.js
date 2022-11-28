@@ -21,6 +21,7 @@ import Form from 'react-bootstrap/Form';
 import Logo from './components/Logo'
 import './css/Dino.css'
 import { MINT, NAVY } from "./css/colors"
+import { fontFamily } from '@mui/system';
 
 function App(props) {
     const [DinoName, setDinoName] = useState("");
@@ -30,30 +31,55 @@ function App(props) {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
+    const linkStyle = {
+        color: 'white',
+        margin: '1rem',
+        fontSize: '1.3rem'
+    }
+
+    const formStyle = {
+        height: '2rem',
+        mergin: '3rem',
+        verticalAlign: 'center'
+    }
+
+    const buttonStyle = {
+        backgroundColor: 'white',
+        color: NAVY,
+        fontFamily: 'dinopia-r',
+        margin: '0.8rem',
+        borderColor: MINT
+    }
+
     //In your_dino_egg, if the user is not logged in, then we should display "login first"
     const HomeRender = (
         <dev>
             <Navbar style={{ backgroundColor: "#2C466C", boxShadow: '0rem 0.3rem 0.05rem ' + MINT }}>
-                    <Navbar.Brand className='ms-4'>
-                        <Logo size={2} href='/' />
-                    </Navbar.Brand>
-                    <Nav className='text-white nav'>
-                        <Nav.Link to="/">Home</Nav.Link>
-                        <Nav.Link to="/build_your_own_dino">Build Your Own Dino</Nav.Link>
-                        <Nav.Link to="/daily_recommendation">Daily Dino</Nav.Link>
-                        <Nav.Link to="/your_dino_egg">Your Dino Egg</Nav.Link>
-                    </Nav>
-                    <Nav>
+                <Navbar.Brand className='ms-4'>
+                    <Logo size={2} href='/' shadow='0rem 0.3rem 0.05rem #000000' />
+                </Navbar.Brand>
+                <Nav className='nav' style={{ color: 'white' }}>
+                    <Link style={linkStyle} to="/">Home</Link>
+                    <Link style={linkStyle} to="/build_your_own_dino">Build Your Own Dino</Link>
+                    <Link style={linkStyle} to="/daily_recommendation">Daily Dino</Link>
+                    <Link style={linkStyle} to="/your_dino_egg">Your Dino Egg</Link>
+                </Nav>
+                <Nav style={formStyle} >
+                    <Form>
                         <input type="text" onChange={(event) => { setDinoName(event.target.value) }} />
-                        <Button onClick={() => { navigate("/DinoPage", { state: { curname: DinoName } }) }}> search </Button>
-                    </Nav>
-                    <Nav>
-                        <Button onClick={() => { navigate("/discover") }}> discover </Button>
-                    </Nav>
-                    <Nav>
-                        <Button onClick={() => { setLogin(true) }}> login </Button>
-                        <Button onClick={() => { setUser({ ...User, name: "wang" }) }}> User </Button>
-                    </Nav>
+                    </Form>
+
+                </Nav>
+                <Nav>
+                    <Button style={buttonStyle} onClick={() => { navigate("/DinoPage", { state: { curname: DinoName } }) }}> search </Button>
+                </Nav>
+                <Nav>
+                    <Button style={buttonStyle} onClick={() => { navigate("/discover") }}> discover </Button>
+                </Nav>
+                <Nav>
+                    <Button style={buttonStyle} onClick={() => { setLogin(true) }}> login </Button>
+                    <Button style={buttonStyle} onClick={() => { setUser({ ...User, name: "wang" }) }}> User </Button>
+                </Nav>
             </Navbar>
 
             <Routes>
