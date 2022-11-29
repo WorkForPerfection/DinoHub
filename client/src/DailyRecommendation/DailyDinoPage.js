@@ -29,37 +29,47 @@ function DailyDinoPage() {
         ).catch()
     }, [])
 
-    const num = 5
-    // var obj = [{"id":3,"date":"2022-11-28T08:00:00.000Z","dinosaur_id":11,"dinosaur":{"id":11,"type":"armoured dinosaur","name":"Ankylosaurus","period":"Late Cretaceous","dino_picture":"./pictures/Ankylosaurus-dino.jpg","dino_size_picture":"./pictures/Ankylosaurus-size.jpg","found_in":"Canada, USA","Diet":"herbivorous","Length":"7.0m","Likes":null}},{"id":4,"date":"2022-11-27T08:00:00.000Z","dinosaur_id":14,"dinosaur":{"id":14,"type":"large theropod","name":"Carnotaurus","period":"Late Cretaceous","dino_picture":"./pictures/Carnotaurus-dino.jpg","dino_size_picture":"./pictures/Carnotaurus-size.jpg","found_in":"Argentina","Diet":"carnivorous","Length":"7.6m","Likes":null}},{"id":5,"date":"2022-11-26T08:00:00.000Z","dinosaur_id":15,"dinosaur":{"id":15,"type":"large theropod","name":"Giganotosaurus","period":"Early Cretaceous","dino_picture":"./pictures/Giganotosaurus-dino.jpg","dino_size_picture":"./pictures/Giganotosaurus-size.jpg","found_in":"Argentina","Diet":"carnivorous","Length":"12.5m","Likes":null}},{"id":6,"date":"2022-11-25T08:00:00.000Z","dinosaur_id":16,"dinosaur":{"id":16,"type":"large theropod","name":"Allosaurus","period":"Late Jurassic","dino_picture":"./pictures/Allosaurus-dino.jpg","dino_size_picture":"./pictures/Allosaurus-size.jpg","found_in":"Portugal, USA","Diet":"carnivorous","Length":"12.0m","Likes":null}},{"id":7,"date":"2022-11-24T08:00:00.000Z","dinosaur_id":17,"dinosaur":{"id":17,"type":"small theropod","name":"Velociraptor","period":"Late Cretaceous","dino_picture":"./pictures/Velociraptor-dino.jpg","dino_size_picture":"./pictures/Velociraptor-size.jpg","found_in":"Mongolia","Diet":"carnivorous","Length":"1.8m","Likes":null}}]
-
-    function decIndex() {
-        var alt = dailyIndex - 1
-        console.log('index to: ' + alt)
-        if (alt > -1 && alt < num) {
-            console.log('index to: ' + alt)
-            setIndex(alt)
-        }
-    }
-    function incIndex() {
-        var alt = dailyIndex + 1
-        console.log('index to: ' + alt)
-        if (alt > -1 && alt < num) {
-            console.log('index to: ' + alt)
-            setIndex(alt)
-        }
-    }
-
-    console.log("here")
-    console.log(obj)
-    // console.log(dailydinos[0])
-
     if (obj.length > 4) {
-
         var dailydinos = obj
         var dinotoday = dailydinos[dailyIndex]
         var otherdinos = dailydinos.map((day) => day)
+
+        var indexStart = dailyIndex
+        var indexEnd = dailyIndex + 4
         otherdinos.splice(dailyIndex, 1)
+        otherdinos = otherdinos.slice(indexStart, indexEnd).reverse()
+        console.log(otherdinos)
         var today = new Date(dinotoday.date)
+
+        const num = obj.length
+        console.log(num)
+        // var obj = [{"id":3,"date":"2022-11-28T08:00:00.000Z","dinosaur_id":11,"dinosaur":{"id":11,"type":"armoured dinosaur","name":"Ankylosaurus","period":"Late Cretaceous","dino_picture":"./pictures/Ankylosaurus-dino.jpg","dino_size_picture":"./pictures/Ankylosaurus-size.jpg","found_in":"Canada, USA","Diet":"herbivorous","Length":"7.0m","Likes":null}},{"id":4,"date":"2022-11-27T08:00:00.000Z","dinosaur_id":14,"dinosaur":{"id":14,"type":"large theropod","name":"Carnotaurus","period":"Late Cretaceous","dino_picture":"./pictures/Carnotaurus-dino.jpg","dino_size_picture":"./pictures/Carnotaurus-size.jpg","found_in":"Argentina","Diet":"carnivorous","Length":"7.6m","Likes":null}},{"id":5,"date":"2022-11-26T08:00:00.000Z","dinosaur_id":15,"dinosaur":{"id":15,"type":"large theropod","name":"Giganotosaurus","period":"Early Cretaceous","dino_picture":"./pictures/Giganotosaurus-dino.jpg","dino_size_picture":"./pictures/Giganotosaurus-size.jpg","found_in":"Argentina","Diet":"carnivorous","Length":"12.5m","Likes":null}},{"id":6,"date":"2022-11-25T08:00:00.000Z","dinosaur_id":16,"dinosaur":{"id":16,"type":"large theropod","name":"Allosaurus","period":"Late Jurassic","dino_picture":"./pictures/Allosaurus-dino.jpg","dino_size_picture":"./pictures/Allosaurus-size.jpg","found_in":"Portugal, USA","Diet":"carnivorous","Length":"12.0m","Likes":null}},{"id":7,"date":"2022-11-24T08:00:00.000Z","dinosaur_id":17,"dinosaur":{"id":17,"type":"small theropod","name":"Velociraptor","period":"Late Cretaceous","dino_picture":"./pictures/Velociraptor-dino.jpg","dino_size_picture":"./pictures/Velociraptor-size.jpg","found_in":"Mongolia","Diet":"carnivorous","Length":"1.8m","Likes":null}}]
+
+        function decIndex() {
+            var alt = dailyIndex - 1
+            console.log('index to: ' + alt)
+            if (alt > -1 && alt < num) {
+                console.log('index to: ' + alt)
+                if (dailyIndex < indexStart) {
+                    indexStart = dailyIndex
+                    indexEnd = indexStart + 4
+                }
+                setIndex(alt)
+            }
+        }
+        function incIndex() {
+            var alt = dailyIndex + 1
+            console.log('index to: ' + alt)
+            if (alt > -1 && alt < num) {
+                // console.log('index to: ' + alt)
+                if (dailyIndex > indexEnd) {
+                    indexEnd = dailyIndex
+                    indexStart = indexEnd - 4
+                }
+                setIndex(alt)
+            }
+        }
+
         return (
             <div className='bg-page'>
                 <Container>
@@ -71,7 +81,6 @@ function DailyDinoPage() {
                                 backgroundColor: NAVY,
                                 textAlign: 'center',
                                 fontSize: '3.5rem',
-                                // margin: '0rem 23rem 0rem 23rem'
                             }}>
                                 <span className='capital-letter'>T</span>
                                 <span style={{ fontSize: '4.2rem' }}>HE</span>
@@ -111,7 +120,8 @@ function DailyDinoPage() {
                                         textAlign: 'center',
                                         padding: '1rem 0.3rem 0.3rem 0.3rem',
                                         color: '#2C466C',
-                                        letterSpacing: '0.11rem'
+                                        letterSpacing: '0.11rem',
+                                        width: '30rem'
                                     }}>
                                         {today.toLocaleString('en-US', { weekday: 'long' })},
                                         {' '}{today.toLocaleString('en-US', { month: 'long' })}
@@ -141,7 +151,7 @@ function DailyDinoPage() {
                         </Container>
                     </div>
                     <TodayCard dino={dinotoday} />
-                    <h1 style={{ fontFamily: 'dinopia-l', fontSize: '2rem', textAlign: 'center', margin: '1rem', color: NAVY }} >Other Daily Dinos</h1>
+                    <h1 style={{ fontFamily: 'dinopia-l', fontSize: '2rem', textAlign: 'center', margin: '1rem', color: NAVY }} >Previous Daily Dinos</h1>
                     <Row xs="auto"
                         md="auto"
                         className="g-3 justify-content-md-center"
@@ -158,6 +168,12 @@ function DailyDinoPage() {
                 </Container>
             </div>
         )
+    }
+    else {
+        <Container style={{ textAlign: 'center' }}>
+            <h1 style={{ fontFamily: "dinopia-r", fontSize: '1rem' }}>A Meteoroid has hitten the Daily Dinos Database</h1>
+            <h1 style={{ fontFamily: "dinopia-r", fontSize: '1rem' }}>#Dino 404 Cry Cry#</h1>
+        </Container>
     }
 
 }

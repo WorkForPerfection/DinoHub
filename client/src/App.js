@@ -36,13 +36,13 @@ function App(props) {
 
     const linkStyle = {
         color: 'white',
-        margin: '0.5rem',
+        margin: '1rem',
         fontSize: '1.2rem'
     }
 
     const formStyle = {
         height: '2rem',
-        padding: '0 1rem 0 8rem',
+        padding: '0 1rem 0 5rem',
         verticalAlign: 'center'
     }
 

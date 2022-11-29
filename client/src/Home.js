@@ -1,8 +1,4 @@
-import styles from './general.module.css'
-import Abel from "./pictures/Abelisaurus-dino.jpg"
-import Diplo from "./pictures/Diplodocus-dino.jpg"
-import Allo from "./pictures/Allosaurus-dino.jpg"
-import React from "react";
+import { React, useState, useEffect } from "react";
 
 import Container from 'react-bootstrap/Container'
 import Logo from './components/Logo'
@@ -13,11 +9,55 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 
 // const cardStyle1 = { margin: '0.8rem', color: ORG, backgroundColor: MINT }
 const cardStyle2 = { margin: '0.8rem', color: NAVY, fontFamily: 'dinopia-l', fontSize: '1.3rem', backgroundColor: MINT }
 
+var dino_list = [
+    'Tyrannosaurus',
+    'Mamenchisaurus',
+    'Stegosaurus',
+    'Bactrosaurus',
+    'Dilophosaurus',
+    'Carnotaurus',
+    'Aragosaurus',
+    'Ankylosaurus',
+    'Allosaurus',
+    'Triceratops',
+]
+
+function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
+    // While there remain elements to shuffle.
+    while (currentIndex !== 0) {
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+    return array;
+}
+
+
 export function Home() {
+    var [shuf_dino, setDino] = useState(dino_list)
+    useEffect(() =>
+        setDino(shuffle(shuf_dino))
+    )
+    var shuf_dino = shuffle(shuf_dino)
+    var dinoImg1 = './pictures/' + shuf_dino[0] + '-dino.jpg'
+    var dinoImg2 = './pictures/' + shuf_dino[1] + '-dino.jpg'
+    var dinoImg3 = './pictures/' + shuf_dino[2] + '-dino.jpg'
+    console.log(dinoImg1, dinoImg2, dinoImg3)
+
+    function handleRefresh() {
+        shuf_dino = shuffle(shuf_dino)
+        setDino(shuf_dino)
+    }
+
     return (
         <Container fluid>
             <div className='bg-dino' >
@@ -59,7 +99,6 @@ export function Home() {
                                 </ListGroup>
                             </Card.Body>
                         </Card>
-
                     </Col>
                     <Col style={{ fontSize: '3rem', fontFamily: 'dinopia-o' }} md={5}>
                         <Card style={{ margin: '0.8rem', color: ORG, backgroundColor: MINT }}>
@@ -74,18 +113,17 @@ export function Home() {
                         <Card style={{ margin: '0.8rem', color: ORG, backgroundColor: MINT }}>
                             <Card.Header style={{ padding: '1rem' }}><span style={{ fontFamily: 'dino-font' }}>Hatch</span> your own dinosaur egg!</Card.Header>
                         </Card>
-
                     </Col>
-
-                </Row>
-                <Row style={{ fontSize: '2rem', fontFamily: 'dinopia-l', margin: '2rem' }}>
-                    Below are some pictures of dinosaurs in our database -- can you guess their names?
                 </Row>
             </Container>
-            <Container style={{ alignText: 'center' }}>
-                <img src={Abel} alt={"Abel"} />
-                <img src={Diplo} alt={"Diplo"} />
-                <img src={Allo} alt={"Allo"} />
+            <Container style={{ alignText: 'center', padding: '3rem' }}>
+                <div style={{ fontSize: '1.5rem', fontFamily: 'dinopia-l', margin: '2rem' }}>
+                    Below are 3 pictures of random dinosaurs from a small part our database -- can you guess their names?
+                    {/* <Button className='button-d' onClick={() => handleRefresh()}>Refresh</Button> */}
+                </div>
+                <img src={require('' + dinoImg1)} alt={"dino1"} />
+                <img src={require('' + dinoImg2)} alt={"dino2"} />
+                <img src={require('' + dinoImg3)} alt={"dino3"} />
             </Container>
         </Container>
     );

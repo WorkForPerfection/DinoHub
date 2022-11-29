@@ -115,7 +115,7 @@ app.get("/dino/all", (req, res) => {
 
 //app to get and daily dinos and return in descending date
 app.get("/dino/today", (req, res) => {
-    var limit = req.query.limit ? req.body.limit : 5
+    var limit = req.query.limit ? req.body.limit : 20
     db.query(
         "SELECT * FROM dailydino ORDER BY date DESC LIMIT ?", [limit],
         (err, result) => {
@@ -151,16 +151,19 @@ app.get("/dino/today", (req, res) => {
     )
 })
 
-/* generate daily dino (every 10 seconds) */
-cron.schedule('*/10 * * * * *', function () {
+/* generate daily dino (every 1 hour at 0 minute) */
+/* change the string below to change frequency of generation */
+// e.g. to generate every 10 seconds use '*/10 * * * * *'
+// e.g. to generate every day at midnight use '0 0 0 * * *'
+cron.schedule('0 0 * * * *', function () {
     generateDailyDino()
 })
 
 function generateDailyDino() {
     console.log('attempts to generate daily dino')
-    /* limit the new dino was not recently selected */
+    /* limit the new dino was not recently selected, query past 10 days of daily dinos*/
     db.query(
-        "SELECT dinosaur_id, date FROM dailydino ORDER BY date DESC LIMIT 5",
+        "SELECT dinosaur_id, date FROM dailydino ORDER BY date DESC LIMIT 10",
         (err, result) => {
             var pastids = []
             var last_date = new Date(result[0].date)

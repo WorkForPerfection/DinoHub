@@ -13,10 +13,10 @@ function DinosaurCard(props) {
         image = require('' + imgSrc)
     } catch (err) {
         image = require('' + './Dino.webp')
-        console.log('this does not work')
-        console.log(imgSrc)
-        console.log('use this instead')
-        console.log('../../pictures/Giganotosaurus-dino.jpg')
+        // console.log('this does not work')
+        // console.log(imgSrc)
+        // console.log('use this instead')
+        // console.log('../../pictures/Giganotosaurus-dino.jpg')
     }
     // imgSrc='./pictures/stego.jpeg'
 
