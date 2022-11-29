@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
+const cron = require('node-cron');
 
 app.use(cors());
 app.use(express.json());
@@ -151,48 +152,60 @@ app.get("/dino/today", (req, res) => {
 })
 
 /* generate daily dino (every 10 seconds) */
-var CronJob = require('cron').CronJob;
-job = new CronJob(
-    '*/10 * * * * *',
-    generateDailyDino(),
-    null,
-    true,
-    'America/Los_Angeles'
-);
+cron.schedule('*/10 * * * * *', function () {
+    generateDailyDino()
+})
 
-async function generateDailyDino() {
+function generateDailyDino() {
+    console.log('attempts to generate daily dino')
     /* limit the new dino was not recently selected */
+    db.query(
+        "SELECT dinosaur_id, date FROM dailydino ORDER BY date DESC LIMIT 5",
+        (err, result) => {
+            var pastids = []
+            var last_date = new Date(result[0].date)
+            for (var i = 0; i < result.length; i++) {
+                pastids.push(result[i].dinosaur_id)
+            }
+            // console.log(pastids)
+            var str = '(' + pastids.join(',') + ')'
+            // console.log(str)
+            // /* select random dino from all */
+            db.query(
+                `SELECT id FROM dinosaur WHERE id NOT IN ${str} ORDER BY RAND() LIMIT 1`,
+                (err, result) => {
+                    var new_dino = result[0].id
+                    var new_date = new Date(last_date)
+                    new_date.setDate(new_date.getDate() + 1)
+                    console.log(new_dino, new_date)
+                    db.query(
+                        `INSERT INTO dailydino (date, dinosaur_id) VALUES ('${formatDate(new_date)}', ${new_dino})`,
+                        (err, result) => {
+                            if (err) {
+                                console.log(err)
+                            } else {
+                                console.log('successfully added daily dino!')
+                            }
+                        })
 
-    console.log('attemp to generate daily dino')
-    // db.query(
-    //     "SELECT * FROM dailydino LIMIT 5",
-    //     (err, result) => var_pastdinos
-    // )
-    // var past_dinos = await getDailyDino().data
-    // past_ids = past_dinos.map(day => {
-    //   return day.dinosaur.id
-    // })
+                }
+            )
+        }
+    )
+}
 
-    // /* select random dino from all */
-    // console.log('attemp to generate daily dino')
-    // const random_dino = await db.query(
-    //   `SELECT id
-    //   FROM dinosaurs
-    //   WHERE id NOT IN(
-    //     SELECT dinosaur_id
-    //     FROM dailydinos
-    //     LIMIT 5
-    //   )
-    //   ORDER BY RAND()
-    //   LIMIT 1`
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
 
-    // )
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
 
-
-    // date = new Date()
-    // db.query(
-    //   `INSERT INTO dailydino(date, dinosaur_id) VALUES (${date},${random_dino.id})`
-    // )
+    return [year, month, day].join('-');
 }
 
 const port = process.env.PORT || 8080;

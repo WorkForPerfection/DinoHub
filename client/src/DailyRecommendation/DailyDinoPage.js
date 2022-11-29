@@ -94,7 +94,7 @@ function DailyDinoPage() {
                                             margin: '0',
                                             padding: '0'
                                         }}
-                                        onClick={() => decIndex()}>
+                                        onClick={() => incIndex()}>
                                         <span style={{
                                             fontFamily: 'dinopia-r',
                                             fontSize: '3rem',
@@ -127,7 +127,7 @@ function DailyDinoPage() {
                                             margin: '0',
                                             padding: '0'
                                         }}
-                                        onClick={() => incIndex()}>
+                                        onClick={() => decIndex()}>
                                         <span style={{
                                             fontFamily: 'dinopia-r',
                                             fontSize: '3rem',

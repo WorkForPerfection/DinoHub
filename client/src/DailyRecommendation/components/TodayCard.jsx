@@ -16,7 +16,7 @@ function TodayCard(props) {
     var dis = dino.basic_info
     var imgSrc = dino.dino_picture
     var image
-    // console.log(typeof (image))
+    console.log(imgSrc)
     try {
         image = require('' + imgSrc)
     } catch (err) {

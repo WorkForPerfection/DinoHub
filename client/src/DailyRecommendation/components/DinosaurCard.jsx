@@ -16,7 +16,7 @@ function DinosaurCard(props) {
         console.log('this does not work')
         console.log(imgSrc)
         console.log('use this instead')
-        console.log('./pictures/Giganotosaurus-dino.jpg')
+        console.log('../../pictures/Giganotosaurus-dino.jpg')
     }
     // imgSrc='./pictures/stego.jpeg'
 
