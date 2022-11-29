@@ -107,3 +107,12 @@
   font-size: '10rem';
 }
 
+.button-d {
+    background-color: 'white';
+    color: '#2C466C'; /* #navy */
+    font-family: 'dinopia-r';
+    border-color: '#B2D3C2';
+    text-align: 'center';
+}
+
+.card-2 { margin: '0.8rem'; color: '2C466C'; font-family: 'dinopia-l'; font-size: '1.3rem'; background-color: '#B2D3C2' /* mint */} 
