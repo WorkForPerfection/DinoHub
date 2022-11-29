@@ -13,167 +13,152 @@ import { Button } from 'react-bootstrap';
 import http from './services/dino'
 import axios from 'axios';
 import dino from './services/dino';
+import { fontSize } from '@mui/system';
 
 const NAVY = '#2C466C'
 
-async function getDailyDinos() {
-    var data = (await http.getToday()).data.data
-    return data
-    // console.log('getting')
-    // http.getToday().then(res => {
-    //     const data = res.data.data;
-    //     if (res.status === 200) {
-    //         console.log('got')
-    //         console.log(data)
-    //         return data
-    //     }
-    // })
-
-}
-
-// function DailyDinoPage() {
-//     return getDailyDinos()
-// }
-
 function DailyDinoPage() {
-    // var [dailydinos, setDinos] = useState(null)
-    // useEffect(() => {
-    //     getDailyDinos().then((res) => {
-    //         obj = res
-    //         console.log("huhhhu")
-    //         console.log(obj)
-    //     })
-    // }, [])
-
-    // var obj = getDailyDinos()
-
     var [dailyIndex, setIndex] = useState(0)
+    var [obj, setObj] = useState([])
     useEffect(() => {
-        console.log("effffffect")
-    })
+        axios.get("http://localhost:8080/dino/today").then(
+            (response) => {
+                console.log("getting")
+                setObj(response.data)
+            }
+        ).catch()
+    }, [])
 
-    var obj = [{ "id": 1, "date": "2022-11-10T08:00:00.000Z", "dinosaur_id": 1, "dinosaur": { "id": 1, "type": "Papapa", "name": "Tyranysf", "period": "Okenham", "found_in": "USA", "length": "8.0m", "diet": "Herbivour", "dino_picture": null, "dino_size_picture": null, "basic_info": "The motley crew of wizards and witches at Hogwarts taught us about life, love, acceptance, friendship, death, and bravery from our book shelves and on the big screen, leaving us dozens of quotes and moments that still hold up to this day. ", "detailed_description": "There will be no foolish wand-waving or silly incantations in this class. As such, I don't expect many of you to appreciate the subtle science and exact art that is potion-making. However, for those select few who possess the predisposition, I can teach you how to bewitch the mind and ensnare the senses. I can tell you how to bottle fame, brew glory, and even put a stopper in death. Then again, maybe some of you have come to Hogwarts in possession of abilities so formidable that you feel confident enough to not pay attention!", "liked_count": 0 } }, { "id": 2, "date": "2022-11-23T08:00:00.000Z", "dinosaur_id": 2, "dinosaur": { "id": 2, "type": "pior", "name": "Ddaumous", "period": "Autum", "found_in": "Canada", "length": "16.0m", "diet": "Carnivourous", "dino_picture": null, "dino_size_picture": null, "basic_info": "If there is one thing Voldemort cannot understand, it is love. He didn't realize that love as powerful as your mother's for you leaves its own mark. Not a scar, no visible sign… to have been loved so deeply, even though the person who loved us is gone, will give us some protection forever. It is in your very own skin.", "detailed_description": "Being our first introduction to the wizarding world and its beloved cast of characters, it’s no surprise that some of the most memorable Harry Potter sayings come from Sorcerer’s Stone. While it has an inviting, almost storybook-like vibe, the first installment of Harry’s magical journey imparts some deep lessons — the importance of friendship, the value of humility (even if you’re The Boy Who Lived), the dangers of excessive desire, and sometimes, that it’s necessary to break the rules.", "liked_count": 0 } }]
-
+    const num = 5
+    // var obj = [{"id":3,"date":"2022-11-28T08:00:00.000Z","dinosaur_id":11,"dinosaur":{"id":11,"type":"armoured dinosaur","name":"Ankylosaurus","period":"Late Cretaceous","dino_picture":"./pictures/Ankylosaurus-dino.jpg","dino_size_picture":"./pictures/Ankylosaurus-size.jpg","found_in":"Canada, USA","Diet":"herbivorous","Length":"7.0m","Likes":null}},{"id":4,"date":"2022-11-27T08:00:00.000Z","dinosaur_id":14,"dinosaur":{"id":14,"type":"large theropod","name":"Carnotaurus","period":"Late Cretaceous","dino_picture":"./pictures/Carnotaurus-dino.jpg","dino_size_picture":"./pictures/Carnotaurus-size.jpg","found_in":"Argentina","Diet":"carnivorous","Length":"7.6m","Likes":null}},{"id":5,"date":"2022-11-26T08:00:00.000Z","dinosaur_id":15,"dinosaur":{"id":15,"type":"large theropod","name":"Giganotosaurus","period":"Early Cretaceous","dino_picture":"./pictures/Giganotosaurus-dino.jpg","dino_size_picture":"./pictures/Giganotosaurus-size.jpg","found_in":"Argentina","Diet":"carnivorous","Length":"12.5m","Likes":null}},{"id":6,"date":"2022-11-25T08:00:00.000Z","dinosaur_id":16,"dinosaur":{"id":16,"type":"large theropod","name":"Allosaurus","period":"Late Jurassic","dino_picture":"./pictures/Allosaurus-dino.jpg","dino_size_picture":"./pictures/Allosaurus-size.jpg","found_in":"Portugal, USA","Diet":"carnivorous","Length":"12.0m","Likes":null}},{"id":7,"date":"2022-11-24T08:00:00.000Z","dinosaur_id":17,"dinosaur":{"id":17,"type":"small theropod","name":"Velociraptor","period":"Late Cretaceous","dino_picture":"./pictures/Velociraptor-dino.jpg","dino_size_picture":"./pictures/Velociraptor-size.jpg","found_in":"Mongolia","Diet":"carnivorous","Length":"1.8m","Likes":null}}]
 
     function decIndex() {
         var alt = dailyIndex - 1
-
         console.log('index to: ' + alt)
-        if (alt > -1 && alt < obj.length) {
+        if (alt > -1 && alt < num) {
             console.log('index to: ' + alt)
             setIndex(alt)
         }
     }
-
     function incIndex() {
         var alt = dailyIndex + 1
         console.log('index to: ' + alt)
-        if (alt > -1 && alt < obj.length) {
+        if (alt > -1 && alt < num) {
             console.log('index to: ' + alt)
             setIndex(alt)
         }
     }
 
-    var dailydinos = obj
     console.log("here")
     console.log(obj)
     // console.log(dailydinos[0])
-    var dinotoday = dailydinos[dailyIndex]
-    dailydinos.splice(dailyIndex, 1)
-    var today = new Date(dinotoday.date)
-    return (
-        <div className='bg-page'>
-            <Container>
-                <div>
-                    <div style={{ padding: "0rem 20rem 0rem 20rem" }}>
-                        <h1 style={{
-                            fontFamily: "dinopia-r",
-                            color: 'white',
-                            backgroundColor: NAVY,
-                            textAlign: 'center',
-                            fontSize: '3.5rem',
-                            // margin: '0rem 23rem 0rem 23rem'
-                        }}>
-                            <span className='capital-letter'>T</span>
-                            <span style={{ fontSize: '4.2rem' }}>HE</span>
-                            <span style={{ fontSize: '4.2rem' }}> D</span>
-                            <span className='capital-letter'>A</span>
-                            <span style={{ fontSize: '4.2rem' }}>IL</span>
-                            <span className='capital-letter'>Y d</span>
-                            <span style={{ fontSize: '4.2rem' }}>IN</span>
-                            <span className='capital-letter'>O</span>
-                        </h1>
-                    </div>
-                    <Container>
-                        <Row className="justify-content-md-center">
-                            <Col className="justify-content-md-center" md='1' span={3}>
-                                <Button
-                                    style={{
-                                        backgroundColor: 'transparent',
-                                        color: NAVY,
-                                        borderColor: 'transparent'
-                                    }}
-                                    onClick={decIndex()}>
-                                    <span style={{
-                                        fontFamily: 'dinopia-r',
-                                        fontSize: '5rem',
-                                        margin: '0rem',
-                                        padding: '0rem'
+
+    if (obj.length > 4) {
+
+        var dailydinos = obj
+        var dinotoday = dailydinos[dailyIndex]
+        var otherdinos = dailydinos.map((day) => day)
+        otherdinos.splice(dailyIndex, 1)
+        var today = new Date(dinotoday.date)
+        return (
+            <div className='bg-page'>
+                <Container>
+                    <div>
+                        <div style={{ padding: "0rem 20rem 0rem 20rem" }}>
+                            <h1 style={{
+                                fontFamily: "dinopia-r",
+                                color: 'white',
+                                backgroundColor: NAVY,
+                                textAlign: 'center',
+                                fontSize: '3.5rem',
+                                // margin: '0rem 23rem 0rem 23rem'
+                            }}>
+                                <span className='capital-letter'>T</span>
+                                <span style={{ fontSize: '4.2rem' }}>HE</span>
+                                <span style={{ fontSize: '4.2rem' }}> D</span>
+                                <span className='capital-letter'>A</span>
+                                <span style={{ fontSize: '4.2rem' }}>IL</span>
+                                <span className='capital-letter'>Y d</span>
+                                <span style={{ fontSize: '4.2rem' }}>IN</span>
+                                <span className='capital-letter'>O</span>
+                            </h1>
+                        </div>
+                        <Container>
+                            <Row className="justify-content-md-center">
+                                <Col md='auto' style={{ margin: '0', padding: '0' }}>
+                                    <Button
+                                        style={{
+                                            backgroundColor: 'transparent',
+                                            color: NAVY,
+                                            borderColor: 'transparent',
+                                            margin: '0',
+                                            padding: '0'
+                                        }}
+                                        onClick={() => decIndex()}>
+                                        <span style={{
+                                            fontFamily: 'dinopia-r',
+                                            fontSize: '3rem',
+                                            margin: '0rem',
+                                            padding: '0rem'
+                                        }}>
+                                            {'<'}
+                                        </span>
+                                    </Button>
+                                </Col>
+                                <Col md='auto'>
+                                    <h3 style={{
+                                        fontFamily: "dinopia-l",
+                                        textAlign: 'center',
+                                        padding: '1rem 0.3rem 0.3rem 0.3rem',
+                                        color: '#2C466C',
+                                        letterSpacing: '0.11rem'
                                     }}>
-                                        {'<'}
-                                    </span>
-                                </Button>
+                                        {today.toLocaleString('en-US', { weekday: 'long' })},
+                                        {' '}{today.toLocaleString('en-US', { month: 'long' })}
+                                        {' '}{today.getDate()}, {today.getFullYear()}
+                                    </h3>
+                                </Col>
+                                <Col md='auto' style={{ margin: '0', padding: '0' }}>
+                                    <Button
+                                        style={{
+                                            backgroundColor: 'transparent',
+                                            color: NAVY,
+                                            borderColor: 'transparent',
+                                            margin: '0',
+                                            padding: '0'
+                                        }}
+                                        onClick={() => incIndex()}>
+                                        <span style={{
+                                            fontFamily: 'dinopia-r',
+                                            fontSize: '3rem',
+                                            margin: '0rem',
+                                            padding: '0rem'
+                                        }}>{'>'}
+                                        </span>
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </div>
+                    <TodayCard dino={dinotoday} />
+                    <h1 style={{ fontFamily: 'dinopia-l', fontSize: '2rem', textAlign: 'center', margin: '1rem', color: NAVY }} >Other Daily Dinos</h1>
+                    <Row xs="auto"
+                        md="auto"
+                        className="g-3 justify-content-md-center"
+                        style={{
+                            alignItems: 'center',
+                            padding: '1rem 0 0 0'
+                        }}>
+                        {otherdinos.map((dailydino) => (
+                            <Col key={dailydino.id} style={{ margin: '0 auto auto auto' }}>
+                                <DailyCard day={dailydino} style={{ alignItems: 'top' }} />
                             </Col>
-                            <Col md='auto'>
-                                <h3 style={{
-                                    fontFamily: "dinopia-l",
-                                    textAlign: 'center',
-                                    padding: '3rem 0.3rem 0.3rem 0.3rem',
-                                    color: '#2C466C',
-                                    letterSpacing: '0.11rem'
-                                }}>
-                                    {today.toLocaleString('en-US', { weekday: 'long' })},
-                                    {' '}{today.toLocaleString('en-US', { month: 'long' })}
-                                    {' '}{today.getDate()}, {today.getFullYear()}
-                                </h3>
-                            </Col>
-                            <Col className="justify-content-md-center" md='1'>
-                                <Button
-                                    style={{
-                                        backgroundColor: 'transparent',
-                                        color: NAVY,
-                                        borderColor: 'transparent'
-                                    }}
-                                    onClick={incIndex()}>
-                                    <span style={{
-                                        fontFamily: 'dinopia-r',
-                                        fontSize: '5rem',
-                                        margin: '0rem',
-                                        padding: '0rem'
-                                    }}>{'>'}
-                                    </span>
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Container>
-                </div>
-                <TodayCard dino={dinotoday} />
-                <Row xs="auto"
-                    md="auto"
-                    className="g-4"
-                    style={{
-                        alignItems: 'center',
-                        padding: '1rem 0 0 0'
-                    }}>
-                    {dailydinos.map((dailydino) => (
-                        <Col key={dailydino.id}>
-                            <DailyCard day={dailydino} style={{ alignItems: 'top' }} />
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
-        </div>
-    )
+                        ))}
+                    </Row>
+                </Container>
+            </div>
+        )
+    }
 
 }
 

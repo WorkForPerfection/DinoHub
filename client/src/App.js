@@ -26,7 +26,7 @@ import { MINT, NAVY } from "./css/colors"
 function App(props) {
     const [DinoName, setDinoName] = useState("");
     const [login, setLogin] = useState(false);           //login=true means we want to render login page
-    const [message,setMessage] = useState(0);       //message=1 means we need to pop up "invalid account/password combination" on login screen; message=2 means pop up "username exists!" on login screen
+    const [message, setMessage] = useState(0);       //message=1 means we need to pop up "invalid account/password combination" on login screen; message=2 means pop up "username exists!" on login screen
     const [user, setUser] = useState();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -42,7 +42,7 @@ function App(props) {
 
     const formStyle = {
         height: '2rem',
-        mergin: '3rem',
+        padding: '0 1rem 0 8rem',
         verticalAlign: 'center'
     }
 

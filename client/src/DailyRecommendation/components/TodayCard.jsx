@@ -14,6 +14,18 @@ function TodayCard(props) {
     var dino = props.dino.dinosaur
     var name = dino.name
     var dis = dino.basic_info
+    var imgSrc = dino.dino_picture
+    var image
+    // console.log(typeof (image))
+    try {
+        image = require('' + imgSrc)
+    } catch (err) {
+        image = require('' + './Dino.webp')
+        console.log('this does not work')
+        console.log(imgSrc)
+        console.log('use this instead')
+        console.log('./pictures/Giganotosaurus-dino.jpg')
+    }
     return (
         <Card style={{
             width: '100%',
@@ -26,7 +38,7 @@ function TodayCard(props) {
                 <Container>
                     <Row>
                         <Col style={{ textAlign: 'center', verticalAlign: 'center' }}>
-                            <Card.Text style={{ fontFamily: 'dinopia-r', fontSize: '5rem' }}>
+                            <Card.Text style={{ fontFamily: 'dinopia-r', fontSize: '5rem', margin: '2rem 0 0rem 0' }}>
                                 <span className='capital-letter'>{name.slice(0, 1)}</span>
                                 {name.slice(1)}
                             </Card.Text>
@@ -34,10 +46,11 @@ function TodayCard(props) {
                         <Col md={{ span: 3, offset: 1 }}>
                             <Card.Img
                                 variant="top"
-                                src={Dino}
+                                src={image}
                                 style={{
                                     height: '15rem',
-                                    width: '15rem'
+                                    width: '15rem',
+                                    margin: '1rem 0 0 0'
                                 }} />
                         </Col>
                         <Col>
@@ -45,11 +58,14 @@ function TodayCard(props) {
                                 className="list-group-flush"
                                 style={{
                                     fontFamily: 'dinopia-r',
-                                    fontSize: '1rem'
+                                    fontSize: '1.2rem',
+                                    margin: '1rem 0 0rem 0'
                                 }}>
                                 <ListGroup.Item>Type: {dino.type}</ListGroup.Item>
-                                <ListGroup.Item>Diet: {dino.diet}</ListGroup.Item>
+                                <ListGroup.Item>Diet: {dino.period}</ListGroup.Item>
                                 <ListGroup.Item>Found in: {dino.found_in}</ListGroup.Item>
+                                <ListGroup.Item>Diet: {dino.Diet}</ListGroup.Item>
+                                <ListGroup.Item>Length: {dino.Length}</ListGroup.Item>
                             </ListGroup>
                         </Col>
 
