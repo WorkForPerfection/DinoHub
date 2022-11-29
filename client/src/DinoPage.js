@@ -12,6 +12,12 @@ import "./css/App.css"
 import { MINT, NAVY } from "./css/colors"
 import dino from "./DailyRecommendation/services/dino";
 
+function Back(margin = '2rem') {
+
+    const navigate = useNavigate();
+    return <button className="button-d" style={{ margin: margin }} onClick={() => navigate(-1)}> {'<'}Back </button>
+}
+
 export function DinoPage(props) {
     const navigate = useNavigate();
     const location = useLocation();
@@ -113,7 +119,7 @@ export function DinoPage(props) {
                     Sorry, the dinosaur you entered is invisible to the naked eye
                     <div>#dino 404 cry cry#</div>
                 </div>
-                <div style={{ fontFamily: 'dinopia-l', margin: '2rem', textAlign: 'center', fontSize: '1.5rem' }}>*** To start another search, please use the <b style={{ fontFamily: 'dinopia-r' }}>'Back' button</b> to return to the previous page, or go back to <b>home</b>. ***</div>
+                <div style={{ fontFamily: 'dinopia-l', margin: '2rem', textAlign: 'center', fontSize: '1.5rem' }}>*** To start another search, please use the <Back mergin='0'/> button to return to the previous page, or go back to <b>home</b>. ***</div>
             </Container>
         )
     }
@@ -121,7 +127,7 @@ export function DinoPage(props) {
         <Container style={{ textAlign: 'center' }}>
                 <button className="button-d" style={{ margin: '2rem' }} onClick={() => navigate(-1)}> {'<'}Back </button>
             {dinoDisplay}
-            <div style={{ fontFamily: 'dinopia-l', margin: '2rem', textAlign: 'center', fontSize: '1.5rem' }}>*** To start another search, please use the <b style={{ fontFamily: 'dinopia-r' }}>'Back' button</b> to return to the previous page, or go back to <b>home</b>. ***</div>
+            <div style={{ fontFamily: 'dinopia-l', margin: '2rem', textAlign: 'center', fontSize: '1.5rem' }}>*** To start another search, please use the <Back mergin='0'/> button to return to the previous page, or go back to <b>home</b>. ***</div>
         </Container>
     );
 }
