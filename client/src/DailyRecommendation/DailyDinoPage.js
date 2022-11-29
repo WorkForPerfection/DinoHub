@@ -10,10 +10,7 @@ import TodayCard from './components/TodayCard'
 import '../css/Dino.css';
 import { Button } from 'react-bootstrap';
 
-import http from './services/dino'
 import axios from 'axios';
-import dino from './services/dino';
-import { fontSize } from '@mui/system';
 
 const NAVY = '#2C466C'
 
@@ -26,7 +23,7 @@ function DailyDinoPage() {
                 console.log("getting")
                 setObj(response.data)
             }
-        ).catch()
+        ).catch() 
     }, [])
 
     if (obj.length > 4) {
@@ -171,7 +168,7 @@ function DailyDinoPage() {
     }
     else {
         <Container style={{ textAlign: 'center' }}>
-            <h1 style={{ fontFamily: "dinopia-r", fontSize: '1rem' }}>A Meteoroid has hitten the Daily Dinos Database</h1>
+            <h1 style={{ fontFamily: "dinopia-r", fontSize: '1rem' }}>Looks like a Meteoroid hit the Daily Dinos Database</h1>
             <h1 style={{ fontFamily: "dinopia-r", fontSize: '1rem' }}>#Dino 404 Cry Cry#</h1>
         </Container>
     }

@@ -10,6 +10,8 @@ import Dino from './stego.jpeg';
 
 import { MINT } from '../../css/colors'
 
+const listStyle = { backgroundColor: 'rgba(255, 255, 255, 0.5)'}
+
 function TodayCard(props) {
     var dino = props.dino.dinosaur
     var name = dino.name
@@ -43,14 +45,14 @@ function TodayCard(props) {
                                 {name.slice(1)}
                             </Card.Text>
                         </Col>
-                        <Col md={{ span: 3, offset: 1 }}>
+                        <Col md={{ span: 3, offset: 0 }}>
                             <Card.Img
                                 variant="top"
                                 src={image}
                                 style={{
-                                    height: '15rem',
-                                    width: '15rem',
-                                    margin: '1rem 0 0 0'
+                                    height: '20rem',
+                                    width: 'auto',
+                                    margin: '0 0 0 0'
                                 }} />
                         </Col>
                         <Col>
@@ -59,13 +61,13 @@ function TodayCard(props) {
                                 style={{
                                     fontFamily: 'dinopia-r',
                                     fontSize: '1.2rem',
-                                    margin: '1rem 0 0rem 0'
+                                    margin: '1rem 0 0rem 0',
                                 }}>
-                                <ListGroup.Item>Type: {dino.type}</ListGroup.Item>
-                                <ListGroup.Item>Diet: {dino.period}</ListGroup.Item>
-                                <ListGroup.Item>Found in: {dino.found_in}</ListGroup.Item>
-                                <ListGroup.Item>Diet: {dino.Diet}</ListGroup.Item>
-                                <ListGroup.Item>Length: {dino.Length}</ListGroup.Item>
+                                <ListGroup.Item style={ listStyle }>Type: {dino.type}</ListGroup.Item>
+                                <ListGroup.Item style={ listStyle }>Diet: {dino.period}</ListGroup.Item>
+                                <ListGroup.Item style={ listStyle }>Found in: {dino.found_in}</ListGroup.Item>
+                                <ListGroup.Item style={ listStyle }>Diet: {dino.Diet}</ListGroup.Item>
+                                <ListGroup.Item style={ listStyle }>Length: {dino.Length}</ListGroup.Item>
                             </ListGroup>
                         </Col>
 

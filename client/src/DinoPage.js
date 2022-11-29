@@ -10,7 +10,6 @@ import ListGroup from "react-bootstrap/ListGroup"
 
 import "./css/App.css"
 import { MINT, NAVY } from "./css/colors"
-import dino from "./DailyRecommendation/services/dino";
 
 function Back(margin = '2rem') {
 
