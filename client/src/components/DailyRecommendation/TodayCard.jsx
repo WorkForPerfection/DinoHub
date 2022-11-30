@@ -5,9 +5,6 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-
-import Dino from './stego.jpeg';
-
 import { MINT } from '../../css/colors'
 
 const listStyle = { backgroundColor: 'rgba(255, 255, 255, 0.5)'}
@@ -22,7 +19,7 @@ function TodayCard(props) {
     try {
         image = require('' + imgSrc)
     } catch (err) {
-        image = require('' + './Dino.webp')
+        image = require('./Dino.webp')
         console.log('this does not work')
         console.log(imgSrc)
         console.log('use this instead')

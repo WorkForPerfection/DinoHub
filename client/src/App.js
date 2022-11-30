@@ -42,7 +42,7 @@ function App(props) {
 
     const formStyle = {
         height: '2rem',
-        padding: '0 1rem 0 5rem',
+        padding: '0 0rem 0 7rem',
         verticalAlign: 'center'
     }
 
@@ -50,13 +50,14 @@ function App(props) {
         backgroundColor: 'white',
         color: NAVY,
         fontFamily: 'dinopia-r',
-        margin: '0.8rem',
+        margin: '1rem',
         borderColor: MINT
     }
 
     const containerStyle = {
         textAlign: 'center',
         verticalAlign: 'center',
+        padding: '3rem'
     }
 
     const cardStyle = {
@@ -119,22 +120,22 @@ function App(props) {
     };
     //if user updates any info in accountpage, make sure to update both mysql record and localstorage
     var accountPage = <dev>null</dev>;
-    if(user) {
+    if (user) {
         console.log(user);
         accountPage = (
             <Container style={containerStyle}>
                 <Card style={cardStyle}>
-                <button style={buttonStyle} onClick={() => {
-                    handleLogout()
-                }}> log out
-                </button>
-                Username: {user[0].username}
-                <br/>
-                First name: {user[0].first_name}
-                <br/>
-                Last name: {user[0].last_name}
-                <br/>
-                profile_picture:{user[0].profile_picture}
+                    <button style={buttonStyle} onClick={() => {
+                        handleLogout()
+                    }}> log out
+                    </button>
+                    Username: {user[0].username}
+                    <br />
+                    First name: {user[0].first_name}
+                    <br />
+                    Last name: {user[0].last_name}
+                    <br />
+                    profile_picture:{user[0].profile_picture}
                 </Card>
             </Container>
         )
@@ -142,7 +143,7 @@ function App(props) {
     const handleLoginSubmit = async e => {
         e.preventDefault();
         // console.log("helloss");
-        const user = {username, password};
+        const user = { username, password };
         // console.log({username,password});
         const response = await axios.post(
             "http://localhost:8080/login",
@@ -150,18 +151,18 @@ function App(props) {
         );
         // console.log("helloss");
         //if login successful
-        if(response.data.length!=0 && response.data[0].username!="") {
+        if (response.data.length != 0 && response.data[0].username != "") {
             setUser(response.data);
             localStorage.setItem('User', JSON.stringify(response.data));
             setMessage(0);
         }
-        else{setMessage(1);}
+        else { setMessage(1); }
         // console.log("helloss");
         // console.log(response.data)
     };
     const handleSignUpSubmit = async e => {
         e.preventDefault();
-        const user = {newusername, newpassword};
+        const user = { newusername, newpassword };
         // console.log(user)
         const response = await axios.post(
             "http://localhost:8080/signup",
@@ -170,71 +171,74 @@ function App(props) {
         // console.log("signup reached")
         //if sign up successful, user will log in automatically
         // console.log(response.data.length);
-        if(response.data[0].username!="") {
+        if (response.data[0].username != "") {
             setUser(response.data);
             localStorage.setItem('User', JSON.stringify(response.data));
             setMessage(0);
         }
-        else{setMessage(2);}
+        else { setMessage(2); }
         console.log(response.data)
     };
     //if user is already logged in, display the corresponding account info component
-    if(user) {logincomponent=(
-        <Container style={containerStyle}>
-            <Card style={cardStyle}>
-                <button style={buttonStyle} onClick={()=>setLogin(false)}> Back </button>
-                {accountPage}
-            </Card>
-        </Container>
-    );}
+    if (user) {
+        logincomponent = (
+            <Container style={containerStyle}>
+                <Card style={cardStyle}>
+                    <button style={buttonStyle} onClick={() => setLogin(false)}> Back </button>
+                    {accountPage}
+                </Card>
+            </Container>
+        );
+    }
     //else, display forms to log in/sign up
-    else {logincomponent = (
-        <Container style={containerStyle}>
-            <button style={buttonStyle} onClick={() => setLogin(false)}> Back </button>
-            <Card style={cardStyle}>
-            <form id={"form1"} onSubmit={handleLoginSubmit}>
-                Log in to an existing account: <br/>
-                <label htmlFor="username">Username: </label>
-                <input
-                    type="text"
-                    value={username}
-                    placeholder="enter a username"
-                    onChange={({target}) => setUsername(target.value)}
-                />
-                <div>
-                    <label htmlFor="password">password: </label>
-                    <input
-                        type="password"
-                        value={password}
-                        placeholder="enter a password"
-                        onChange={({target}) => setPassword(target.value)}
-                    />
-                </div>
-                <button style={buttonStyle} type="submit">Login</button>
-            </form>
-            <form id={"form2"} onSubmit={handleSignUpSubmit}>
-                Sign up a new account: <br/>
-                <label htmlFor="username">Username: </label>
-                <input
-                    type="text"
-                    value={newusername}
-                    placeholder="enter a new username"
-                    onChange={({target}) => setnewUsername(target.value)}
-                />
-                <div>
-                    <label htmlFor="password">password: </label>
-                    <input
-                        type="password"
-                        value={newpassword}
-                        placeholder="enter a new password"
-                        onChange={({target}) => setnewPassword(target.value)}
-                    />
-                </div>
-                <button style={buttonStyle} type="submit">Sign up</button>
-            </form>
-            </Card>
-        </Container>
-    );
+    else {
+        logincomponent = (
+            <Container style={containerStyle}>
+                <button style={buttonStyle} onClick={() => setLogin(false)}> Back </button>
+                <Card style={cardStyle}>
+                    <form id={"form1"} onSubmit={handleLoginSubmit}>
+                        Log in to an existing account: <br />
+                        <label htmlFor="username">Username: </label>
+                        <input
+                            type="text"
+                            value={username}
+                            placeholder="enter a username"
+                            onChange={({ target }) => setUsername(target.value)}
+                        />
+                        <div>
+                            <label htmlFor="password">password: </label>
+                            <input
+                                type="password"
+                                value={password}
+                                placeholder="enter a password"
+                                onChange={({ target }) => setPassword(target.value)}
+                            />
+                        </div>
+                        <button style={buttonStyle} type="submit">Login</button>
+                    </form>
+                    <form id={"form2"} onSubmit={handleSignUpSubmit}>
+                        Sign up a new account: <br />
+                        <label htmlFor="username">Username: </label>
+                        <input
+                            type="text"
+                            value={newusername}
+                            placeholder="enter a new username"
+                            onChange={({ target }) => setnewUsername(target.value)}
+                        />
+                        <div>
+                            <label htmlFor="password">password: </label>
+                            <input
+                                type="password"
+                                value={newpassword}
+                                placeholder="enter a new password"
+                                onChange={({ target }) => setnewPassword(target.value)}
+                            />
+                        </div>
+                        <button style={buttonStyle} type="submit">Sign up</button>
+                    </form>
+                </Card>
+            </Container>
+        );
     }
     //whenever rendering homepage, check whether there is a logged in user
     useEffect(() => {
@@ -246,25 +250,25 @@ function App(props) {
             setUser(foundUser);
         }
     }, []);
-    if(login==true){
-        let warningMessage=<dev></dev>;
+    if (login == true) {
+        let warningMessage = <dev></dev>;
         //message can be set to true only when handlesubmit set it to true; it resets after rerender of page
-        if(message===1) {
-            warningMessage=(
+        if (message === 1) {
+            warningMessage = (
                 <dev>
                     Wrong account/password combination!
                 </dev>
             );
         }
-        else if (message===2){
-            warningMessage=(
+        else if (message === 2) {
+            warningMessage = (
                 <dev>
                     Username already exist!
                 </dev>
             );
         }
         return (
-            <Container style={{margin:'10% 0 0 0'}}>
+            <Container style={{ margin: '10% 0 0 0' }}>
                 {logincomponent}
                 {warningMessage}
             </Container>
