@@ -170,10 +170,10 @@ class Choice extends React.Component {
 	}
 	normal(props) {
 		const status = "Choose from below";
-		const leg = "Legs: ";
-		const head = "Heads: ";
-		const body = "Bodys: ";
-		const tail = "Tails: ";
+		const leg = "Legs";
+		const head = "Heads";
+		const body = "Bodys";
+		const tail = "Tails";
 		const normal_render = (
 			<Card>
 				<div style={{ fontFamily: 'dino-font', textAlign: 'center', margin: '1rem', fontSize: '1.5rem' }}>{status}</div>

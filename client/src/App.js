@@ -22,6 +22,8 @@ import Card from 'react-bootstrap/Card';
 import Logo from './components/Logo'
 import './css/Dino.css'
 import { MINT, NAVY } from "./css/colors"
+import { fontSize } from '@mui/system';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 function App(props) {
     const [DinoName, setDinoName] = useState("");
@@ -57,16 +59,18 @@ function App(props) {
     const containerStyle = {
         textAlign: 'center',
         verticalAlign: 'center',
-        padding: '3rem'
+        padding: '0rem',
+        height: '100%'
     }
 
     const cardStyle = {
         textAlign: 'center',
         verticalAlign: 'center',
         fontFamily: 'dinopia-l',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        width: '40%'
+        width: '50%',
+        backgroundColor: 'rgba(255, 255, 255, 0.6)',
+        margin: '0rem auto 2rem auto',
+        fontSize: '1.2rem'
     }
 
     //In your_dino_egg, if the user is not logged in, then we should display "login first"
@@ -124,18 +128,29 @@ function App(props) {
         console.log(user);
         accountPage = (
             <Container style={containerStyle}>
+                <h1><span style={{fontSize: '4rem', fontFamily:'dino-font', margin: '0.6rem'}}>{user[0].username}</span>'s DinoHub</h1>
                 <Card style={cardStyle}>
+                    <Card.Body>
+                        <ListGroup>
+                            <ListGroupItem>
+                                Username: {user[0].username}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                First name: {user[0].first_name}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                Last name: {user[0].last_name}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                profile_picture:{user[0].profile_picture}
+                            </ListGroupItem>
+                        </ListGroup>
+                    </Card.Body>
+
                     <button style={buttonStyle} onClick={() => {
                         handleLogout()
-                    }}> log out
+                    }}> <span style={{ color:'#b23b3b' }}>log out</span>
                     </button>
-                    Username: {user[0].username}
-                    <br />
-                    First name: {user[0].first_name}
-                    <br />
-                    Last name: {user[0].last_name}
-                    <br />
-                    profile_picture:{user[0].profile_picture}
                 </Card>
             </Container>
         )
@@ -196,46 +211,53 @@ function App(props) {
             <Container style={containerStyle}>
                 <button style={buttonStyle} onClick={() => setLogin(false)}> Back </button>
                 <Card style={cardStyle}>
-                    <form id={"form1"} onSubmit={handleLoginSubmit}>
-                        Log in to an existing account: <br />
-                        <label htmlFor="username">Username: </label>
-                        <input
-                            type="text"
-                            value={username}
-                            placeholder="enter a username"
-                            onChange={({ target }) => setUsername(target.value)}
-                        />
-                        <div>
-                            <label htmlFor="password">password: </label>
-                            <input
-                                type="password"
-                                value={password}
-                                placeholder="enter a password"
-                                onChange={({ target }) => setPassword(target.value)}
+                    <Card.Header>Log in to an existing account:</Card.Header>
+                    <Card.Body>
+                        <form id={"form1"} onSubmit={handleLoginSubmit}>
+                            <label htmlFor="username">Username: </label>
+                            <input style={{ margin: '0.3rem' }}
+                                type="text"
+                                value={username}
+                                placeholder="enter a username"
+                                onChange={({ target }) => setUsername(target.value)}
                             />
-                        </div>
-                        <button style={buttonStyle} type="submit">Login</button>
-                    </form>
-                    <form id={"form2"} onSubmit={handleSignUpSubmit}>
-                        Sign up a new account: <br />
-                        <label htmlFor="username">Username: </label>
-                        <input
-                            type="text"
-                            value={newusername}
-                            placeholder="enter a new username"
-                            onChange={({ target }) => setnewUsername(target.value)}
-                        />
-                        <div>
-                            <label htmlFor="password">password: </label>
-                            <input
-                                type="password"
-                                value={newpassword}
-                                placeholder="enter a new password"
-                                onChange={({ target }) => setnewPassword(target.value)}
+                            <div>
+                                <label htmlFor="password">password: </label>
+                                <input style={{ margin: '0.3rem' }}
+                                    type="password"
+                                    value={password}
+                                    placeholder="enter a password"
+                                    onChange={({ target }) => setPassword(target.value)}
+                                />
+                            </div>
+                            <button style={buttonStyle} type="submit">Login</button>
+                        </form>
+                    </Card.Body>
+                </Card>
+                <Card style={cardStyle}>
+                    <Card.Header>Sign up for a new account:</Card.Header>
+                    <Card.Body>
+                        <form id={"form2"} onSubmit={handleSignUpSubmit}>
+
+                            <label htmlFor="username">Username: </label>
+                            <input style={{ margin: '0.3rem' }}
+                                type="text"
+                                value={newusername}
+                                placeholder="enter a new username"
+                                onChange={({ target }) => setnewUsername(target.value)}
                             />
-                        </div>
-                        <button style={buttonStyle} type="submit">Sign up</button>
-                    </form>
+                            <div>
+                                <label htmlFor="password">password: </label>
+                                <input style={{ margin: '0.3rem' }}
+                                    type="password"
+                                    value={newpassword}
+                                    placeholder="enter a new password"
+                                    onChange={({ target }) => setnewPassword(target.value)}
+                                />
+                            </div>
+                            <button style={buttonStyle} type="submit">Sign up</button>
+                        </form>
+                    </Card.Body>
                 </Card>
             </Container>
         );
@@ -268,9 +290,11 @@ function App(props) {
             );
         }
         return (
-            <Container style={{ margin: '10% 0 0 0' }}>
-                {logincomponent}
-                {warningMessage}
+            <Container fluid className='bg-dino vh-100'>
+                <Container style={{ padding: '5rem 0 0 0' }}>
+                    {logincomponent}
+                    {warningMessage}
+                </Container>
             </Container>
         );
     }
