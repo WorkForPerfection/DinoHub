@@ -95,7 +95,6 @@ function App(props) {
                 </Nav>
                 <Nav>
                     <button style={buttonStyle} onClick={() => { setLogin(true) }}> login </button>
-                    <button style={buttonStyle} onClick={() => { setUser({ ...user, name: "wang" }) }}> User </button>
                 </Nav>
             </Navbar>
 
@@ -151,7 +150,7 @@ function App(props) {
         );
         // console.log("helloss");
         //if login successful
-        if(response.data.length!=0) {
+        if(response.data.length!=0 && response.data[0].username!="") {
             setUser(response.data);
             localStorage.setItem('User', JSON.stringify(response.data));
             setMessage(0);
@@ -163,10 +162,12 @@ function App(props) {
     const handleSignUpSubmit = async e => {
         e.preventDefault();
         const user = {newusername, newpassword};
+        // console.log(user)
         const response = await axios.post(
             "http://localhost:8080/signup",
             user
         );
+        // console.log("signup reached")
         //if sign up successful, user will log in automatically
         // console.log(response.data.length);
         if(response.data[0].username!="") {
@@ -175,7 +176,7 @@ function App(props) {
             setMessage(0);
         }
         else{setMessage(2);}
-        // console.log(response.data)
+        console.log(response.data)
     };
     //if user is already logged in, display the corresponding account info component
     if(user) {logincomponent=(

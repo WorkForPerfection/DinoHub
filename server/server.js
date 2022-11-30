@@ -9,7 +9,8 @@ app.use(express.json());
 
 //make sure to replace this with your local mysql DB's information
 const db = mysql.createConnection({
-    user: "yubozhang",
+    user: "root",
+    password:"wangzihe0218",
     host: "localhost",
     database: "dinohub"
 }
@@ -49,11 +50,12 @@ app.post("/login", (req, res) => {
 })
 
 //api for user signup
-app.get("/signup", (req, res) => {
+app.post("/signup", (req, res) => {
     const Username = req.body.newusername;
     const Password = req.body.newpassword;
     let exists = false;
     //first make sure no one is using the same username
+    // console.log("h");
     db.query(
         "SELECT * FROM user WHERE (username=?)", [Username],
         (err, result) => {
@@ -120,7 +122,7 @@ app.get("/dino/today", (req, res) => {
         "SELECT * FROM dailydino ORDER BY date DESC LIMIT ?", [limit],
         (err, result) => {
             if (err) {
-                console.log("error");
+                console.log(err);
                 res.json(err)
             }
             else {
