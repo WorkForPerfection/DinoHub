@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import './css/Dino.css'
 import './css/App.css'
-import { NAVY } from './css/colors'
+import { NAVY, MINT } from './css/colors'
 import Container from 'react-bootstrap/Container'
 import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card'
@@ -53,23 +53,28 @@ import { fontFamily } from "@mui/system";
 
 const caraStyle = {
 	textAlign: 'center',
-	padding: '0 1rem 1rem 1rem'
-}
-
-const cardStyle = {
-	textAlign: 'center', padding: '0', display: 'flex', flexWrap: 'wrap'
+	padding: '0 1rem 1rem 1rem',
 }
 
 const slideStyle = {
 	height: '50rem',
+	width: '100%'
 }
 
 const headerStyle = {
-	fontFamily: 'dinopia-o', fontSize: '2rem'
+	fontFamily: 'dinopia-r', fontSize: '2rem', backgroundColor: MINT, color: NAVY
 }
 
 const bodyStyle = {
 	padding: '1rem 10rem 1rem 3rem'
+}
+
+const cardStyle = {
+	textAlign: 'center', 
+	padding: '0', 
+	display: 'flex',
+	flexWrap: 'wrap',
+	justifyContent: 'space-around' 
 }
 
 function Image(props) {
@@ -142,10 +147,14 @@ class Choice extends React.Component {
 	};
 
 	renderChoice(i) {
-		return (<Image
-			value={this.state.index[i]}
-			onClick={() => this.handleClick(i)}
-			url={this.state.url[i]} />);
+		return (
+			<div>
+				<Image
+					url={this.state.url[i]}
+					value={this.state.index[i]}
+					onClick={() => this.handleClick(i)} />
+			</div>
+		);
 	}
 
 	getResult(props) {
@@ -175,91 +184,94 @@ class Choice extends React.Component {
 		const body = "Bodys";
 		const tail = "Tails";
 		const normal_render = (
-			<Card>
-				<div style={{ fontFamily: 'dino-font', textAlign: 'center', margin: '1rem', fontSize: '1.5rem' }}>{status}</div>
-				<Carousel interval={null} activeIndex={this.state.slideIndex} onSelect={() => this.handleSlide()} variant='dark'>
-					<Carousel.Item style={caraStyle}>
-						<Card style={slideStyle}>
-							<Card.Header style={headerStyle}>{leg}</Card.Header>
-							<Card.Body style={bodyStyle}>
-								<div style={cardStyle}>
-									{this.renderChoice(0)}
-									{this.renderChoice(1)}
-									{this.renderChoice(2)}
-									{this.renderChoice(3)}
-									{this.renderChoice(4)}
-									{this.renderChoice(5)}
-									{this.renderChoice(6)}
-									{this.renderChoice(7)}
-									{this.renderChoice(8)}
-								</div>
-							</Card.Body>
-						</Card>
-					</Carousel.Item>
-					<Carousel.Item style={caraStyle}>
-						<Card style={slideStyle}>
+			<div style={{ textAlign: 'center' }}>
+				<Card>
+					<div style={{ fontFamily: 'dino-font', textAlign: 'center', margin: '1rem', fontSize: '1.5rem' }}>{status}</div>
+					<Carousel style={caraStyle} interval={null} activeIndex={this.state.slideIndex} onSelect={() => this.handleSlide()} variant='dark'>
+						<Carousel.Item>
+							<Card style={slideStyle}>
+								<Card.Header style={headerStyle}>{leg}</Card.Header>
+								<Card.Body style={bodyStyle}>
+									<div style={cardStyle}>
+										{this.renderChoice(0)}
+										{this.renderChoice(1)}
+										{this.renderChoice(2)}
+										{this.renderChoice(3)}
+										{this.renderChoice(4)}
+										{this.renderChoice(5)}
+										{this.renderChoice(6)}
+										{this.renderChoice(7)}
+										{this.renderChoice(8)}
+									</div>
+								</Card.Body>
+							</Card>
+						</Carousel.Item>
+						<Carousel.Item>
+							<Card style={slideStyle}>
 
-							<Card.Header style={headerStyle}>{head}</Card.Header>
-							<Card.Body style={bodyStyle}>
-								<div style={cardStyle}>
-									{this.renderChoice(9)}
-									{this.renderChoice(10)}
-									{this.renderChoice(11)}
-									{this.renderChoice(12)}
-									{this.renderChoice(13)}
-									{this.renderChoice(14)}
-									{this.renderChoice(15)}
-									{this.renderChoice(16)}
-									{this.renderChoice(17)}
-								</div>
-							</Card.Body>
-						</Card>
-					</Carousel.Item>
-					<Carousel.Item style={caraStyle}>
-						<Card style={slideStyle}>
-							<Card.Header style={headerStyle}>{body}</Card.Header>
-							<Card.Body style={bodyStyle}>
-								<div style={cardStyle}>
-									{this.renderChoice(18)}
-									{this.renderChoice(19)}
-									{this.renderChoice(20)}
-									{this.renderChoice(21)}
-									{this.renderChoice(22)}
-									{this.renderChoice(23)}
-									{this.renderChoice(24)}
-									{this.renderChoice(25)}
-									{this.renderChoice(26)}
-								</div>
-							</Card.Body>
-						</Card>
-					</Carousel.Item>
-					<Carousel.Item style={caraStyle}>
-						<Card style={slideStyle}>
-							<Card.Header style={headerStyle}>{tail}</Card.Header>
-							<Card.Body style={bodyStyle}>
-								<div style={cardStyle}>
-									{this.renderChoice(27)}
-									{this.renderChoice(28)}
-									{this.renderChoice(29)}
-									{this.renderChoice(30)}
-									{this.renderChoice(31)}
-									{this.renderChoice(32)}
-									{this.renderChoice(33)}
-									{this.renderChoice(34)}
-									{this.renderChoice(35)}
-								</div>
-							</Card.Body>
-						</Card>
-					</Carousel.Item>
-				</Carousel>
+								<Card.Header style={headerStyle}>{head}</Card.Header>
+								<Card.Body style={bodyStyle}>
+									<div style={cardStyle}>
+										{this.renderChoice(9)}
+										{this.renderChoice(10)}
+										{this.renderChoice(11)}
+										{this.renderChoice(12)}
+										{this.renderChoice(13)}
+										{this.renderChoice(14)}
+										{this.renderChoice(15)}
+										{this.renderChoice(16)}
+										{this.renderChoice(17)}
+									</div>
+								</Card.Body>
+							</Card>
+						</Carousel.Item>
+						<Carousel.Item>
+							<Card style={slideStyle}>
+								<Card.Header style={headerStyle}>{body}</Card.Header>
+								<Card.Body style={bodyStyle}>
+									<div style={cardStyle}>
+										{this.renderChoice(18)}
+										{this.renderChoice(19)}
+										{this.renderChoice(20)}
+										{this.renderChoice(21)}
+										{this.renderChoice(22)}
+										{this.renderChoice(23)}
+										{this.renderChoice(24)}
+										{this.renderChoice(25)}
+										{this.renderChoice(26)}
+									</div>
+								</Card.Body>
+							</Card>
+						</Carousel.Item>
+						<Carousel.Item>
+							<Card style={slideStyle}>
+								<Card.Header style={headerStyle}>{tail}</Card.Header>
+								<Card.Body style={bodyStyle}>
+									<div style={cardStyle}>
+										{this.renderChoice(27)}
+										{this.renderChoice(28)}
+										{this.renderChoice(29)}
+										{this.renderChoice(30)}
+										{this.renderChoice(31)}
+										{this.renderChoice(32)}
+										{this.renderChoice(33)}
+										{this.renderChoice(34)}
+										{this.renderChoice(35)}
+									</div>
+								</Card.Body>
+							</Card>
+						</Carousel.Item>
+					</Carousel>
+				</Card>
 				<button
 					className='button-d'
 					style={{
 						fontSize: '4rem',
-						margin: '1rem 0 0 0'
+						margin: '1rem',
+						width: '90%'
 					}}
 					onClick={() => this.getResult()}> Build </button>
-			</Card>);
+			</div>);
 		const display_render = (
 			<Container style={{ textAlign: 'center' }}>
 				<h1 style={{ fontFamily: 'dinopia-r', fontSize: '3rem', color: NAVY }}>NEW DINO DISCOVERED!</h1>
