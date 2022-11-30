@@ -1,9 +1,9 @@
 import{useNavigate} from "react-router-dom";
-import React from 'react';
 import styles from "./general.module.css";
-import ReactDOM from 'react-dom/client';
-import './css/build-your-own.css';
 
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './css/build-your-own.css'
 import leg_1 from './Leg/1.png';
 import leg_2 from './Leg/2.png';
 import leg_3 from './Leg/3.png';
@@ -82,7 +82,23 @@ class Choice extends React.Component {
 	  return;
       }
       let temp=Math.floor(i/9);
-      if(this.state.last!=-1 && temp == Math.floor(this.state.last/9)){return;}
+      let head = -1;
+      let legs = -1;
+      let tail = -1;
+      let body = -1;
+      for(let k =0; k<9; k++){
+	  if(ind[k]!==null){legs = k;}
+      }
+      for(let k =9; k<18; k++){
+	  if(ind[k]!==null){head = k;}
+      }
+      for(let k =18; k<27; k++){
+	  if(ind[k]!==null){body = k;}
+       }
+      for(let k =27; k<36; k++){
+	  if(ind[k]!==null){tail = k;}
+      }
+      if((legs!==-1 && temp===0) || (head!==-1 && temp===1) || (body!==-1 && temp===2) || (tail!==-1 && temp===3)){return;}
       ind[i]=this.state.mark;
       this.setState({index:ind, mark: this.state.mark, last: i});
       
@@ -103,8 +119,12 @@ class Choice extends React.Component {
 		n++;
 	    }
 	}
-	if(this.state.result.length == 4 && this.state.result[0]!=null && this.state.result[1]!=null && this.state.result[2]!=null && this.state.result[3]!=null)
+	if(this.state.result.length === 4 && this.state.result[0]!==null && this.state.result[1]!==null && this.state.result[2]!==null && this.state.result[3]!==null)
 	    this.setState({index: this.state.index, mark: this.state.mark, last: this.state.last, isvalid: true, result: this.state.result});
+    }
+
+    return_back(props){
+	this.setState({index: Array(36).fill(null), mark: this.state.mark, last: this.state.last, isvalid: false, result: this.state.result});
     }
     normal(props){
 	const status = "Choose from below";
@@ -166,23 +186,24 @@ class Choice extends React.Component {
 		<button onClick={()=>this.getResult()}> Build </button>
 	    </div>);
 	const display_render=(
-	    <div className='grid-container'>
-		<img className='item_leg'
+	    <div className='grid'>
+		<img className='legs'
 		     src={this.state.result[0]}
 		     alt="dino skeleton"
 		/>
-		<img className='item_head'
+		<img className='head'
 		     src={this.state.result[1]}
 		     alt="dino skeleton"
 		/>
-		<img className='item_body'
+		<img className='body'
 		     src={this.state.result[2]}
 		     alt="dino skeleton"
 		/>
-		<img className='item_tail'
+		<img className='tail'
 		     src={this.state.result[3]}
 		     alt="dino skeleton"
 		/>
+		<button onClick={()=>this.return_back()}> Rebuild </button>
 	    </div>
 	);
 	if(this.state.isvalid){return display_render;}
@@ -237,6 +258,8 @@ class Build extends React.Component {
   }
 }
 
+
+
 export function BuildYourOwn(){
     const navigate = useNavigate();
     return (
@@ -246,3 +269,4 @@ export function BuildYourOwn(){
         </dev>
     );
 }
+
