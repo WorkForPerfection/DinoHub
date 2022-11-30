@@ -21,7 +21,7 @@ import Card from 'react-bootstrap/Card';
 
 import Logo from './components/Logo'
 import './css/Dino.css'
-import { MINT, NAVY } from "./css/colors"
+import { MINT, NAVY, MAROON } from "./css/colors"
 import { fontSize } from '@mui/system';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
@@ -277,16 +277,18 @@ function App(props) {
         //message can be set to true only when handlesubmit set it to true; it resets after rerender of page
         if (message === 1) {
             warningMessage = (
-                <dev>
+                <Container style={{textAlign: 'center'}}>
+                    <div style={{fontFamily: 'dinopia-r', fontSize:'1.5rem', color: MAROON}}>
                     Wrong account/password combination!
-                </dev>
+                    </div>
+                </Container>
             );
         }
         else if (message === 2) {
             warningMessage = (
-                <dev>
-                    Username already exist!
-                </dev>
+                <Container style={{textAlign: 'center'}}>
+                    <div style={{fontFamily: 'dinopia-r', fontSize:'1.5rem', color: MAROON}}>Username already exist!</div>
+                </Container>
             );
         }
         return (
