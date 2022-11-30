@@ -52,7 +52,7 @@ function Image(props) {
       <div>
 	  <img className='image'
 	       src={props.url}
-	       alt="car"
+	       alt="dino skeleton"
 	  />
 	  <button className="square" onClick={props.onClick}>
 	      {props.value}
@@ -80,7 +80,6 @@ class Choice extends React.Component {
 	  return;
       }
       let temp=Math.floor(i/9);
-      console.log(temp);
       if(this.state.last!=-1 && temp == Math.floor(this.state.last/9)){return;}
       ind[i]=this.state.mark;
       this.setState({index:ind, mark: this.state.mark, last: i});
@@ -90,6 +89,17 @@ class Choice extends React.Component {
     renderChoice(i) {
 	return (<Image value={this.state.index[i]} onClick={() => this.handleClick(i)} url={this.state.url[i]}/>);
     }
+    
+    getResult(){
+	let results = [];
+	for(let k=0; k<36; k++){
+	    if(this.state.index[k]!=null){
+		results.push(this.state.url[k]);
+	    }
+	}
+	return results;
+    }
+    
     render() {
 	const status = "Choose from below";
 	const leg = "Legs: ";
@@ -148,11 +158,36 @@ class Choice extends React.Component {
 		    {this.renderChoice(34)}
 		    {this.renderChoice(35)}
 		</div>
+		<Display data={this.getResult()} />
 	    </div>
+	    
 	);
     }
 }
 
+class Display extends React.Component {
+    renderLegs(){
+	if(this.props.data.size()!=4){return;}
+	return this.props.data[0];
+    }
+    renderHead(){
+	if(this.props.data.size()!=4){return;}
+	return this.props.data[1];
+    }
+    renderBody(){
+	if(this.props.data.size()!=4){return;}
+	return this.props.data[2];
+    }
+    renderTail(){
+	if(this.props.data.size()!=4){return;}
+	return this.props.data[3];
+    }
+    render(){
+	return{
+	    
+	}
+    }
+}
 
 class Build extends React.Component {
   render() {
@@ -165,6 +200,7 @@ class Build extends React.Component {
     );
   }
 }
+
 
 export function BuildYourOwn(){
     const navigate = useNavigate();
