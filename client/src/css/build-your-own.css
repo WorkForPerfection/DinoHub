@@ -70,33 +70,3 @@ ol, ul {
   position: relative;
 }
 
-.head{
-    grid-row: 3 / span 5;
-    grid-column: 7 / span 2;
-    z-index: 2;
-    height: 80px;
-    width: 150px;
-}
-
-.body{
-    grid-row: 1 / span 6;
-    grid-column: 6 / span 1;
-    z-index: 1;
-    height: 170px;
-    width: 250px;
-    
-}
-
-.tail{
-    grid-row: 4 / span 4;
-    grid-column: 4 / span 2;
-    height: 90px;
-    width: 190px;
-}
-
-.legs{
-    grid-row: 6 / -1;
-    grid-column: 6/ span 4;
-    height: 150px;
-    width: 230px;
-}
