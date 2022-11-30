@@ -70,3 +70,22 @@ ol, ul {
   position: relative;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-areas:
+      'header header header header header header'
+      'left left main main empty empty'
+      'menu menu  main main empty empty'
+      'menu menu footer footer center center'
+      'other other footer footer another another';
+  gap: -1px;
+  background-color: #FFFFFF;
+  padding: 200px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 1px 0;
+  font-size: 30px;
+}
