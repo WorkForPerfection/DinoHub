@@ -1,0 +1,102 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
+
+ol, ul {
+  padding-left: 30px;
+}
+
+.choice-row{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.status {
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+.title{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.square {
+  background: #fff;
+  border: 3px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: 30px;
+  padding: 5;
+  text-align: center;
+  width: 34px;
+}
+
+.image {
+    margin-right: 30px;
+    margin-top: 30px;
+}
+
+.image:focus {
+  outline: none;
+}
+
+.kbd-navigation .image:focus {
+  background: #ddd;
+}
+
+.build {
+  display: flex;
+  flex-direction: row;
+}
+
+.build-info {
+  margin-left: 20px;
+}
+
+
+
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(16, 1fr);
+  position: relative;
+}
+
+.head{
+    grid-row: 3 / span 5;
+    grid-column: 7 / span 2;
+    z-index: 2;
+    height: 80px;
+    width: 150px;
+}
+
+.body{
+    grid-row: 1 / span 6;
+    grid-column: 6 / span 1;
+    z-index: 1;
+    height: 170px;
+    width: 250px;
+    
+}
+
+.tail{
+    grid-row: 4 / span 4;
+    grid-column: 4 / span 2;
+    height: 90px;
+    width: 190px;
+}
+
+.legs{
+    grid-row: 6 / -1;
+    grid-column: 6/ span 4;
+    height: 150px;
+    width: 230px;
+}
