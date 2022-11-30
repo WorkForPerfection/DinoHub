@@ -1,15 +1,15 @@
 import { React, useState, useEffect } from "react";
 
-import Container from 'react-bootstrap/Container'
 import Logo from './components/Logo'
 import './css/Dino.css'
 import { MINT, NAVY, ORG } from "./css/colors"
 
+
+import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
 
 // const cardStyle1 = { margin: '0.8rem', color: ORG, backgroundColor: MINT }
 const cardStyle2 = { margin: '0.8rem', color: NAVY, fontFamily: 'dinopia-l', fontSize: '1.3rem', backgroundColor: MINT }
