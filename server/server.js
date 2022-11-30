@@ -20,7 +20,7 @@ app.post("/dino_page", (req, res) => {
     const curname = req.body.name;
     db.query(
         "SELECT * FROM dinosaur WHERE name=?", [curname],
-        (err, result) => {
+        (err, result) => { //result: result[0] is first record, result[1] is second record... result[0].<column_name> is column's value of that record
             if (err) { res.send(err) }
             else {
                 // console.log(result[0]['Diet']);

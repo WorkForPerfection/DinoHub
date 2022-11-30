@@ -1,8 +1,6 @@
-// import{useNavigate} from "react-router-dom";
-
 import {useNavigate} from "react-router-dom";
 import styles from "./general.module.css";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import eggstage1 from './eggstage/eggstage1.jpg';
 import eggstage2 from './eggstage/eggstage2.jpg';
 import eggstage3 from './eggstage/eggstage3.jpg';
@@ -53,7 +51,6 @@ function Hatched()
 
 function App() {
     const [curPage, setcurPage] = useState('Hatching');
-   
     return (
       <div className="App">
         <button onClick={() => setcurPage('Hatched')}>
@@ -69,9 +66,16 @@ function App() {
     );
   }
 
-export function DinoEgg(){
-    // const navigate = useNavigate();
+export function DinoEgg(props){
     const navigate = useNavigate();
+    const User = props.User;
+    const func = props.Func;
+    useEffect(()=>{
+        if(!User){
+            navigate('/');
+            func(true);
+        }
+    })
     return (
         <dev className={styles.content_begin}>
         <button onClick={()=>navigate(-1)}> Back </button>
