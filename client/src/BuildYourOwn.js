@@ -69,6 +69,8 @@ class Choice extends React.Component {
 	url: [leg_1,leg_2,leg_3,leg_4,leg_5,leg_6,leg_7,leg_8,leg_9,head_1,head_2,head_3,head_4,head_5,head_6,head_7,head_8,head_9,body_1,body_2,body_3,body_4,body_5,body_6,body_7,body_8,body_9,tail_1,tail_2,tail_3,tail_4,tail_5,tail_6,tail_7,tail_8,tail_9],
 	mark: 'X',
 	last: -1,
+	isvalid: false,
+	result: [],
 	
     };
   }
@@ -90,77 +92,105 @@ class Choice extends React.Component {
 	return (<Image value={this.state.index[i]} onClick={() => this.handleClick(i)} url={this.state.url[i]}/>);
     }
     
-    getResult(){
-	let results = [];
+    getResult(props){
+	let n=0;
+	this.state.isvalid = false;
+	this.state.result = Array(4).fill(null);
 	for(let k=0; k<36; k++){
 	    if(this.state.index[k]!=null){
-		results.push(this.state.url[k]);
+		this.state.result[n]=this.state.url[k];
+		
+		n++;
 	    }
 	}
-	return results;
+	if(this.state.result.length == 4 && this.state.result[0]!=null && this.state.result[1]!=null && this.state.result[2]!=null && this.state.result[3]!=null)
+	    this.setState({index: this.state.index, mark: this.state.mark, last: this.state.last, isvalid: true, result: this.state.result});
     }
-    
-    render() {
+    normal(props){
 	const status = "Choose from below";
 	const leg = "Legs: ";
 	const head = "Heads: ";
 	const body = "Bodys: ";
 	const tail = "Tails: ";
-	
-	return (
+	const normal_render = (
 	    <div>
-		<div className="status">{status}</div>
-		<div className="title">{leg}</div>
+	    <div className="status">{status}</div>
+	    <div className="title">{leg}</div>
 		<div className="choice-row">
-		    {this.renderChoice(0)}
-		    {this.renderChoice(1)}
-		    {this.renderChoice(2)}
-		    {this.renderChoice(3)}
-		    {this.renderChoice(4)}
-		    {this.renderChoice(5)}
-		    {this.renderChoice(6)}
-		    {this.renderChoice(7)}
-		    {this.renderChoice(8)}
-		</div>
-		<div className="title">{head}</div>
-		<div className="choice-row">
-		    {this.renderChoice(9)}
-		    {this.renderChoice(10)}
-		    {this.renderChoice(11)}
-		    {this.renderChoice(12)}
-		    {this.renderChoice(13)}
-		    {this.renderChoice(14)}
-		    {this.renderChoice(15)}
-		    {this.renderChoice(16)}
-		    {this.renderChoice(17)}
-		</div>
-		<div className="title">{body}</div>
-		<div className="choice-row">
-		    {this.renderChoice(18)}
-		    {this.renderChoice(19)}
-		    {this.renderChoice(20)}
-		    {this.renderChoice(21)}
-		    {this.renderChoice(22)}
-		    {this.renderChoice(23)}
-		    {this.renderChoice(24)}
-		    {this.renderChoice(25)}
-		    {this.renderChoice(26)}
-		</div>
-		<div className="title">{tail}</div>
-		<div className="choice-row">
-		    {this.renderChoice(27)}
-		    {this.renderChoice(28)}
-		    {this.renderChoice(29)}
-		    {this.renderChoice(30)}
-		    {this.renderChoice(31)}
-		    {this.renderChoice(32)}
-		    {this.renderChoice(33)}
-		    {this.renderChoice(34)}
-		    {this.renderChoice(35)}
-		</div>
-		<Display data={this.getResult()} />
+		{this.renderChoice(0)}
+		{this.renderChoice(1)}
+		{this.renderChoice(2)}
+		{this.renderChoice(3)}
+		{this.renderChoice(4)}
+		{this.renderChoice(5)}
+		{this.renderChoice(6)}
+		{this.renderChoice(7)}
+		{this.renderChoice(8)}
 	    </div>
-	    
+	    <div className="title">{head}</div>
+	    <div className="choice-row">
+		{this.renderChoice(9)}
+		{this.renderChoice(10)}
+		{this.renderChoice(11)}
+		{this.renderChoice(12)}
+		{this.renderChoice(13)}
+		{this.renderChoice(14)}
+		{this.renderChoice(15)}
+		{this.renderChoice(16)}
+		{this.renderChoice(17)}
+	    </div>
+	    <div className="title">{body}</div>
+	    <div className="choice-row">
+		{this.renderChoice(18)}
+		{this.renderChoice(19)}
+		{this.renderChoice(20)}
+		{this.renderChoice(21)}
+		{this.renderChoice(22)}
+		{this.renderChoice(23)}
+		{this.renderChoice(24)}
+		{this.renderChoice(25)}
+		{this.renderChoice(26)}
+	    </div>
+	    <div className="title">{tail}</div>
+	    <div className="choice-row">
+		{this.renderChoice(27)}
+		{this.renderChoice(28)}
+		{this.renderChoice(29)}
+		{this.renderChoice(30)}
+		{this.renderChoice(31)}
+		{this.renderChoice(32)}
+		{this.renderChoice(33)}
+		{this.renderChoice(34)}
+		{this.renderChoice(35)}
+	    </div>
+		<button onClick={()=>this.getResult()}> Build </button>
+	    </div>);
+	const display_render=(
+	    <div className='grid-container'>
+		<img className='item_leg'
+		     src={this.state.result[0]}
+		     alt="dino skeleton"
+		/>
+		<img className='item_head'
+		     src={this.state.result[1]}
+		     alt="dino skeleton"
+		/>
+		<img className='item_body'
+		     src={this.state.result[2]}
+		     alt="dino skeleton"
+		/>
+		<img className='item_tail'
+		     src={this.state.result[3]}
+		     alt="dino skeleton"
+		/>
+	    </div>
+	);
+	if(this.state.isvalid){return display_render;}
+	else return normal_render;
+    }
+    render() {
+	return (
+	    this.normal()
 	);
     }
 }
@@ -183,9 +213,14 @@ class Display extends React.Component {
 	return this.props.data[3];
     }
     render(){
-	return{
-	    
-	}
+	return(
+	    <div className="build">
+		<img className='image'
+		     src={this.renderLegs()}
+		     alt="dino skeleton"
+		/>
+	    </div>
+	)
     }
 }
 
@@ -197,10 +232,10 @@ class Build extends React.Component {
 		<Choice />
             </div>
 	</div>
+	
     );
   }
 }
-
 
 export function BuildYourOwn(){
     const navigate = useNavigate();
