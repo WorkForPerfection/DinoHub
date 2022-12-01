@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./general.module.css";
 import React, { useEffect, useState } from 'react';
 import eggstage1 from './eggstage/eggstage1.jpg';
@@ -10,125 +10,127 @@ import eggstage6 from './eggstage/eggstage6.jpg';
 import Axios from 'axios'
 
 //niyao: ranglongdannengjishifuhua, ran hou fu hua hao, call hatched function with long dan de id
-function Hatching(props) 
-{
+function Hatching(props) {
   // const [count, setCount] = React.useState(0);
   // const add = () => {
   //    setCount (count + 1)
   // }
   const User = props.user;
-  const [dino_egg,set_dino_egg] = useState(<dev></dev>)
+  const [dino_egg, set_dino_egg] = useState(<dev></dev>)
   const getYourEgg = () => {
-    const useridval = {userid:User[0].id};
-      Axios.post("http://localhost:8080/your_hatching_dino_egg",useridval).then((response) => {
-        // const starttime = response.data[0].startdate;
-        // console.log(response.data);
-        // set_dino_egg(<img src = {eggstage1} alt= " Eggstage1" />)
-        console.log("insert successful");
-        return response;
-      }).then((response) => {
-          
-          Axios.post("http://localhost:8080/check_hatching_egg",useridval).then((response) => {
-          const starttime = response.data[0].startdate;
-          console.log(starttime);
-          set_dino_egg(<img src = {eggstage1} alt= " Eggstage1" />)
+    const useridval = { userid: User[0].id };
+    Axios.post("http://localhost:8080/your_hatching_dino_egg", useridval).then((response) => {
+      // const starttime = response.data[0].startdate;
+      // console.log(response.data);
+      // set_dino_egg(<img src = {eggstage1} alt= " Eggstage1" />)
+      console.log("insert successful");
+      return response;
+    }).then((response) => {
+
+      Axios.post("http://localhost:8080/check_hatching_egg", useridval).then((response) => {
+        const starttime = response.data[0].startdate;
+        console.log(starttime);
+        set_dino_egg(<img src={eggstage1} alt=" Eggstage1" />)
       });
-      })
-      
-      // console.log(dino_egg)
-      // console.log(11)
-    };
-   return (
+    })
+
+    // console.log(dino_egg)
+    // console.log(11)
+  };
+  return (
     <div className="Hatching">
-    <p>Hatching your egg!</p>
-       <button onClick={getYourEgg}>
+      <p style={{fontFamily: 'dinopia-r' }}>Hatching your egg!</p>
+      <button className='button-d' onClick={getYourEgg}>
         Get an egg and happy hatching!
         {dino_egg}
-    </button>
-   {/* {count === 2 && <img src = {eggstage2} alt= " Eggstage2" />}
+      </button>
+      {/* {count === 2 && <img src = {eggstage2} alt= " Eggstage2" />}
    {count === 3 && <img src = {eggstage3} alt= " Eggstage3" />}
    {count === 4 && <img src = {eggstage4} alt= " Eggstage4" />}
    {count === 5 &&<img src = {eggstage5} alt= " Eggstage5" />}
    {count >= 6 && <img src = {eggstage6} alt= " Eggstage6" />} */}
     </div>
-   );
+  );
 }
 
-function Hatched(props)
-{
+function Hatched(props) {
 
   const User = props.user;
-    const [dino_image,set_dino_image] = useState(<dev></dev>)
-    const [dino_name,set_dino_name]=useState("")
-    const [dino_id,set_dino_id] = useState(0)
-    const userid = User[0].id;
-    const getYourDino = () => {
-      // console.log(12)
-      const curstate = {userid,dino_name}
-        Axios.post("http://localhost:8080/your_hatched_dino_egg",curstate).then((response) => {
-          // console.log(response.data);
-          // console.log(response.data[0].dino_picture);
-          set_dino_image(<img src={require(`${response.data[0].dino_picture}`)} alt = "your_dino_picture"/>);
-          return response;
-        }).then((response)=>{
-          console.log("responsedataid: "+response.data[0].id)
-          const tmp = response.data[0].id;
-          console.log("dinoid: "+tmp);
-          Axios.post("http://localhost:8080/create_user_dino_relation",{userid,dino_name,tmp}).then(
-            (response)=>{
-                
-            }
-          )
+  const [dino_image, set_dino_image] = useState(<dev></dev>)
+  const [dino_name, set_dino_name] = useState("")
+  const [dino_id, set_dino_id] = useState(0)
+  const userid = User[0].id;
+  const getYourDino = () => {
+    // console.log(12)
+    const curstate = { userid, dino_name }
+    Axios.post("http://localhost:8080/your_hatched_dino_egg", curstate).then((response) => {
+      // console.log(response.data);
+      // console.log(response.data[0].dino_picture);
+      set_dino_image(<img src={require(`${response.data[0].dino_picture}`)} alt="your_dino_picture" />);
+      return response;
+    }).then((response) => {
+      console.log("responsedataid: " + response.data[0].id)
+      const tmp = response.data[0].id;
+      console.log("dinoid: " + tmp);
+      Axios.post("http://localhost:8080/create_user_dino_relation", { userid, dino_name, tmp }).then(
+        (response) => {
+
         }
-        );
-      };
-    return (
-   <div className="Hatched">    
-   <input type="text" onChange={(e)=>{set_dino_name(e.target.value)}}/>
-     <button onClick={getYourDino}>
-        Claim your Dino
-    </button>
-    {dino_image}
-    {dino_name}
-   <button onClick = {() => {}} >
-   Here are the dinos you hatched!
-   </button>
-   </div>
+      )
+    }
     );
+  };
+  return (
+    <div className="Hatched">
+      <input type="text" onChange={(e) => { set_dino_name(e.target.value) }} />
+      <button className='button-d' onClick={getYourDino}>
+        Claim your Dino
+      </button>
+      {dino_image}
+      {dino_name}
+      <button className='button-d' onClick={() => { }} >
+        Here are the dinos you hatched!
+      </button>
+    </div>
+  );
 }
 
 function App(props) {
-   const User = props.user;
-    const [curPage, setcurPage] = useState('Hatching');
-    return (
-      <div className="App">
-        <button onClick={() => setcurPage('Hatched')}>
-         Go to Hatched page 
+  const User = props.user;
+  const [curPage, setcurPage] = useState('Hatching');
+  return (
+    <div className="App">
+      <button className='button-d' onClick={() => setcurPage('Hatched')}>
+        Go to Hatched page
       </button>
-      <button onClick={() => setcurPage('Hatching')}>
-          Back
-       </button>
+      <button className='button-d' onClick={() => setcurPage('Hatching')}>
+        Back
+      </button>
       {
-      curPage === "Hatching" ? <Hatching user={User}/> : <Hatched user={User}/>
+        curPage === "Hatching" ? <Hatching user={User} /> : <Hatched user={User} />
       }
-      </div>
-    );
-  }
+    </div>
+  );
+}
 
-  export function DinoEgg(props){
-    const navigate = useNavigate();
-    const User = props.User;
-    const func = props.Func;
-    useEffect(()=>{
-        if(!User){
-            navigate('/');
-            func(true);
-        }
-    })
-    return (
-        <dev className={styles.content_begin}>
-        <button onClick={()=>navigate(-1)}> Back </button>
-            <App user = {User}/>
-        </dev>
-    );
+export function DinoEgg(props) {
+  const navigate = useNavigate();
+  const User = props.User;
+  const func = props.Func;
+  useEffect(() => {
+    if (!User) {
+      navigate('/');
+      func(true);
+    }
+  })
+  return (
+    <div style={{ textAlign: 'center'}}>
+      <button onClick={() => navigate(-1)}
+        className='button-d'
+        style={{
+      margin: '3rem'
+        }}> Back </button>
+      <App user={User} />
+    </div>
+  );
 }
