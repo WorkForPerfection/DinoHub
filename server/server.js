@@ -220,10 +220,12 @@ app.listen(port, function () {
 
 
 // --------------dinoegg api------------
-app.get("/your_dino_egg", (req, res) => {
+//randomly generate a dino
+app.post("/your_hatched_dino_egg", (req, res) => {
     // console.log(11)
+    const curstate = req.body;
     db.query(
-        "SELECT dino_picture FROM dinosaur order by RAND() Limit 1",
+        "SELECT * FROM dinosaur order by RAND() Limit 1",
         (err, result) => {
             // console.log(10)
             if (err) { res.send(err)}
@@ -237,4 +239,90 @@ app.get("/your_dino_egg", (req, res) => {
     // console.log(7);
 })
 
+app.post("/create_user_dino_relation", (req, res) => {
+    // console.log(11)
+    const {userid,dino_name,tmp} = req.body;
+    console.log("userid: "+userid);
+    db.query(
+        "INSERT INTO dinosaur_has_user (dinosaur_id,user_id,dino_name) VALUES (?,?,?)",[tmp,userid,dino_name],
+        (err, result) => {
+            // console.log(10)
+            if (err) { console.log(err)}
+            else {
+                console.log("success creating relationship");
+                // console.log(9);
+            }
+                // console.log(8);
+        }
+    )
+    // console.log(7);
+})
+
+//set startdate and id for egg
+app.post("/your_hatching_dino_egg", (req, res) => {
+    console.log(req.body);
+    const uid = req.body.userid;
+    console.log(uid);
+    let time = 0;
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth()+'';
+    if(month.length==1)   {month =  '0'.concat(month);}
+    let day = date.getDay()+'';
+    if(day.length==1)   {day =  '0'.concat(day);}
+    let hour = date.getHours()+'';
+
+    console.log(hour.length);
+     if(hour.length==1)   {hour =  '0'.concat(hour);}
+    console.log(hour);
+    let minute = date.getMinutes()+'';
+    if(minute.length==1)   {minute =  '0'.concat(minute);}
+    let second = date.getSeconds()+'';
+    if (second.length == 1)
+    {
+        second = '0'.concat(second);
+    }
+    let date_string = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+    console.log(date_string);
+    console.log(uid);
+     db.query(
+        "Insert Into dinoegg (startdate,id) Values (?,?); ",[date_string,uid],
+        (err, result) => {
+            if (err) { console.log(err)}
+            else {
+                console.log("alex");
+                
+                // console.log(9);
+            }
+                // console.log(8);
+        }
+        )
+}
+)
+
+app.post("/check_hatching_egg", (req, res) => {
+    const uid = req.body.userid;
+    db.query(
+        "SELECT * FROM dinoegg WHERE uid;", 
+        (err, result) => {
+            if(err) {console.log(err)}
+            else{
+                res.send(result);
+            }
+        }
+    )
+}
+)
+
+
+
+//user gives their dino a name
+// app.post("/your_dino_egg", (req, res) => {
+//     const dino_id = ;
+//     const User_id = ;
+//     const Dino_name = ;
+//     db.query(
+//          "INSERT INTO dinosaur_has_user (dinosaur_id,user_id, dino_name) VALUES (?,?)", [dino_id, User_id, Dino_name]
+//     );
+// })
 
