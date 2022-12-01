@@ -6,9 +6,12 @@ import Container from 'react-bootstrap/Container'
 import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card'
 
+
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './css/build-your-own.css'
+import background from './components/BuildYourOwn/background.png';
 import leg_1 from './components/BuildYourOwn/Leg/1.png';
 import leg_2 from './components/BuildYourOwn/Leg/2.png';
 import leg_3 from './components/BuildYourOwn/Leg/3.png';
@@ -49,6 +52,7 @@ import tail_7 from './components/BuildYourOwn/Tail/7.png';
 import tail_8 from './components/BuildYourOwn/Tail/8.png';
 import tail_9 from './components/BuildYourOwn/Tail/9.png';
 import { fontFamily } from "@mui/system";
+
 
 
 const caraStyle = {
@@ -101,7 +105,8 @@ class Choice extends React.Component {
 			url: [leg_1, leg_2, leg_3, leg_4, leg_5, leg_6, leg_7, leg_8, leg_9, head_1, head_2, head_3, head_4, head_5, head_6, head_7, head_8, head_9, body_1, body_2, body_3, body_4, body_5, body_6, body_7, body_8, body_9, tail_1, tail_2, tail_3, tail_4, tail_5, tail_6, tail_7, tail_8, tail_9],
 			mark: 'X',
 			last: -1,
-			isvalid: false,
+		    isvalid: false,
+		    isavatar: false,
 			result: [],
 			slideIndex: 0
 		};
@@ -299,16 +304,12 @@ class Choice extends React.Component {
 							fontSize: '4rem',
 						}}
 						onClick={() => this.return_back()}> Rebuild </button>
-				    <button className='button-d'
-						style={{
-							fontSize: '4rem',
-						}}
-						onClick={() => this.return_back()}> Rebuild </button>
+				    
 				</Container>
 			</Container>
 		);
-		if (this.state.isvalid) { return display_render; }
-		else return normal_render;
+	    if (this.state.isvalid) { return display_render; }
+	    else return normal_render;
 	}
 	render() {
 		return (
