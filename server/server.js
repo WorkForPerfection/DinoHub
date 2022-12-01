@@ -217,3 +217,24 @@ const port = process.env.PORT || 8080;
 app.listen(port, function () {
     console.log('Example app listening on port ' + port + '!');
 });
+
+
+// --------------dinoegg api------------
+app.get("/your_dino_egg", (req, res) => {
+    // console.log(11)
+    db.query(
+        "SELECT dino_picture FROM dinosaur order by RAND() Limit 1",
+        (err, result) => {
+            // console.log(10)
+            if (err) { res.send(err)}
+            else {
+                res.send(result);
+                // console.log(9);
+            }
+                // console.log(8);
+        }
+    )
+    // console.log(7);
+})
+
+

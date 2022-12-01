@@ -7,9 +7,10 @@ import eggstage3 from './eggstage/eggstage3.jpg';
 import eggstage4 from './eggstage/eggstage4.jpg';
 import eggstage5 from './eggstage/eggstage5.jpg';
 import eggstage6 from './eggstage/eggstage6.jpg';
-
+import Axios from 'axios'
 function Hatching() 
 {
+    // egg_count = db.query
    const [count, setCount] = React.useState(0);
    const add = () => {
       setCount (count + 1)
@@ -17,12 +18,9 @@ function Hatching()
    return (
     <div className="Hatching">
     <p>Hatching your egg!</p>
-    <button onClick={add}>
-       Check in!
+       <button onClick={add}>
+        Get an egg and happy hatching!
     </button>
-    <h4>
-      It's your {count} day hatching your egg :)
-    </h4>
    {count === 1 && <img src = {eggstage1} alt= " Eggstage1" />}
    {count === 2 && <img src = {eggstage2} alt= " Eggstage2" />}
    {count === 3 && <img src = {eggstage3} alt= " Eggstage3" />}
@@ -35,14 +33,21 @@ function Hatching()
 
 function Hatched()
 {
+    const [dino_image,set_dino_image] = useState(<dev></dev>)
+    const getYourDino = () => {
+      // console.log(12)
+        Axios.get("http://localhost:8080/your_dino_egg").then((response) => {
+          // console.log(response.data);
+          // console.log(response.data[0].dino_picture);
+          set_dino_image(<img src={require(`${response.data[0].dino_picture}`)} alt = "your_dino_picture"/>)
+          // console.log(dino_image);
+        });
+      };
     return (
    <div className="Hatched">
-    {/* pull out the dino db */}
-    <button onClick={() => {}}>
+     <button onClick={getYourDino}>
         Claim your Dino
-    </button>
-    <button onClick={() => {}}>
-        Get a new egg
+        {dino_image}
     </button>
    <p>Here are the dinos you hatched!</p>
    </div>
@@ -66,7 +71,7 @@ function App() {
     );
   }
 
-export function DinoEgg(props){
+  export function DinoEgg(props){
     const navigate = useNavigate();
     const User = props.User;
     const func = props.Func;
