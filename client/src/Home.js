@@ -12,11 +12,10 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup';
 
 // const cardStyle1 = { margin: '0.8rem', color: ORG, backgroundColor: MINT }
-const cardStyle2 = { margin: '0.8rem', color: NAVY, fontFamily: 'dinopia-l', fontSize: '1.3rem', backgroundColor: MINT }
+const cardStyle2 = { margin: '0.8rem', color: MINT, fontFamily: 'dinopia-l', fontSize: '1.3rem', backgroundColor: NAVY }
 
 var dino_list = [
     'Tyrannosaurus',
-    'Mamenchisaurus',
     'Stegosaurus',
     'Bactrosaurus',
     'Dilophosaurus',
@@ -74,49 +73,50 @@ export function Home() {
                     <h1 style={{ fontSize: '2rem', fontFamily: 'dinopia-L', color: NAVY, textAlign: 'center' }}>Dedicated to Fellow Dino Fans</h1>
                     <h1 style={{ fontFamily: 'dinopia-r', color: NAVY, textAlign: 'center' }}>\/{'      '}\/{'      '}\/</h1>
                 </Container>
-            </div>
 
-            <Container>
-                <Row>
-                    <Col>
-                        <Card style={cardStyle2}>
-                            <Card.Header style={{ padding: '1rem' }}>This is a place where dinosaur lovers can learn and share dinosaur facts, build your own customized dino-fossil, and even hatch your own dinosaur egg!</Card.Header>
-                            <Card.Body style={{ padding: '1rem' }}>
-                                In addition, you can try out some of our custom features, including:
-                                <ListGroup style={{ padding: '1rem 0 0 0' }}>
-                                    <ListGroup.Item style={{ color: MINT, backgroundColor: NAVY }}>
-                                        To begin, sign up / log in to your DinoHub account. Then, you can search for a particular dinosaur's name in the search bar, or use the 'explore' functionality to browse through all dinosaurs in our database in various sorting methods.
-                                    </ListGroup.Item>
-                                    <ListGroup.Item style={{ color: MINT, backgroundColor: NAVY }}>
-                                        the "daily recommendation" which tells you about a random dinosaur's facts every day, and see previous dinos of the day;
-                                    </ListGroup.Item>
-                                    <ListGroup.Item style={{ color: MINT, backgroundColor: NAVY }}>
-                                        the "build your own dino" feature, which allows you to create your own dinosaur skeleton from pieces of skeletons from existing dinosaurs;
-                                    </ListGroup.Item >
-                                    <ListGroup.Item style={{ color: MINT, backgroundColor: NAVY }}>
-                                        and the "hatch dino egg" feature, where you can get a random dinosaur's egg which will be hatched in a period of 6 days. After the egg hatches, you will be able to see your dinosaur in your "park"; you can even name your dino! (can keep up to 10 dinos for each account)
-                                    </ListGroup.Item>
-                                </ListGroup>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col style={{ fontSize: '3rem', fontFamily: 'dinopia-o' }} md={5}>
-                        <Card style={{ margin: '0.8rem', color: ORG, backgroundColor: MINT }}>
-                            <Card.Header style={{ padding: '1rem' }}>
-                                <span style={{ fontFamily: 'dino-font' }}>Learn</span>
-                                {' '}and{' '}<span style={{ fontFamily: 'dino-font' }}>Share</span>{' '}dinosaur facts
-                            </Card.Header>
-                        </Card>
-                        <Card style={{ margin: '0.6rem', color: ORG, backgroundColor: MINT }}>
-                            <Card.Header style={{ padding: '1rem' }}><span style={{ fontFamily: 'dino-font' }}>Build</span> your own customized dino-fossil</Card.Header>
-                        </Card>
-                        <Card style={{ margin: '0.8rem', color: ORG, backgroundColor: MINT }}>
-                            <Card.Header style={{ padding: '1rem' }}><span style={{ fontFamily: 'dino-font' }}>Hatch</span> your own dinosaur egg!</Card.Header>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
-            <Container style={{ alignText: 'center', padding: '3rem' }}>
+
+                <Container style={{ padding: '0rem 0 4rem 0' }}>
+                    <Row>
+                        <Col>
+                            <Card style={cardStyle2}>
+                                <Card.Header style={{ padding: '1rem' }}>This is a place where dinosaur lovers can learn and share dinosaur facts, build your own customized dino-fossil, and even hatch your own dinosaur egg!</Card.Header>
+                                <Card.Body style={{ padding: '1rem' }}>
+                                    In addition, you can try out some of our custom features, including:
+                                    <ListGroup style={{ padding: '1rem 0 0 0' }}>
+                                        <ListGroup.Item style={{ color: NAVY, backgroundColor: MINT }}>
+                                            To begin, sign up / log in to your DinoHub account. Then, you can search for a particular dinosaur's name in the search bar, or use the 'explore' functionality to browse through all dinosaurs in our database in various sorting methods.
+                                        </ListGroup.Item>
+                                        <ListGroup.Item style={{ color: NAVY, backgroundColor: MINT }}>
+                                            the "daily recommendation" which tells you about a random dinosaur's facts every day, and see previous dinos of the day;
+                                        </ListGroup.Item>
+                                        <ListGroup.Item style={{ color: NAVY, backgroundColor: MINT }}>
+                                            the "build your own dino" feature, which allows you to create your own dinosaur skeleton from pieces of skeletons from existing dinosaurs;
+                                        </ListGroup.Item >
+                                        <ListGroup.Item style={{ color: NAVY, backgroundColor: MINT }}>
+                                            and the "hatch dino egg" feature, where you can get a random dinosaur's egg which will be hatched in a period of 6 days. After the egg hatches, you will be able to see your dinosaur in your "park"; you can even name your dino! (can keep up to 10 dinos for each account)
+                                        </ListGroup.Item>
+                                    </ListGroup>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col style={{ fontSize: '3rem', fontFamily: 'dinopia-o' }} md={5}>
+                            <Card style={{ margin: '0.8rem', color: ORG, backgroundColor: MINT }}>
+                                <Card.Header style={{ padding: '1rem' }}>
+                                    <span style={{ fontFamily: 'dino-font' }}>Learn</span>
+                                    {' '}and{' '}<span style={{ fontFamily: 'dino-font' }}>Share</span>{' '}dinosaur facts
+                                </Card.Header>
+                            </Card>
+                            <Card style={{ margin: '0.6rem', color: ORG, backgroundColor: MINT }}>
+                                <Card.Header style={{ padding: '1rem' }}><span style={{ fontFamily: 'dino-font' }}>Build</span> your own customized dino-fossil</Card.Header>
+                            </Card>
+                            <Card style={{ margin: '0.8rem', color: ORG, backgroundColor: MINT }}>
+                                <Card.Header style={{ padding: '1rem' }}><span style={{ fontFamily: 'dino-font' }}>Hatch</span> your own dinosaur egg!</Card.Header>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+            <Container style={{ alignText: 'center'}}>
                 <div style={{ fontSize: '1.5rem', fontFamily: 'dinopia-l', margin: '2rem' }}>
                     Below are 3 pictures of random dinosaurs from a small part our database -- can you guess their names?
                     {/* <Button className='button-d' onClick={() => handleRefresh()}>Refresh</Button> */}

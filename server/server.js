@@ -3,18 +3,20 @@ const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
 const cron = require('node-cron');
+const config = require('./config.js')
 
 app.use(cors());
 app.use(express.json());
 
-//make sure to replace this with your local mysql DB's information
-const db = mysql.createConnection({
-    user: "root",
-    password:"password",
-    host: "localhost",
-    database: "dinohub"
-}
-)
+//create config.js for db configuration, it will be git ingnored
+// example: paste this into your config.js
+// module.exports = {
+//     user: "yubozhang",
+//     host: "localhost",
+//     database: "dinohub"
+// }
+
+const db = mysql.createConnection(config)
 
 
 //api for dinosaur search
@@ -93,36 +95,36 @@ app.post("/signup", (req, res) => {
 })
 
 
-app.post("/add_likes",(req,res)=>{
-        const DinoName = req.body.dinoname;
-        var curlikes;
-        db.query(
-            "SELECT Likes FROM dinosaur WHERE name=?",[DinoName],
-            (err,result)=>{
-                if(err){
-                    console.log(err);
-                }
-                else{
-                    curlikes = result[0];
-                    // console.log(result);
-                    // console.log(curlikes);
-                    curlikes.Likes += 1;
-                    // console.log(curlikes.Likes);
-                    // console.log(curlikes.Likes+1);
-                    db.query(
-                        "UPDATE dinosaur SET Likes=? WHERE name = ?", [curlikes.Likes, DinoName],
-                        (err, result) => {
-                            if (err) {
-                                res.send(err)
-                            } else {
-                                res.send(curlikes + 1);
-                            }
-                        }
-                    )
-                }
+app.post("/add_likes", (req, res) => {
+    const DinoName = req.body.dinoname;
+    var curlikes;
+    db.query(
+        "SELECT Likes FROM dinosaur WHERE name=?", [DinoName],
+        (err, result) => {
+            if (err) {
+                console.log(err);
             }
-        )
-    }
+            else {
+                curlikes = result[0];
+                // console.log(result);
+                // console.log(curlikes);
+                curlikes.Likes += 1;
+                // console.log(curlikes.Likes);
+                // console.log(curlikes.Likes+1);
+                db.query(
+                    "UPDATE dinosaur SET Likes=? WHERE name = ?", [curlikes.Likes, DinoName],
+                    (err, result) => {
+                        if (err) {
+                            res.send(err)
+                        } else {
+                            res.send(curlikes + 1);
+                        }
+                    }
+                )
+            }
+        }
+    )
+}
 )
 
 

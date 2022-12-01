@@ -9,7 +9,9 @@ import Row from "react-bootstrap/Row"
 import ListGroup from "react-bootstrap/ListGroup"
 
 import "./css/App.css"
-import { MINT, NAVY } from "./css/colors"
+import { MAROON, MINT, NAVY } from "./css/colors"
+
+const listStyle =  { backgroundColor: 'rgba(255, 255, 255, 0.4)'}
 
 function Back(margin = '2rem') {
 
@@ -22,31 +24,17 @@ export function DinoPage(props) {
     const location = useLocation();
     const dinoname = location.state.curname;
     const [dinoInfo, setdinoInfo] = useState([]);
-    const [upd,setUpd] = useState(false);                               //this is used to trigger useEffect(); similar to this.forceUpdate();
+    const [upd, setUpd] = useState(false);                               //this is used to trigger useEffect(); similar to this.forceUpdate();
     useEffect(() => {
         axios.post("http://localhost:8080/dino_page", { name: dinoname }).then(
             (response) => {
                 setdinoInfo(response.data);
             }
         ).catch();
-    },[dinoInfo,upd])
+    }, [dinoInfo, upd])
     const dinoDisplay = (
         <Container>
             {dinoInfo.map((dino) =>
-                //         <Container>
-                //             <Card>
-                //                 <Card.Header>
-                //                     Dinosaur Name: {dino.name} <br />
-                //                     Dinosaur Type: {dino.type} <br />
-                //                     The period they lived in: {dino.period} <br />
-                //                     Where they were found: {dino.found_in} <br />
-                //                     Diet: {dino.Diet} <br />
-                //                     Length: {dino.Length} <br />
-                //                     <img src={require(`${dino.dino_picture}`)} />
-                //                     <img src={require(`${dino.dino_size_picture}`)} />
-                //                 </Card.Header>
-                //             </Card>
-                //         </Container>
                 <Card style={{
                     width: '100%',
                     height: '30%'
@@ -56,49 +44,63 @@ export function DinoPage(props) {
                     </Card.Header>
                     <Card.Body>
                         <Container>
-                            <Row>
-                                <Col md={{ span: 8 }} style={{ textAlign: 'center', verticalAlign: 'center' }}>
-                                    <Row>
-                                        <Card.Text style={{ fontFamily: 'dinopia-r', fontSize: '5rem' }}>
-                                            <span className='capital-letter'>{dino.name.slice(0, 1)}</span>
-                                            {dino.name.slice(1)}
-                                        </Card.Text>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            <img
-                                                src={require(`${dino.dino_picture}`)}
-                                                style={{
-                                                    height: '15rem',
-                                                    width: 'auto'
-                                                }} />
-                                        </Col>
-                                        <Col>
-                                            <img
-                                                src={require(`${dino.dino_size_picture}`)}
-                                                style={{
-                                                    height: '15rem',
-                                                    width: 'auto'
-                                                }} />
-                                        </Col>
-                                    </Row>
-                                </Col>
-                                <Col>
-                                    <ListGroup
-                                        className="list-group-flush"
-                                        style={{
-                                            fontFamily: 'dinopia-r',
-                                            fontSize: '1.5rem'
-                                        }}>
-                                        <ListGroup.Item>Type: {dino.type}</ListGroup.Item>
-                                        <ListGroup.Item>Diet: {dino.period}</ListGroup.Item>
-                                        <ListGroup.Item>Found in: {dino.found_in}</ListGroup.Item>
-                                        <ListGroup.Item>Diet: {dino.Diet}</ListGroup.Item>
-                                        <ListGroup.Item>Length: {dino.Length}</ListGroup.Item>
-                                        <ListGroup.Item>likes: {dino.Likes}</ListGroup.Item>
-                                    </ListGroup>
-                                </Col>
+                            <Row style={{ textAlign: 'center', verticalAlign: 'center' }}>
+                                <Row>
+                                    <Card.Text style={{ fontFamily: 'dinopia-r', fontSize: '5rem' }}>
+                                        <span className='capital-letter'>{dino.name.slice(0, 1)}</span>
+                                        {dino.name.slice(1)}
+                                    </Card.Text>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <img
+                                            src={require(`${dino.dino_picture}`)}
+                                            style={{
+                                                height: 'auto',
+                                                width: '30rem',
+                                                margin: '3rem 0 0 0'
+                                            }} />
+                                    </Col>
+                                    <Col md={{ span: 3, offset: 0 }}>
+                                        <img
+                                            src={require(`${dino.dino_size_picture}`)}
+                                            style={{
+                                                height: 'auto',
+                                                width: '30rem',
+                                                margin: '3rem 0 0 0'
+                                            }} />
+                                    </Col>
+                                    <Col>
+                                        <ListGroup
+                                            className="list-group-flush"
+                                            style={{
+                                                fontFamily: 'dinopia-r',
+                                                fontSize: '1.5rem',
+                                                backgroundColor: 'rgba(255, 255, 255, 0.01)',
+                                                width: '20rem'
+                                            }}>
+                                            <ListGroup.Item style={listStyle}>Type: {dino.type}</ListGroup.Item>
+                                            <ListGroup.Item style={listStyle}>Diet: {dino.period}</ListGroup.Item>
+                                            <ListGroup.Item style={listStyle}>Found in: {dino.found_in}</ListGroup.Item>
+                                            <ListGroup.Item style={listStyle}>Diet: {dino.Diet}</ListGroup.Item>
+                                            <ListGroup.Item style={listStyle}>Length: {dino.Length}</ListGroup.Item>
+                                            <ListGroup.Item style={listStyle}>likes: {dino.Likes}</ListGroup.Item>
+                                        </ListGroup>
 
+                                        <button
+                                            onClick={() => { likeDino(); }}
+                                            style={{
+                                                fontFamily: 'dinopia-l',
+                                                backgroundColor: 'transparent',
+                                                borderWidth: '0',
+                                                margin: '1rem',
+                                                fontSize: '2rem',
+                                                color: NAVY
+
+                                            }}>
+                                            👍</button>
+                                    </Col>
+                                </Row>
                             </Row>
                         </Container>
                     </Card.Body>
@@ -112,16 +114,16 @@ export function DinoPage(props) {
         </Container>
 
     );
-    const likeDino = ()=>{
-        const data = {dinoname};
+    const likeDino = () => {
+        const data = { dinoname };
         let curlikes;
-        axios.post("http://localhost:8080/add_likes",data).then(
-            (response)=>{
+        axios.post("http://localhost:8080/add_likes", data).then(
+            (response) => {
                 curlikes = response.data;
             }
         );
         console.log(curlikes);
-        setUpd(upd==true?false:true);
+        setUpd(upd == true ? false : true);
     }
     if (dinoInfo.length === 0) {
         return (
@@ -131,16 +133,15 @@ export function DinoPage(props) {
                     Sorry, the dinosaur you entered is invisible to the naked eye
                     <div>#dino 404 cry cry#</div>
                 </div>
-                <div style={{ fontFamily: 'dinopia-l', margin: '2rem', textAlign: 'center', fontSize: '1.5rem' }}>*** To start another search, please use the <Back mergin='0'/> button to return to the previous page, or go back to <b>home</b>. ***</div>
+                <div style={{ fontFamily: 'dinopia-l', margin: '2rem', textAlign: 'center', fontSize: '1.5rem' }}>*** To start another search, please use the <Back mergin='0' /> button to return to the previous page, or go back to <b>home</b>. ***</div>
             </Container>
         )
     }
     else return (
         <Container style={{ textAlign: 'center' }}>
-                <button className="button-d" style={{ margin: '2rem' }} onClick={() => navigate(-1)}> {'<'}Back </button>
+            <button className="button-d" style={{ margin: '2rem' }} onClick={() => navigate(-1)}> {'<'}Back </button>
             {dinoDisplay}
-                <button onClick = {()=>{likeDino();}}> Like this Dino</button>
-            <div style={{ fontFamily: 'dinopia-l', margin: '2rem', textAlign: 'center', fontSize: '1.5rem' }}>*** To start another search, please use the <Back mergin='0'/> button to return to the previous page, or go back to <b>home</b>. ***</div>
+            <div style={{ fontFamily: 'dinopia-l', margin: '2rem', textAlign: 'center', fontSize: '1.5rem' }}>*** To start another search, please use the <Back mergin='0' /> button to return to the previous page, or go back to <b>home</b>. ***</div>
         </Container>
     );
 }
