@@ -9,7 +9,7 @@ app.use(express.json());
 
 //make sure to replace this with your local mysql DB's information
 const db = mysql.createConnection({
-    user: "yubozhang",
+    user: "root",
     host: "localhost",
     database: "dinohub"
 }
