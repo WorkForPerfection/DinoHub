@@ -177,6 +177,9 @@ class Choice extends React.Component {
 	return_back(props) {
 		this.setState({ index: Array(36).fill(null), mark: this.state.mark, last: this.state.last, isvalid: false, result: this.state.result });
 	}
+    avatar(props) {
+	
+    }
 	normal(props) {
 		const status = "Choose from below";
 		const leg = "Legs";
@@ -303,7 +306,7 @@ class Choice extends React.Component {
 						style={{
 							fontSize: '4rem',
 						}}
-						onClick={() => this.return_back()}> Rebuild </button>
+						onClick={() => this.return_back()}> Make this your avatar </button>
 				</Container>
 			</Container>
 		);
