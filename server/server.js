@@ -9,11 +9,13 @@ app.use(express.json());
 
 //make sure to replace this with your local mysql DB's information
 const db = mysql.createConnection({
-    user: "yubozhang",
+    user: "root",
+    password:"password",
     host: "localhost",
     database: "dinohub"
 }
 )
+
 
 //api for dinosaur search
 app.post("/dino_page", (req, res) => {
@@ -89,6 +91,39 @@ app.post("/signup", (req, res) => {
         )
     }
 })
+
+
+app.post("/add_likes",(req,res)=>{
+        const DinoName = req.body.dinoname;
+        var curlikes;
+        db.query(
+            "SELECT Likes FROM dinosaur WHERE name=?",[DinoName],
+            (err,result)=>{
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    curlikes = result[0];
+                    // console.log(result);
+                    // console.log(curlikes);
+                    curlikes.Likes += 1;
+                    // console.log(curlikes.Likes);
+                    // console.log(curlikes.Likes+1);
+                    db.query(
+                        "UPDATE dinosaur SET Likes=? WHERE name = ?", [curlikes.Likes, DinoName],
+                        (err, result) => {
+                            if (err) {
+                                res.send(err)
+                            } else {
+                                res.send(curlikes + 1);
+                            }
+                        }
+                    )
+                }
+            }
+        )
+    }
+)
 
 
 // --------------daily dino api------------

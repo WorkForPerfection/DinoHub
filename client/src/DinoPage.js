@@ -22,13 +22,14 @@ export function DinoPage(props) {
     const location = useLocation();
     const dinoname = location.state.curname;
     const [dinoInfo, setdinoInfo] = useState([]);
+    const [upd,setUpd] = useState(false);                               //this is used to trigger useEffect(); similar to this.forceUpdate();
     useEffect(() => {
         axios.post("http://localhost:8080/dino_page", { name: dinoname }).then(
             (response) => {
                 setdinoInfo(response.data);
             }
-        ).catch()
-    }, [])
+        ).catch();
+    },[dinoInfo,upd])
     const dinoDisplay = (
         <Container>
             {dinoInfo.map((dino) =>
@@ -94,6 +95,7 @@ export function DinoPage(props) {
                                         <ListGroup.Item>Found in: {dino.found_in}</ListGroup.Item>
                                         <ListGroup.Item>Diet: {dino.Diet}</ListGroup.Item>
                                         <ListGroup.Item>Length: {dino.Length}</ListGroup.Item>
+                                        <ListGroup.Item>likes: {dino.Likes}</ListGroup.Item>
                                     </ListGroup>
                                 </Col>
 
@@ -110,6 +112,17 @@ export function DinoPage(props) {
         </Container>
 
     );
+    const likeDino = ()=>{
+        const data = {dinoname};
+        let curlikes;
+        axios.post("http://localhost:8080/add_likes",data).then(
+            (response)=>{
+                curlikes = response.data;
+            }
+        );
+        console.log(curlikes);
+        setUpd(upd==true?false:true);
+    }
     if (dinoInfo.length === 0) {
         return (
             <Container style={{ textAlign: 'center' }}>
@@ -126,6 +139,7 @@ export function DinoPage(props) {
         <Container style={{ textAlign: 'center' }}>
                 <button className="button-d" style={{ margin: '2rem' }} onClick={() => navigate(-1)}> {'<'}Back </button>
             {dinoDisplay}
+                <button onClick = {()=>{likeDino();}}> Like this Dino</button>
             <div style={{ fontFamily: 'dinopia-l', margin: '2rem', textAlign: 'center', fontSize: '1.5rem' }}>*** To start another search, please use the <Back mergin='0'/> button to return to the previous page, or go back to <b>home</b>. ***</div>
         </Container>
     );

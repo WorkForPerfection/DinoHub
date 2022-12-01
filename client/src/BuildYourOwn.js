@@ -294,7 +294,12 @@ class Choice extends React.Component {
 					/>
 				</div>
 				<Container style={{ textAlign: 'center' }}>
-					<button className='button-d'
+				    <button className='button-d'
+						style={{
+							fontSize: '4rem',
+						}}
+						onClick={() => this.return_back()}> Rebuild </button>
+				    <button className='button-d'
 						style={{
 							fontSize: '4rem',
 						}}
