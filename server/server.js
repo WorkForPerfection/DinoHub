@@ -16,7 +16,6 @@ app.use(express.json());
 //     database: "dinohub"
 // }
 // )
-const config = require('./config');
 const db = mysql.createConnection(config);
 
 

@@ -34,7 +34,7 @@ function App(props) {
     const [password, setPassword] = useState("");
     const [newusername, setnewUsername] = useState("");
     const [newpassword, setnewPassword] = useState("");
-    const [editstate,setEditState] = useState({display:false,password:"",first_name:"",last_name:"",message:""});
+    const [editstate, setEditState] = useState({ display: false, password: "", first_name: "", last_name: "", message: "" });
     const navigate = useNavigate();
 
     const linkStyle = {
@@ -108,7 +108,7 @@ function App(props) {
                 <Route path="/" element={<Home />} />
                 <Route path="/build_your_own_dino" element={<BuildYourOwn />} />
                 <Route path="/daily_recommendation" element={<DailyRecommendation />} />
-                <Route path="/your_dino_egg" element={<DinoEgg User={user} Func={(t)=>{setLogin(t)}}/>} />
+                <Route path="/your_dino_egg" element={<DinoEgg User={user} Func={(t) => { setLogin(t) }} />} />
                 <Route path="/discover" element={<Explore />} />
                 <Route path="/DinoPage" element={<DinoPage />} />
             </Routes>
@@ -129,7 +129,7 @@ function App(props) {
         // console.log(user);
         accountPage = (
             <Container style={containerStyle}>
-                <h1><span style={{fontSize: '4rem', fontFamily:'dino-font', margin: '0.6rem'}}>{user.username}</span>'s DinoHub</h1>
+                <h1><span style={{ fontSize: '4rem', fontFamily: 'dino-font', margin: '0.6rem' }}>{user.username}</span>'s DinoHub</h1>
                 <Card style={cardStyle}>
                     <Card.Body>
                         <ListGroup>
@@ -146,14 +146,14 @@ function App(props) {
                                 profile_picture:{user.profile_picture}
                             </ListGroupItem>
                             <ListGroupItem>
-                                <button onClick={()=>{setEditState({...editstate,display:true})}}> edit informaion</button>
+                                <button onClick={() => { setEditState({ ...editstate, display: true }) }}> edit informaion</button>
                             </ListGroupItem>
                         </ListGroup>
                     </Card.Body>
 
                     <button style={buttonStyle} onClick={() => {
                         handleLogout()
-                    }}> <span style={{ color:'#b23b3b' }}>log out</span>
+                    }}> <span style={{ color: '#b23b3b' }}>log out</span>
                     </button>
                 </Card>
             </Container>
@@ -281,32 +281,32 @@ function App(props) {
             setUser(foundUser);
         }
     }, []);
-    useEffect(()=>{
-            if(user) localStorage.setItem('User', JSON.stringify(user));
-        },[user]
+    useEffect(() => {
+        if (user) localStorage.setItem('User', JSON.stringify(user));
+    }, [user]
     )
 
     //Edit user info
     //change all fields of User (state variable) and that in localstorage, and that in DB
-    const handleEditSubmit = async (e)=>{
+    const handleEditSubmit = async (e) => {
         e.preventDefault();
-        if(editstate.password===''){alert("You must have input on all the fields!"); return;}
-        if(editstate.first_name===''){alert("You must have input on all the fields!"); return;}
-        if(editstate.last_name===''){alert("You must have input on all the fields!"); return;}
+        if (editstate.password === '') { alert("You must have input on all the fields!"); return; }
+        if (editstate.first_name === '') { alert("You must have input on all the fields!"); return; }
+        if (editstate.last_name === '') { alert("You must have input on all the fields!"); return; }
         // console.log(user);
         // console.log(editstate);
         const pswd = editstate.password;
         const fn = editstate.first_name;
         const ln = editstate.last_name;
-        console.log(pswd+fn+ln);
+        console.log(pswd + fn + ln);
         setUser(
             {
-                username:user.username,
-                password:pswd,
-                first_name:fn,
-                last_name:ln,
-                profile_picture:user.profile_picture,
-                description:user.description
+                username: user.username,
+                password: pswd,
+                first_name: fn,
+                last_name: ln,
+                profile_picture: user.profile_picture,
+                description: user.description
             }
         )
         // console.log(pswd+fn+ln);
@@ -315,32 +315,37 @@ function App(props) {
         console.log(JSON.stringify(user));
         localStorage.setItem('User', JSON.stringify(user));
         console.log(localStorage.getItem('User'));
-        setEditState({...editstate,password:"",first_name:"",last_name:"",message: "changes successfully stored!"})
+        setEditState({ ...editstate, password: "", first_name: "", last_name: "", message: "changes successfully stored!" })
     }
 
     //Login related render pages
     if (login == true) {
-        if(editstate.display==true){
+        if (editstate.display == true) {
             return (
-                <dev>
-                <Container style={{textAlign: 'center'}}>
-                    <button  style={buttonStyle} onClick={()=>{setEditState({...editstate,display:false,message:""})}}> Back </button>
-                    <form id={"edit_form"} onSubmit={handleEditSubmit}>
-                        <label htmlFor={"password"}> Edit your new password: </label>
-                        <input type={"password"} value={editstate.password} onChange={(e)=>{setEditState({...editstate,password:e.target.value})}}/>
-                        <br/>
-                        <label htmlFor={"first name"}> Enter/Edit your firstname: </label>
-                        <input type={"text"} value={editstate.first_name} onChange={(e)=>{setEditState({...editstate,first_name:e.target.value})}}/>
-                        <br/>
-                        <label htmlFor={"last name"}> Enter/Edit your lastname: </label>
-                        <input type={"text"} value={editstate.last_name} onChange={(e)=>{setEditState({...editstate,last_name:e.target.value})}}/>
-                        <br/>
-                        <button style={buttonStyle} type="submit"> Confirm changes </button>
-                    </form>
-                    <dev style={{fontFamily:'dinopia-r'}}>{editstate.message} </dev>
+                <div style={{margin: '10% 0 0 0'}}>
+                    <Container style={containerStyle}>
+                        <Card style={cardStyle}>
+                            <button style={buttonStyle} onClick={() => { setEditState({ ...editstate, display: false, message: "" }) }}> Back </button>
+                            <form id={"edit_form"} onSubmit={handleEditSubmit}>
+                                <Card.Body>
+                                <label htmlFor={"password"} style={{margin: '1rem'}}> Edit your new password:</label>
+                                <input type={"password"} value={editstate.password} onChange={(e) => { setEditState({ ...editstate, password: e.target.value }) }} />
+                                </Card.Body>
+                                <Card.Body>
+                                <label htmlFor={"first name"} style={{margin: '1rem'}}> Enter/Edit your firstname: </label>
+                                <input type={"text"} value={editstate.first_name} onChange={(e) => { setEditState({ ...editstate, first_name: e.target.value }) }} />
+                                </Card.Body>
+                                <Card.Body>
+                                <label htmlFor={"last name"} style={{margin: '1rem'}}> Enter/Edit your lastname: </label>
+                                <input type={"text"} value={editstate.last_name} onChange={(e) => { setEditState({ ...editstate, last_name: e.target.value }) }} />
+                                </Card.Body>
+                                <button style={buttonStyle} type="submit"> Confirm changes </button>
+                            </form>
+                            <dev style={{ fontFamily: 'dinopia-r' }}>{editstate.message} </dev>
+                        </Card>
 
-                </Container>
-                </dev>
+                    </Container>
+                </div>
             )
         }
         else {
@@ -348,16 +353,16 @@ function App(props) {
             //message can be set to true only when handlesubmit set it to true; it resets after rerender of page
             if (message === 1) {
                 warningMessage = (
-                    <Container style={{textAlign: 'center'}}>
-                        <div style={{fontFamily: 'dinopia-r', fontSize: '1.5rem', color: MAROON}}>
+                    <Container style={{ textAlign: 'center' }}>
+                        <div style={{ fontFamily: 'dinopia-r', fontSize: '1.5rem', color: MAROON }}>
                             Wrong account/password combination!
                         </div>
                     </Container>
                 );
             } else if (message === 2) {
                 warningMessage = (
-                    <Container style={{textAlign: 'center'}}>
-                        <div style={{fontFamily: 'dinopia-r', fontSize: '1.5rem', color: MAROON}}>Username already
+                    <Container style={{ textAlign: 'center' }}>
+                        <div style={{ fontFamily: 'dinopia-r', fontSize: '1.5rem', color: MAROON }}>Username already
                             exist!
                         </div>
                     </Container>
@@ -365,7 +370,7 @@ function App(props) {
             }
             return (
                 <Container fluid className='bg-dino vh-100'>
-                    <Container style={{padding: '5rem 0 0 0'}}>
+                    <Container style={{ padding: '5rem 0 0 0' }}>
                         {logincomponent}
                         {warningMessage}
                     </Container>
