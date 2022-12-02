@@ -151,7 +151,6 @@ export function DinoPage(props) {
             {dinoDisplay}
                 <button style={buttonStyle} onClick = {()=>{likeDino();}}> Like this Dino</button>
             <div style={{ fontFamily: 'dinopia-l', margin: '2rem', textAlign: 'center', fontSize: '1.5rem' }}>*** To start another search, please use the <Back mergin='0'/> button to return to the previous page, or go back to <b>home</b>. ***</div>
-
         </Container>
     );
 }

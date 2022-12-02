@@ -191,7 +191,6 @@ function App(props) {
         );
         // console.log("signup reached")
         //if sign up successful, user will log in automatically
-        // console.log(response.data.length);
         if (response.data[0].username != "") {
             setUser(response.data[0]);
             localStorage.setItem('User', JSON.stringify(response.data[0]));
@@ -281,8 +280,17 @@ function App(props) {
             setUser(foundUser);
         }
     }, []);
+
+    //whenever we setUser(), we update its info accordinly in 1) localstorage, 2) user table
     useEffect(()=>{
-            if(user) localStorage.setItem('User', JSON.stringify(user));
+            if(user) {
+                localStorage.setItem('User', JSON.stringify(user));
+                axios.post("http://localhost:8080/update_user",user).then(
+                    (response)=>{
+                        console.log(response.data);
+                    }
+                )
+            }
         },[user]
     )
 
@@ -309,12 +317,6 @@ function App(props) {
                 description:user.description
             }
         )
-        // console.log(pswd+fn+ln);
-        // console.log(editstate);
-        console.log(user);
-        console.log(JSON.stringify(user));
-        localStorage.setItem('User', JSON.stringify(user));
-        console.log(localStorage.getItem('User'));
         setEditState({...editstate,password:"",first_name:"",last_name:"",message: "changes successfully stored!"})
     }
 
