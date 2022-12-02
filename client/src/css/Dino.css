@@ -87,6 +87,7 @@
     background-image: url('./img/dinobg.jpg');
     background-size: 100% auto;
     background-attachment: fixed;
+    background-repeat: repeat-y;
 }
 
 .bg-overlay {

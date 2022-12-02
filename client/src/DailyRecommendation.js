@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./general.module.css";
-import DailyDinoPage from "./DailyRecommendation/DailyDinoPage";
+import DailyDinoPage from "./components/DailyDinoPage";
 import { MINT, NAVY } from "./css/colors"
 import Container from "react-bootstrap/Container"
 import { textAlign } from "@mui/system";

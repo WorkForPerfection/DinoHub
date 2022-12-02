@@ -1,7 +1,7 @@
 import React from "react"
 import Container from "react-bootstrap/Container"
 
-import { MINT, NAVY } from "../css/colors"
+import { MINT } from "../css/colors"
 import '../css/Dino.css'
 
 function Logo(props) {

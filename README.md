@@ -11,7 +11,7 @@ npm install axios
 npm install node    #backend
 npm install cors    #backend for altering CORS policy
 npm install express #backend
-npm install cron    #backend for generating daily dinos
+npm install cron    #backend for generating daily dinos  
 ```
 
 ### Running the app ###

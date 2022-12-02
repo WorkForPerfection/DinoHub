@@ -4,8 +4,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import DailyCard from './components/DailyCard'
-import TodayCard from './components/TodayCard'
+import DailyCard from './DailyRecommendation/DailyCard'
+import TodayCard from './DailyRecommendation/TodayCard'
 
 import '../css/Dino.css';
 import { Button } from 'react-bootstrap';
