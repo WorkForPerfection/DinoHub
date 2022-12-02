@@ -52,16 +52,16 @@ app.post("/login", (req, res) => {
     )
 })
 
-app.post("/update_user",(req,res)=>{
+app.post("/update_user", (req, res) => {
     const user = req.body;
     db.query(
-        "UPDATE user SET password=?,first_name=?,last_name=? WHERE username=?",[user.password,user.first_name,user.last_name,user.username],
-        (err,result)=>{
-            if(err){
+        "UPDATE user SET password=?,first_name=?,last_name=? WHERE username=?", [user.password, user.first_name, user.last_name, user.username],
+        (err, result) => {
+            if (err) {
                 console.log(err);
                 res.send(err);
             }
-            else{
+            else {
                 console.log("success");
                 res.send("success");
             }
@@ -277,21 +277,21 @@ app.listen(port, function () {
 //randomly generate a dino
 app.post("/your_hatched_dino_egg", (req, res) => {
     // console.log(11)
-    const {userid,dino_name} = req.body;
+    const { userid, dino_name } = req.body;
     db.query(
-        "DELETE FROM dinoegg WHERE id=(?)",[userid],(err,result)=>{
-            if(err){console.log(err);}
-            else{
+        "DELETE FROM dinoegg WHERE id=(?)", [userid], (err, result) => {
+            if (err) { console.log(err); }
+            else {
                 db.query(
                     "SELECT * FROM dinosaur order by RAND() Limit 1",
                     (err, result) => {
                         // console.log(10)
-                        if (err) { res.send(err)}
+                        if (err) { res.send(err) }
                         else {
                             res.send(result);
                             // console.log(9);
                         }
-                            // console.log(8);
+                        // console.log(8);
                     }
                 )
             }
@@ -302,18 +302,18 @@ app.post("/your_hatched_dino_egg", (req, res) => {
 
 app.post("/create_user_dino_relation", (req, res) => {
     // console.log(11)
-    const {userid,dino_name,tmp} = req.body;
-    console.log("userid: "+userid);
+    const { userid, dino_name, tmp } = req.body;
+    console.log("userid: " + userid);
     db.query(
-        "INSERT INTO dinosaur_has_user (dinosaur_id,user_id,dino_name) VALUES (?,?,?)",[tmp,userid,dino_name],
+        "INSERT INTO dinosaur_has_user (dinosaur_id,user_id,dino_name) VALUES (?,?,?)", [tmp, userid, dino_name],
         (err, result) => {
             // console.log(10)
-            if (err) { console.log(err)}
+            if (err) { console.log(err) }
             else {
                 console.log("success creating relationship");
                 // console.log(9);
             }
-                // console.log(8);
+            // console.log(8);
         }
     )
     // console.log(7);
@@ -327,85 +327,86 @@ app.post("/your_hatching_dino_egg", (req, res) => {
     let time = 0;
     let date = new Date();
     let year = date.getFullYear();
-    let month = date.getMonth()+1;
-    if(month.length==1)   {month =  '0'.concat(month);}
-    let day = date.getDate()+'';
-    if(day.length==1)   {day =  '0'.concat(day);}
-    let hour = date.getHours()+'';
+    let month = date.getMonth() + 1;
+    if (month.length == 1) { month = '0'.concat(month); }
+    let day = date.getDate() + '';
+    if (day.length == 1) { day = '0'.concat(day); }
+    let hour = date.getHours() + '';
 
     console.log(hour.length);
-     if(hour.length==1)   {hour =  '0'.concat(hour);}
+    if (hour.length == 1) { hour = '0'.concat(hour); }
     console.log(hour);
-    let minute = date.getMinutes()+'';
-    if(minute.length==1)   {minute =  '0'.concat(minute);}
-    let second = date.getSeconds()+'';
-    if (second.length == 1)
-    {
+    let minute = date.getMinutes() + '';
+    if (minute.length == 1) { minute = '0'.concat(minute); }
+    let second = date.getSeconds() + '';
+    if (second.length == 1) {
         second = '0'.concat(second);
     }
     let date_string = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
     console.log(date_string);
     console.log(uid);
-     db.query(
-        "Insert Into dinoegg (startdate,id) Values (?,?); ",[date_string,uid],
+    db.query(
+        "Insert Into dinoegg (startdate,id) Values (?,?); ", [date_string, uid],
         (err, result) => {
-            if (err) { console.log(err)}
+            if (err) { console.log(err) }
             else {
                 // console.log("alex");
-                
+
                 // console.log(9);
                 res.send(result);
             }
-                // console.log(8);
+            // console.log(8);
         }
-        )
+    )
 }
 )
 
 app.post("/check_hatching_egg", (req, res) => {
     const uid = req.body.userid;
     db.query(
-        `SELECT * FROM dinoegg WHERE id=${uid};`, 
+        `SELECT * FROM dinoegg WHERE id=${uid};`,
         (err, result) => {
-            if(err) {console.log(err)}
-            else{
+            if (err) { console.log(err) }
+            else {
                 res.send(result);
             }
         }
     )
 }
 )
- //display all the dinos user hatched
-app.post("/display_hatched_dinos", (req,res) => {
+//display all the dinos user hatched
+app.post("/display_hatched_dinos", (req, res) => {
     console.log(req.body)
     const uid = req.body.id;
     console.log(uid);
     db.query(
         `SELECT * FROM dinosaur_has_user WHERE user_id=${uid}`,
         (err, result) => {
-            if (err) { res.send(err)}
+            if (err) { res.send(err) }
             else {
                 var dino_ids = []
                 var dino_names = []
-                for(var i = 0; i < result.length; i++) {
+                for (var i = 0; i < result.length; i++) {
                     dino_ids.push(result[i].dinosaur_id)
                     dino_names.push(result[i].dino_name)
                 }
                 var id_str = dino_ids.join(',')
                 id_str = '(' + id_str + ')'
-                db.query(
-                    `SELECT dino_picture FROM dinosaur WHERE id in ${id_str}`,
-                    (err, result) => {
-                        var dino_pics = []
-                        for (var j = 0; j < result.length; j++) {
-                            dino_pics.push(result[j].dino_picture)
+                if (result.length > 0) {
+                    db.query(
+                        `SELECT dino_picture FROM dinosaur WHERE id in ${id_str}`,
+                        (err, result) => {
+                            var dino_pics = []
+                            for (var j = 0; j < result.length; j++) {
+                                dino_pics.push(result[j].dino_picture)
+                            }
+                            if (err) { res.send(err) }
+                            else {
+                                res.send({ dino_pics, dino_names });
+                            }
                         }
-                        if (err) {res.send(err)}
-                        else {
-                            res.send({dino_pics, dino_names});
-                        }
-                    }
-                )
+                    )
+                }
             }
         }
     )

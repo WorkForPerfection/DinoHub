@@ -12,6 +12,10 @@ import Axios from 'axios'
 import Container from 'react-bootstrap/Container'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import Card from 'react-bootstrap/Card'
+import { NAVY } from './css/colors'
 
 function Hatching(props) {
   const User = props.user;
@@ -37,9 +41,9 @@ function Hatching(props) {
   if (flag === 0) {
     return (
       <div className="Hatching">
-        <p>Hatching your egg!</p>
-        <button onClick={() => getYourEgg()}>
-          Get an egg and happy hatching!
+        <p style={{ fontFamily: 'dinopia-r', fontSize: '3rem', margin: '2rem', color: NAVY }}>Hatching your egg!</p>
+        <button className="button-d" style={{ fontSize: '2rem' }} onClick={() => getYourEgg()}>
+          Get an egg 🥚 and happy hatching!
         </button>
         {dino_image}
       </div>
@@ -202,6 +206,7 @@ function Hatching(props) {
           c_time = new Date();
         } while ((c_time - s_time) <= 6000)
         //console.log("Right here")
+        props.setPage(false)
       });
 
     return (
@@ -245,7 +250,7 @@ function Hatching(props) {
 function Hatched(props) {
   let hatched = false;
   const User = props.user;
-  console.log("first" + User)
+  console.log(User)
   const [dino_image, set_dino_image] = useState(<dev></dev>)
   const [dino_name, set_dino_name] = useState("")
   const [dino_id, set_dino_id] = useState(0)
@@ -305,35 +310,62 @@ function Hatched(props) {
   };
   return (
     <div>
-      <input type="text" onChange={(e) => { set_dino_name(e.target.value) }} />
-      <button onClick={getYourDino} className='button-d'>
-        Claim your Dino
-      </button>
-      {dino_image}
-      {dino_name}
-      <button onClick={() => displayYourDinos()} className='button-d'>
-        Here are the dinos you hatched!
-      </button>
-    </div>
+      <Row>
+        <Col>
+          <Card style={{
+            fontFamily: 'dinopia-r',
+            margin: '3rem'
+          }}>
+            <input type="text"
+              placeholder='Name your Dino'
+              onChange={(e) => { set_dino_name(e.target.value) }}
+              style={{ margin: '1rem' }} />
+            <button onClick={getYourDino} className='button-d' style={{ margin: '1rem' }}>
+              Claim your Dino
+            </button>
+          </Card>
+          {dino_image}
+          {dino_name}
+
+        </Col>
+        <Col>
+          <button onClick={() => displayYourDinos()} 
+          className='button-d'
+          style={{margin: '5rem 0 0 0', fontSize: '2rem'}}>
+            Click here to see the dinos you hatched!
+          </button>
+        </Col>
+      </Row>
+    </div >
   );
 }
 
 function App(props) {
   const User = props.user;
   console.log("this is App" + User);
-  const [curPage, setcurPage] = useState('Hatching');
+  const [hatching, setHatching] = useState(true);
   return (
-    <div className="App">
-      <button onClick={() => setcurPage('Hatched')}>
-        Go to Hatched page
-      </button>
-      <button onClick={() => setcurPage('Hatching')}>
-        Back
-      </button>
-      {
-        curPage === "Hatching" ? <Hatching user={User} /> : <Hatched user={User} />
-      }
-    </div>
+    <Container>
+      <Tabs fill style={{ fontFamily: 'dinopia-r', fontSize: '2rem' }}>
+        <Tab eventKey='hatching' title='Hatching'>
+          <Hatching user={User} setPage={setHatching}/>
+        </Tab>
+       <Tab eventKey='hatched' title='Hatched' disabled={hatching}>
+          <Hatched user={User} />
+        </Tab>
+      </Tabs>
+    </Container>
+    // <div className="App">
+    //   <button onClick={() => setcurPage('Hatched')}>
+    //     Go to Hatched page
+    //   </button>
+    //   <button onClick={() => setcurPage('Hatching')}>
+    //     Back
+    //   </button>
+    //   {
+    //     curPage === "Hatching" ? <Hatching user={User} /> : <Hatched user={User} />
+    //   }
+    // </div>
   );
 }
 
