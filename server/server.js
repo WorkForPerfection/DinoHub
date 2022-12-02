@@ -260,17 +260,24 @@ app.listen(port, function () {
 //randomly generate a dino
 app.post("/your_hatched_dino_egg", (req, res) => {
     // console.log(11)
-    const curstate = req.body;
+    const {userid,dino_name} = req.body;
     db.query(
-        "SELECT * FROM dinosaur order by RAND() Limit 1",
-        (err, result) => {
-            // console.log(10)
-            if (err) { res.send(err)}
-            else {
-                res.send(result);
-                // console.log(9);
+        "DELETE FROM dinoegg WHERE id=(?)",[userid],(err,result)=>{
+            if(err){console.log(err);}
+            else{
+                db.query(
+                    "SELECT * FROM dinosaur order by RAND() Limit 1",
+                    (err, result) => {
+                        // console.log(10)
+                        if (err) { res.send(err)}
+                        else {
+                            res.send(result);
+                            // console.log(9);
+                        }
+                            // console.log(8);
+                    }
+                )
             }
-                // console.log(8);
         }
     )
     // console.log(7);
