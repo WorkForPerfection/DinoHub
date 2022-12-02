@@ -6,6 +6,7 @@ import axios from "axios"
 import { BuildYourOwn } from "./BuildYourOwn.js"
 import { DinoEgg } from "./DinoEgg"
 import { DailyRecommendation } from "./DailyRecommendation.js"
+import { DinoSound } from "./DinoSound"
 import { Home } from "./Home"
 import { DinoPage } from "./DinoPage"
 import { Explore } from "./explore"
@@ -85,6 +86,7 @@ function App(props) {
                     <Link style={linkStyle} to="/build_your_own_dino">Build Your Own Dino</Link>
                     <Link style={linkStyle} to="/daily_recommendation">Daily Dino</Link>
                     <Link style={linkStyle} to="/your_dino_egg">Your Dino Egg</Link>
+                    <Link style={linkStyle} to="/dino_audio">Dino Sounds</Link>
                 </Nav>
                 <Nav style={formStyle} >
                     <Form>
@@ -95,9 +97,9 @@ function App(props) {
                 <Nav>
                     <button style={buttonStyle} onClick={() => { navigate("/DinoPage", { state: { curname: DinoName } }) }}> search </button>
                 </Nav>
-                <Nav>
+                {/* <Nav>
                     <button style={buttonStyle} onClick={() => { navigate("/discover") }}> discover </button>
-                </Nav>
+                </Nav> */}
                 <Nav>
                     <button style={buttonStyle} onClick={() => { setLogin(true) }}> login </button>
                 </Nav>
@@ -108,7 +110,8 @@ function App(props) {
                 <Route path="/build_your_own_dino" element={<BuildYourOwn />} />
                 <Route path="/daily_recommendation" element={<DailyRecommendation />} />
                 <Route path="/your_dino_egg" element={<DinoEgg User={user} Func={(t)=>{setLogin(t)}}/>} />
-                <Route path="/discover" element={<Explore />} />
+                <Route path="/dino_audio" element={<DinoSound />} />
+                {/* <Route path="/discover" element={<Explore />} /> */}
                 <Route path="/DinoPage" element={<DinoPage />} />
             </Routes>
         </dev>
