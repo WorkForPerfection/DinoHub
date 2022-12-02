@@ -8,14 +8,15 @@ app.use(cors());
 app.use(express.json());
 
 //make sure to replace this with your local mysql DB's information
-const db = mysql.createConnection({
-    user: "root",
-    password:"password",
-    host: "localhost",
-    database: "dinohub"
-}
-)
-
+// const db = mysql.createConnection({
+//     user: "root",
+//     password:"wangzihe0218",
+//     host: "localhost",
+//     database: "dinohub"
+// }
+// )
+const config = require('./config');
+const db = mysql.createConnection(config);
 
 //api for dinosaur search
 app.post("/dino_page", (req, res) => {
@@ -41,7 +42,7 @@ app.post("/login", (req, res) => {
         "SELECT * FROM user WHERE (username=? AND password=?)", [Username, Password],
         (err, result) => {
             if (err) {
-                console.log("error"); res.send(err)
+                console.log(err); res.send(err)
             }
             else {
                 res.send(result);

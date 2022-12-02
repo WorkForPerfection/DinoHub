@@ -34,6 +34,7 @@ function App(props) {
     const [password, setPassword] = useState("");
     const [newusername, setnewUsername] = useState("");
     const [newpassword, setnewPassword] = useState("");
+    const [editstate,setEditState] = useState({display:false,password:"",first_name:"",last_name:"",message:""});
     const navigate = useNavigate();
 
     const linkStyle = {
@@ -125,24 +126,27 @@ function App(props) {
     //if user updates any info in accountpage, make sure to update both mysql record and localstorage
     var accountPage = <dev>null</dev>;
     if (user) {
-        console.log(user);
+        // console.log(user);
         accountPage = (
             <Container style={containerStyle}>
-                <h1><span style={{fontSize: '4rem', fontFamily:'dino-font', margin: '0.6rem'}}>{user[0].username}</span>'s DinoHub</h1>
+                <h1><span style={{fontSize: '4rem', fontFamily:'dino-font', margin: '0.6rem'}}>{user.username}</span>'s DinoHub</h1>
                 <Card style={cardStyle}>
                     <Card.Body>
                         <ListGroup>
                             <ListGroupItem>
-                                Username: {user[0].username}
+                                Username: {user.username}
                             </ListGroupItem>
                             <ListGroupItem>
-                                First name: {user[0].first_name}
+                                First name: {user.first_name}
                             </ListGroupItem>
                             <ListGroupItem>
-                                Last name: {user[0].last_name}
+                                Last name: {user.last_name}
                             </ListGroupItem>
                             <ListGroupItem>
-                                profile_picture:{user[0].profile_picture}
+                                profile_picture:{user.profile_picture}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                <button onClick={()=>{setEditState({...editstate,display:true})}}> edit informaion</button>
                             </ListGroupItem>
                         </ListGroup>
                     </Card.Body>
@@ -155,6 +159,7 @@ function App(props) {
             </Container>
         )
     }
+
     const handleLoginSubmit = async e => {
         e.preventDefault();
         // console.log("helloss");
@@ -167,8 +172,9 @@ function App(props) {
         // console.log("helloss");
         //if login successful
         if (response.data.length != 0 && response.data[0].username != "") {
-            setUser(response.data);
-            localStorage.setItem('User', JSON.stringify(response.data));
+            setUser(response.data[0]);
+            console.log(user);
+            localStorage.setItem('User', JSON.stringify(user));
             setMessage(0);
         }
         else { setMessage(1); }
@@ -187,12 +193,14 @@ function App(props) {
         //if sign up successful, user will log in automatically
         // console.log(response.data.length);
         if (response.data[0].username != "") {
-            setUser(response.data);
-            localStorage.setItem('User', JSON.stringify(response.data));
+            setUser(response.data[0]);
+            localStorage.setItem('User', JSON.stringify(response.data[0]));
+            setnewUsername("")
+            setnewPassword("")
             setMessage(0);
         }
         else { setMessage(2); }
-        console.log(response.data)
+        // console.log(response.data)
     };
     //if user is already logged in, display the corresponding account info component
     if (user) {
@@ -266,43 +274,111 @@ function App(props) {
     useEffect(() => {
         // console.log("im here");
         const loggedInUser = localStorage.getItem("User");
+        // console.log(loggedInUser);
         if (loggedInUser) {
             // console.log(loggedInUser);
             const foundUser = JSON.parse(loggedInUser);
             setUser(foundUser);
         }
     }, []);
-    if (login == true) {
-        let warningMessage = <dev></dev>;
-        //message can be set to true only when handlesubmit set it to true; it resets after rerender of page
-        if (message === 1) {
-            warningMessage = (
-                <Container style={{textAlign: 'center'}}>
-                    <div style={{fontFamily: 'dinopia-r', fontSize:'1.5rem', color: MAROON}}>
-                    Wrong account/password combination!
-                    </div>
-                </Container>
-            );
-        }
-        else if (message === 2) {
-            warningMessage = (
-                <Container style={{textAlign: 'center'}}>
-                    <div style={{fontFamily: 'dinopia-r', fontSize:'1.5rem', color: MAROON}}>Username already exist!</div>
-                </Container>
-            );
-        }
-        return (
-            <Container fluid className='bg-dino vh-100'>
-                <Container style={{ padding: '5rem 0 0 0' }}>
-                    {logincomponent}
-                    {warningMessage}
-                </Container>
-            </Container>
-        );
+    useEffect(()=>{
+            if(user) localStorage.setItem('User', JSON.stringify(user));
+        },[user]
+    )
+
+    //Edit user info
+    //change all fields of User (state variable) and that in localstorage, and that in DB
+    const handleEditSubmit = async (e)=>{
+        e.preventDefault();
+        if(editstate.password===''){alert("You must have input on all the fields!"); return;}
+        if(editstate.first_name===''){alert("You must have input on all the fields!"); return;}
+        if(editstate.last_name===''){alert("You must have input on all the fields!"); return;}
+        // console.log(user);
+        // console.log(editstate);
+        const pswd = editstate.password;
+        const fn = editstate.first_name;
+        const ln = editstate.last_name;
+        console.log(pswd+fn+ln);
+        setUser(
+            {
+                username:user.username,
+                password:pswd,
+                first_name:fn,
+                last_name:ln,
+                profile_picture:user.profile_picture,
+                description:user.description
+            }
+        )
+        // console.log(pswd+fn+ln);
+        // console.log(editstate);
+        console.log(user);
+        console.log(JSON.stringify(user));
+        localStorage.setItem('User', JSON.stringify(user));
+        console.log(localStorage.getItem('User'));
+        setEditState({...editstate,password:"",first_name:"",last_name:"",message: "changes successfully stored!"})
     }
+
+    //Login related render pages
+    if (login == true) {
+        if(editstate.display==true){
+            return (
+                <dev>
+                <Container style={{textAlign: 'center'}}>
+                    <button  style={buttonStyle} onClick={()=>{setEditState({...editstate,display:false,message:""})}}> Back </button>
+                    <form id={"edit_form"} onSubmit={handleEditSubmit}>
+                        <label htmlFor={"password"}> Edit your new password: </label>
+                        <input type={"password"} value={editstate.password} onChange={(e)=>{setEditState({...editstate,password:e.target.value})}}/>
+                        <br/>
+                        <label htmlFor={"first name"}> Enter/Edit your firstname: </label>
+                        <input type={"text"} value={editstate.first_name} onChange={(e)=>{setEditState({...editstate,first_name:e.target.value})}}/>
+                        <br/>
+                        <label htmlFor={"last name"}> Enter/Edit your lastname: </label>
+                        <input type={"text"} value={editstate.last_name} onChange={(e)=>{setEditState({...editstate,last_name:e.target.value})}}/>
+                        <br/>
+                        <button style={buttonStyle} type="submit"> Confirm changes </button>
+                    </form>
+                    <dev style={{fontFamily:'dinopia-r'}}>{editstate.message} </dev>
+
+                </Container>
+                </dev>
+            )
+        }
+        else {
+            let warningMessage = <dev></dev>;
+            //message can be set to true only when handlesubmit set it to true; it resets after rerender of page
+            if (message === 1) {
+                warningMessage = (
+                    <Container style={{textAlign: 'center'}}>
+                        <div style={{fontFamily: 'dinopia-r', fontSize: '1.5rem', color: MAROON}}>
+                            Wrong account/password combination!
+                        </div>
+                    </Container>
+                );
+            } else if (message === 2) {
+                warningMessage = (
+                    <Container style={{textAlign: 'center'}}>
+                        <div style={{fontFamily: 'dinopia-r', fontSize: '1.5rem', color: MAROON}}>Username already
+                            exist!
+                        </div>
+                    </Container>
+                );
+            }
+            return (
+                <Container fluid className='bg-dino vh-100'>
+                    <Container style={{padding: '5rem 0 0 0'}}>
+                        {logincomponent}
+                        {warningMessage}
+                    </Container>
+                </Container>
+            );
+        }
+    }
+    //Normal home page renders
     else return HomeRender;
 
 }
+
+
 
 export default App;
 
