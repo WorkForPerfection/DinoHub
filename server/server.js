@@ -354,8 +354,10 @@ app.post("/check_hatching_egg", (req, res) => {
 }
 )
  //display all the dinos user hatched
-app.post("/display_hatched_dinos", (req,res) => {
-    const uid = req.body.userid;
+ app.post("/display_hatched_dinos", (req,res) => {
+    console.log(req.body);
+    const uid = req.body.id;
+    console.log(uid);
     db.query(
         `SELECT * FROM dinosaur_has_user WHERE user_id=${uid}`,
         (err, result) => {
@@ -372,6 +374,7 @@ app.post("/display_hatched_dinos", (req,res) => {
                 db.query(
                     `SELECT dino_picture FROM dinosaur WHERE id in ${id_str}`,
                     (err, result) => {
+                console.log("result"+result)
                         var dino_pics = []
                         for (var j = 0; j < result.length; j++) {
                             dino_pics.push(result[j].dino_picture)
