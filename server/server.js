@@ -297,9 +297,9 @@ app.post("/create_user_dino_relation", (req, res) => {
 
 //set startdate and id for egg
 app.post("/your_hatching_dino_egg", (req, res) => {
-    console.log(req.body);
+    //log("Right Here!");
     const uid = req.body.userid;
-    console.log(uid);
+    //console.log(uid);
     let time = 0;
     let date = new Date();
     let year = date.getFullYear();
@@ -309,9 +309,9 @@ app.post("/your_hatching_dino_egg", (req, res) => {
     if(day.length==1)   {day =  '0'.concat(day);}
     let hour = date.getHours()+'';
 
-    console.log(hour.length);
+    //console.log(hour.length);
      if(hour.length==1)   {hour =  '0'.concat(hour);}
-    console.log(hour);
+    //console.log(hour);
     let minute = date.getMinutes()+'';
     if(minute.length==1)   {minute =  '0'.concat(minute);}
     let second = date.getSeconds()+'';
@@ -320,8 +320,8 @@ app.post("/your_hatching_dino_egg", (req, res) => {
         second = '0'.concat(second);
     }
     let date_string = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-    console.log(date_string);
-    console.log(uid);
+    //console.log(date_string);
+    //console.log(uid);
      db.query(
         "Insert Into dinoegg (startdate,id) Values (?,?); ",[date_string,uid],
         (err, result) => {
@@ -329,7 +329,8 @@ app.post("/your_hatching_dino_egg", (req, res) => {
             else {
                 // console.log("alex");
                 
-                // console.log(9);
+                console.log(9);
+                res.send(result);
             }
                 // console.log(8);
         }
@@ -339,11 +340,13 @@ app.post("/your_hatching_dino_egg", (req, res) => {
 
 app.post("/check_hatching_egg", (req, res) => {
     const uid = req.body.userid;
+    console.log(uid);
     db.query(
-        "SELECT * FROM dinoegg WHERE uid;", 
+        `SELECT * FROM dinoegg WHERE id=${uid};`,
         (err, result) => {
             if(err) {console.log(err)}
             else{
+                console.log(result);
                 res.send(result);
             }
         }
