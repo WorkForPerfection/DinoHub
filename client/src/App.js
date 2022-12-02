@@ -293,6 +293,7 @@ function App(props) {
                         console.log(response.data);
                     }
                 )
+                // console.log(user);
             }
         },[user]
     )
