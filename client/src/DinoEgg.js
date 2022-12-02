@@ -85,7 +85,7 @@ function Hatched(props) {
     // }
     // );
   };
-  
+
   function displayYourDinos() {
     const User = props.user
     const userid = { userid: User[0].id }
@@ -93,11 +93,10 @@ function Hatched(props) {
     Axios.post("http://localhost:8080/display_hatched_dinos", userid).then((response) => {
       console.log(response.data)
       var dinosaurs = []
-      for (var i = 0; i < response.data.dino_names.length; i++)
-      {
+      for (var i = 0; i < response.data.dino_names.length; i++) {
         var name = response.data.dino_names[i]
         var pic = response.data.dino_pics[i]
-        dinosaurs.push({name, pic})
+        dinosaurs.push({ name, pic })
       }
 
       console.log(dinosaurs)
@@ -141,8 +140,16 @@ function App(props) {
   const User = props.user;
   const [curPage, setcurPage] = useState('Hatching');
   return (
-    <div className="App">
-      <button className='button-d' onClick={() => setcurPage('Hatched')}>
+    <Container>
+      <Tabs>
+        <Tab eventKey="hatched" title="Hatched Dinos">
+          <Hatched user={User} />
+        </Tab>
+        <Tab eventKey="hatcing" title="Hatching">
+          <Hatching user={User} />
+        </Tab>
+      </Tabs>
+      {/* <button className='button-d' onClick={() => setcurPage('Hatched')}>
         Go to Hatched page
       </button>
       <button className='button-d' onClick={() => setcurPage('Hatching')}>
@@ -150,8 +157,8 @@ function App(props) {
       </button>
       {
         curPage === "Hatching" ? <Hatching user={User} /> : <Hatched user={User} />
-      }
-    </div>
+      } */}
+    </Container>
   );
 }
 
