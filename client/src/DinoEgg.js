@@ -59,7 +59,7 @@ function Hatched(props) {
   const [dino_image, set_dino_image] = useState(<dev></dev>)
   const [dino_name, set_dino_name] = useState("")
   const [dino_id, set_dino_id] = useState(0)
-  const userid = User[0].id;
+  const userid = User.id
   const getYourDino = () => {
     // console.log(12)
     const curstate = { userid, dino_name }
@@ -124,12 +124,12 @@ function Hatched(props) {
   return (
     <div>
       <input type="text" onChange={(e) => { set_dino_name(e.target.value) }} />
-      <button onClick={getYourDino}>
+      <button onClick={getYourDino} className='button-d'>
         Claim your Dino
       </button>
       {dino_image}
       {dino_name}
-      <button onClick={() => displayYourDinos()} >
+      <button onClick={() => displayYourDinos()}  className='button-d'>
         Here are the dinos you hatched!
       </button>
     </div>
@@ -141,8 +141,8 @@ function App(props) {
   const [curPage, setcurPage] = useState('Hatching');
   return (
     <Container>
-      <Tabs>
-        <Tab eventKey="hatched" title="Hatched Dinos">
+      <Tabs fill style={{fontSize: '2rem'}}>
+        <Tab eventKey="hatched" title="Hatched Dinos" style={{fontSize: '3rem'}}>
           <Hatched user={User} />
         </Tab>
         <Tab eventKey="hatcing" title="Hatching">

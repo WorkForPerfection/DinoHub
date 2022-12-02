@@ -3,7 +3,6 @@ const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
 const cron = require('node-cron');
-const config = require('./config.js')
 
 app.use(cors());
 app.use(express.json());
@@ -16,7 +15,6 @@ app.use(express.json());
 //     database: "dinohub"
 // }
 // )
-const config = require('./config');
 const db = mysql.createConnection(config);
 
 
@@ -48,6 +46,23 @@ app.post("/login", (req, res) => {
             }
             else {
                 res.send(result);
+            }
+        }
+    )
+})
+
+app.post("/update_user",(req,res)=>{
+    const user = req.body;
+    db.query(
+        "UPDATE user SET password=?,first_name=?,last_name=? WHERE username=?",[user.password,user.first_name,user.last_name,user.username],
+        (err,result)=>{
+            if(err){
+                console.log(err);
+                res.send(err);
+            }
+            else{
+                console.log("success");
+                res.send("success");
             }
         }
     )
