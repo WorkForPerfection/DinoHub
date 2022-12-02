@@ -98,3 +98,24 @@ ol, ul {
     height: 150px;
     width: 230px;
 }
+
+
+.avatar_legs{
+    height: 150px;
+    width: 230px;
+}
+
+.avatar_head{
+    height: 80px;
+    width: 150px;
+}
+
+.avatar_body{
+    height: 170px;
+    width: 250px;
+}
+
+.avatar_tail{
+    height: 90px;
+    width: 190px;
+}

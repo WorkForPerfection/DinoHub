@@ -108,7 +108,7 @@ function App(props) {
                 <Route path="/" element={<Home />} />
                 <Route path="/build_your_own_dino" element={<BuildYourOwn />} />
                 <Route path="/daily_recommendation" element={<DailyRecommendation />} />
-                <Route path="/your_dino_egg" element={<DinoEgg />} />
+                <Route path="/your_dino_egg" element={<DinoEgg User={user} Func={(t)=>{setLogin(t)}}/>} />
                 <Route path="/discover" element={<Explore />} />
                 <Route path="/DinoPage" element={<DinoPage />} />
             </Routes>
