@@ -352,12 +352,33 @@ app.post("/check_hatching_egg", (req, res) => {
 )
  //display all the dinos user hatched
 app.post("/display_hatched_dinos", (req,res) => {
+    const uid = req.body.userid;
     db.query(
-        "SELECT * FROM dinosaur_has_user",
+        `SELECT * FROM dinosaur_has_user WHERE user_id=${uid}`,
         (err, result) => {
             if (err) { res.send(err)}
             else {
-                res.send(result);
+                var dino_ids = []
+                var dino_names = []
+                for(var i = 0; i < result.length; i++) {
+                    dino_ids.push(result[i].dinosaur_id)
+                    dino_names.push(result[i].dino_name)
+                }
+                var id_str = dino_ids.join(',')
+                id_str = '(' + id_str + ')'
+                db.query(
+                    `SELECT dino_picture FROM dinosaur WHERE id in ${id_str}`,
+                    (err, result) => {
+                        var dino_pics = []
+                        for (var j = 0; j < result.length; j++) {
+                            dino_pics.push(result[j].dino_picture)
+                        }
+                        if (err) {res.send(err)}
+                        else {
+                            res.send({dino_pics, dino_names});
+                        }
+                    }
+                )
             }
         }
     )
