@@ -266,9 +266,9 @@ app.post("/your_hatching_dino_egg", (req, res) => {
     let time = 0;
     let date = new Date();
     let year = date.getFullYear();
-    let month = date.getMonth()+'';
+    let month = date.getMonth()+1;
     if(month.length==1)   {month =  '0'.concat(month);}
-    let day = date.getDay()+'';
+    let day = date.getDate()+'';
     if(day.length==1)   {day =  '0'.concat(day);}
     let hour = date.getHours()+'';
 
@@ -290,7 +290,7 @@ app.post("/your_hatching_dino_egg", (req, res) => {
         (err, result) => {
             if (err) { console.log(err)}
             else {
-                console.log("alex");
+                // console.log("alex");
                 
                 // console.log(9);
             }
@@ -313,16 +313,16 @@ app.post("/check_hatching_egg", (req, res) => {
     )
 }
 )
-
-
-
-//user gives their dino a name
-// app.post("/your_dino_egg", (req, res) => {
-//     const dino_id = ;
-//     const User_id = ;
-//     const Dino_name = ;
-//     db.query(
-//          "INSERT INTO dinosaur_has_user (dinosaur_id,user_id, dino_name) VALUES (?,?)", [dino_id, User_id, Dino_name]
-//     );
-// })
-
+ //display all the dinos user hatched
+app.post("/display_hatched_dinos", (req,res) => {
+    db.query(
+        "SELECT * FROM dinosaur_has_user",
+        (err, result) => {
+            if (err) { res.send(err)}
+            else {
+                res.send(result);
+            }
+        }
+    )
+}
+)
