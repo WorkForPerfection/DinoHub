@@ -210,7 +210,7 @@ app.get("/dino/today", (req, res) => {
 /* change the string below to change frequency of generation */
 // e.g. to generate every 10 seconds use '*/10 * * * * *'
 // e.g. to generate every day at midnight use '0 0 0 * * *'
-cron.schedule('0 0 * * * *', function () {
+cron.schedule('*/10 * * * * *', function () {
     generateDailyDino()
 })
 
