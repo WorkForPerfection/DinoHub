@@ -1,6 +1,5 @@
 module.exports = {
-        user: "root",
-        password:"wangzihe0218",
+        user: "yubozhang",
         host: "localhost",
         database: "dinohub"
     }
