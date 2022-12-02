@@ -8,15 +8,16 @@ const config = require('./config.js')
 app.use(cors());
 app.use(express.json());
 
-//create config.js for db configuration, it will be git ingnored
-// example: paste this into your config.js
-// module.exports = {
-//     user: "yubozhang",
+//make sure to replace this with your local mysql DB's information
+// const db = mysql.createConnection({
+//     user: "root",
+//     password:"wangzihe0218",
 //     host: "localhost",
 //     database: "dinohub"
 // }
-
-const db = mysql.createConnection(config)
+// )
+const config = require('./config');
+const db = mysql.createConnection(config);
 
 
 //api for dinosaur search
@@ -43,7 +44,7 @@ app.post("/login", (req, res) => {
         "SELECT * FROM user WHERE (username=? AND password=?)", [Username, Password],
         (err, result) => {
             if (err) {
-                console.log("error"); res.send(err)
+                console.log(err); res.send(err)
             }
             else {
                 res.send(result);

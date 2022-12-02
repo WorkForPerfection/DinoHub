@@ -19,6 +19,14 @@ function Back(margin = '2rem') {
     return <button className="button-d" style={{ margin: margin }} onClick={() => navigate(-1)}> {'<'}Back </button>
 }
 
+const buttonStyle = {
+    backgroundColor: 'white',
+    color: NAVY,
+    fontFamily: 'dinopia-r',
+    margin: '1rem',
+    borderColor: MINT
+}
+
 export function DinoPage(props) {
     const navigate = useNavigate();
     const location = useLocation();
@@ -141,7 +149,9 @@ export function DinoPage(props) {
         <Container style={{ textAlign: 'center' }}>
             <button className="button-d" style={{ margin: '2rem' }} onClick={() => navigate(-1)}> {'<'}Back </button>
             {dinoDisplay}
-            <div style={{ fontFamily: 'dinopia-l', margin: '2rem', textAlign: 'center', fontSize: '1.5rem' }}>*** To start another search, please use the <Back mergin='0' /> button to return to the previous page, or go back to <b>home</b>. ***</div>
+                <button style={buttonStyle} onClick = {()=>{likeDino();}}> Like this Dino</button>
+            <div style={{ fontFamily: 'dinopia-l', margin: '2rem', textAlign: 'center', fontSize: '1.5rem' }}>*** To start another search, please use the <Back mergin='0'/> button to return to the previous page, or go back to <b>home</b>. ***</div>
+
         </Container>
     );
 }
