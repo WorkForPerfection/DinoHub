@@ -3,6 +3,7 @@ const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
 const cron = require('node-cron');
+const config = require("./config")
 
 app.use(cors());
 app.use(express.json());
