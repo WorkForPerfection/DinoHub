@@ -6,7 +6,7 @@
 * Then go into the repository and install the packages with the followin command lines:
 ```
 npm install react
-npm install react-bootstrap bootsrap
+npm install react-bootstrap bootstrap
 npm install axios
 npm install node    #backend
 npm install cors    #backend for altering CORS policy
