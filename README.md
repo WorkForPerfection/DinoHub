@@ -23,4 +23,5 @@ npm install cron    #backend for generating daily dinos
 *Database requires local setup, tune-in to our live presentation for more details*
 
 *If using xampp on mac and mysql database won't start, use the following command: 
-*sudo /Applications/XAMPP/xamppfiles/bin/mysql.server start
+
+sudo /Applications/XAMPP/xamppfiles/bin/mysql.server start
