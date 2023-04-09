@@ -321,6 +321,7 @@ app.post("/create_user_dino_relation", (req, res) => {
 
 //set startdate and id for egg
 app.post("/your_hatching_dino_egg", (req, res) => {
+    console.log("__________________");
     console.log(req.body);
     const uid = req.body.userid;
     console.log(uid);
@@ -343,8 +344,8 @@ app.post("/your_hatching_dino_egg", (req, res) => {
         second = '0'.concat(second);
     }
     let date_string = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-    console.log(date_string);
-    console.log(uid);
+    //console.log(date_string);
+    //console.log(uid);
     db.query(
         "Insert Into dinoegg (startdate,id) Values (?,?); ", [date_string, uid],
         (err, result) => {
@@ -353,11 +354,13 @@ app.post("/your_hatching_dino_egg", (req, res) => {
                 // console.log("alex");
 
                 // console.log(9);
+                console.log("This is successful")
                 res.send(result);
             }
             // console.log(8);
         }
     )
+    
 }
 )
 
