@@ -1,6 +1,9 @@
 # DinoHub #
 ## a web application for dinosaur lovers. ##
 
+<img width="1435" alt="Screenshot 2023-08-18 at 4 11 10 PM" src="https://github.com/WorkForPerfection/DinoHub/assets/52626825/f6316ab2-5fa7-45b9-ac3f-9e8db2718faf">
+
+
 ### Installation ###
 * To run the app, first clone this repository to your local machine
 * Then go into the repository and install the packages with the followin command lines:
